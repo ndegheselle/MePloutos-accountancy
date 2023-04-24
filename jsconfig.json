@@ -1,0 +1,12 @@
+{
+	"compilerOptions": {
+		"baseUrl": ".",
+		"paths": {
+             // name and path to aliases
+			"@lib": ["src/lib"],
+			"@global": ["src/lib/_global"],
+            "@components": ["src/lib/_components"],
+		}
+	},
+	"include": ["src/**/*.js", "src/**/*.svelte"]
+}
