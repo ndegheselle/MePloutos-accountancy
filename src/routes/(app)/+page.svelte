@@ -1,1 +1,5 @@
-<h1>Page</h1>
+<script>
+    
+</script>
+
+<h1>Dashboard</h1>
