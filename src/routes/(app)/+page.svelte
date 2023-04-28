@@ -19,11 +19,7 @@
     });
 </script>
 
-<h1>Global dashboard</h1>
-
-- Summary of the accounts - Summary of all categories - Summary of all projects
-
-<main class="container">
+<section class="p-2">
     <div class="columns is-variable is-1 mb-0">
         <div class="column">
             <div class="box mb-2">
@@ -163,7 +159,7 @@
             </div>
         </div>
     </div>
-</main>
+</section>
 
 <style>
     .percent {
