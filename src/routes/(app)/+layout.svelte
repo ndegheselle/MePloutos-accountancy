@@ -7,7 +7,7 @@
     <a class="navbar-item" href="/">
       <span class="icon-text">
         <span class="icon">
-          <i class="gg-home" />
+          <i class="fas fa-house"></i>
         </span>
         <span>Dashboard</span>
       </span>
@@ -26,17 +26,34 @@
     </a>
   </div>
 
-  <div id="navbarBasicExample" class="navbar-menu is-hidden-desktop" class:is-active={menuOpen}>
-    <div class="navbar-start">
-      <a class="navbar-item">Accounts </a>
-      <a class="navbar-item">Projects </a>
+  <div id="navbarBasicExample" class="navbar-menu" class:is-active={menuOpen}>
+    <div class="navbar-start is-hidden-desktop">
+      <a class="navbar-item">
+        <span class="icon-text">
+          <span class="icon">
+            <i class="fas fa-folder"></i>
+          </span>
+          <span>Accounts</span>
+        </span>
+      </a>
+      <a class="navbar-item">
+        <span class="icon-text">
+          <span class="icon">
+            <i class="fas fa-folder-tree"></i>
+          </span>
+          <span>Projects</span>
+        </span>
+      </a>
     </div>
 
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
-          <a class="button is-light"> <i class="gg-settings"></i>
-            Parameters </a>
+          <a class="button is-light">
+            <span class="icon is-small">
+              <i class="fa-solid fa-gear"></i>
+            </span>
+          </a>
         </div>
       </div>
     </div>
@@ -50,14 +67,26 @@
         Accountancy
       </p>
       <ul class="menu-list">
-        <li><a>Accounts</a></li>
-        <li><a>Projects</a></li>
-      </ul>
-      <p class="menu-label">
-        General
-      </p>
-      <ul class="menu-list">
-        <li><a>Parameters</a></li>
+        <li>
+          <a>
+          <span class="icon-text">
+            <span class="icon">
+              <i class="fas fa-folder"></i>
+            </span>
+            <span>Accounts</span>
+          </span>
+        </a>
+        </li>
+        <li>
+          <a>
+          <span class="icon-text">
+            <span class="icon">
+              <i class="fas fa-folder-tree"></i>
+            </span>
+            <span>Projects</span>
+          </span>
+        </a>
+        </li>
       </ul>
     </aside>
   </div>
