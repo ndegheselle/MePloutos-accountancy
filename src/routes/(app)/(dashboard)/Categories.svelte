@@ -2,12 +2,32 @@
     import { onMount } from "svelte";
     import { PieChart } from "chartist";
 
+    import { categories } from "@lib/accountancy/store";
+
+    let chart = null;
+
+    $: {
+        if (chart) chart.update(getChartData($categories));
+    }
+
+    function getChartData(categories)
+    {
+        const total = categories.reduce((acc, cat) => acc + Math.abs(cat.total), 0);
+        return {
+            series: categories.map(cat => {
+                return {
+                    value: Math.abs(cat.total) * 100 / total,
+                    className: `category-${cat.id}`
+                }
+            }),
+            labels: categories.map(cat => cat.name)
+        }
+    }
+
     onMount(async () => {
-        new PieChart(
+        chart = new PieChart(
             ".ct-chart",
-            {
-                series: [20, 10, 30, 40],
-            },
+            getChartData($categories),
             {
                 donut: true,
                 donutWidth: 60,

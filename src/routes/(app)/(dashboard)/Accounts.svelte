@@ -1,50 +1,25 @@
+<script>
+    import { accounts } from "@lib/accountancy/store";
+</script>
+
 <div class="panel p-4">
     <span class="panel-block has-text-grey-lighter">
         Accounts
     </span>
-    <a class="panel-block" href="#">
-        <span class="panel-icon has-text-warning">
-            <i class="gg-folder" />
+    {#each $accounts as account}
+    <a class="panel-block" href="/accounts/{account.id}">
+        <span class="panel-icon">
+            <i class="fa-regular fa-folder" style="color: {account.color}" ></i>
         </span>
         <div
             class="flex-container is-justify-content-space-between"
         >
-            <span>Account 1</span>
-            <b class="has-text-link">1002 €</b>
+            <span>{account.name}</span>
+            <b class="has-text-link">{account.balance.toLocaleString(undefined, {
+                currency: "EUR",
+                style: "currency"
+            })}</b>
         </div>
     </a>
-    <a class="panel-block" href="#">
-        <span class="panel-icon has-text-success">
-            <i class="gg-folder" />
-        </span>
-        <div
-            class="flex-container is-justify-content-space-between"
-        >
-            <span>Account 1</span>
-            <b class="has-text-link">1002 €</b>
-        </div>
-    </a>
-
-    <a class="panel-block" href="#">
-        <span class="panel-icon has-text-danger">
-            <i class="gg-folder" />
-        </span>
-        <div
-            class="flex-container is-justify-content-space-between"
-        >
-            <span>Account 1</span>
-            <b class="has-text-link">1002 €</b>
-        </div>
-    </a>
-    <a class="panel-block" href="#">
-        <span class="panel-icon has-text-primary">
-            <i class="gg-folder" />
-        </span>
-        <div
-            class="flex-container is-justify-content-space-between"
-        >
-            <span>Account 1</span>
-            <b class="has-text-link">1002 €</b>
-        </div>
-    </a>
+    {/each}
 </div>

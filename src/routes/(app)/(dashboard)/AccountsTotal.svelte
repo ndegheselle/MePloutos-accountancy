@@ -1,23 +1,24 @@
+<script>
+    import { accounts } from "@lib/accountancy/store";
+
+    $: total = $accounts.reduce((acc, account) => acc + account.balance, 0);
+</script>
+
 <div class="box mb-2">
     <span class="has-text-grey-lighter">Total</span>
-    <h1 class="title">10 325.50 €</h1>
+    <h1 class="title">
+        {total.toLocaleString(undefined, {
+            currency: "EUR",
+            style: "currency",
+        })}
+    </h1>
     <div class="progress">
-        <div
-            class="progress-bar has-background-warning"
-            style="width:40%;"
-        />
-        <div
-            class="progress-bar has-background-success"
-            style="width:30%;"
-        />
-        <div
-            class="progress-bar has-background-danger"
-            style="width:15%;"
-        />
-        <div
-            class="progress-bar has-background-primary"
-            style="width:15%;"
-        />
+        {#each $accounts as account}
+            <div
+                class="progress-bar"
+                style="background-color: {account.color}; width: {account.balance * 100 / total}%;"
+            />
+        {/each}
     </div>
 </div>
 
