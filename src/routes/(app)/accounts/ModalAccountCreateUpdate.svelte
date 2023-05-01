@@ -1,5 +1,8 @@
 <script>
-    import accountsService, { Account } from '@lib/services/accounts.js'
+    import accountsService, { Account } from '@lib/services/accounts.js';
+    import {colors} from '@lib/services/colors.js';
+
+    import ColorInput from '@components/ColorInput.svelte';
 
     function handleClosing() {
         show = false;
@@ -31,7 +34,6 @@
                 <span class="has-text-grey-lighter">{(edit)? 'Edit account' : 'Add account'}</span>
 
                 <div class="field">
-                    
                     <div class="control">
                         <label class="label">Name
                             <input
@@ -40,6 +42,12 @@
                             bind:value={currentAccount.name}
                         />
                         </label>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="control">
+                        <label class="label">Color</label>
+                        <ColorInput bind:color={currentAccount.color} availableColors={colors}/>
                     </div>
                 </div>
             </div>
@@ -51,3 +59,9 @@
         </div>
     </div>
 </div>
+
+<style scoped>
+    .modal-content {
+        overflow: initial;
+    }
+</style>

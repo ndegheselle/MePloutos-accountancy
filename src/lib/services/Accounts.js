@@ -18,6 +18,7 @@ export class Account
         this.id = uuidv4();
         this.name = "";
         this.balance = 0;
+        this.color = "#DDD";
     }
 }
 
