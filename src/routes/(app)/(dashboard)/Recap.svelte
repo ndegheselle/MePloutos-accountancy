@@ -1,5 +1,5 @@
 <script>
-    import { transactions } from "@lib/accountancy/store";
+    import { transactions } from "@lib/store";
 
     let total = 0;
     let positiveTotal = 0;

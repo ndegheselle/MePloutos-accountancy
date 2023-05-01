@@ -2,7 +2,7 @@
     import { onMount } from "svelte";
     import { PieChart } from "chartist";
 
-    import { categories } from "@lib/accountancy/store";
+    import { categories } from "@lib/store";
 
     let chart = null;
 

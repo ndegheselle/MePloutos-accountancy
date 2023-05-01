@@ -5,7 +5,7 @@
   import ConfirmModal from "./ConfirmModal.svelte";
   import ContextMenu from "./ContextMenu.svelte";
 
-  import { categories } from "@lib/accountancy/store";
+  import { categories } from "@lib/store";
 
   $: updateCategoriesCSS($categories)
 

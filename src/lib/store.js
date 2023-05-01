@@ -76,6 +76,6 @@ export const transactions = writable([
     {
         description: 'Transaction 3',
         date: new Date('2023-04-10'),
-        value: 6.5
+        value: 8
     },
 ]); 

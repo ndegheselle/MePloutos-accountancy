@@ -1,3 +1,8 @@
+<script>
+    import AccountDetails from "./AccountDetails.svelte";
+</script>
+
+
 <h1>Account page</h1>
 
 <ul>
