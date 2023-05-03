@@ -10,17 +10,18 @@
         if (chart) chart.update(getChartData($categories));
     }
 
-    function getChartData(categories)
+    function getChartData(_categories)
     {
-        const total = categories.reduce((acc, cat) => acc + Math.abs(cat.total), 0);
+        console.log(_categories);
+        const total = _categories.reduce((acc, cat) => acc + Math.abs(cat.total), 0);
         return {
-            series: categories.map(cat => {
+            series: _categories.map(cat => {
                 return {
                     value: Math.abs(cat.total) * 100 / total,
                     className: `category-${cat.id}`
                 }
             }),
-            labels: categories.map(cat => cat.name)
+            labels: _categories.map(cat => cat.name)
         }
     }
 

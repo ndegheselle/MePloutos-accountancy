@@ -1,7 +1,8 @@
 <script>
+    import Categories from "@components/Categories.svelte";
+
     import AccountsTotal from "./AccountsTotal.svelte";
     import Accounts from "./Accounts.svelte";
-    import Categories from "./Categories.svelte";
     import Projects from "./Projects.svelte";
     import Recap from "./Recap.svelte";
 </script>

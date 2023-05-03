@@ -1,13 +1,25 @@
 <script>
+    import Categories from "@components/Categories.svelte";
     import AccountDetails from "./AccountDetails.svelte";
+
+    import { accounts } from "@lib/store";
+
+    let account = null;
+    $: updateAccount( $accounts, data.accountId);
+
+    function updateAccount(_accounts, accountId)
+    {
+        account = _accounts.find(a => a.id == accountId);
+    }
+
+    export let data;
 </script>
 
-
-<h1>Account page</h1>
-
-<ul>
-    <li>Account data (money, name, ...)</li>
-    <li>Projects summary (linked to this account)</li>
-    <li>Categories of transactions summary</li>
-    <li>Option to import transactions</li>
-</ul>
+<div class="columns is-variable is-1 mb-0">
+    <div class="column pb-2">
+        <AccountDetails account={account}/>
+    </div>
+    <div class="column pb-2">
+        <Categories />
+    </div>
+</div>
