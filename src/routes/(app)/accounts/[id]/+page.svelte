@@ -2,14 +2,20 @@
     import Categories from "@components/Categories.svelte";
     import AccountDetails from "./AccountDetails.svelte";
 
-    import { accounts } from "@lib/store";
+    import { accounts, categories } from "@lib/store";
 
     let account = null;
-    $: updateAccount( $accounts, data.accountId);
+    $: updateAccount($accounts, data.accountId);
+    $: updateAccountCategories($categories, account);
 
     function updateAccount(_accounts, accountId)
     {
         account = _accounts.find(a => a.id == accountId);
+    }
+
+    function updateAccountCategories(_categories, _account)
+    {
+        // Get the categories ?
     }
 
     export let data;
