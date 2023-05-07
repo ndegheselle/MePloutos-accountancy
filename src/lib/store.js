@@ -3,8 +3,8 @@ import { writable } from 'svelte/store';
 import { Account, Category } from './models';
 
 export const accounts = writable([
-    new Account("Account 1", "#264653", 500.46),
-    new Account("Account 2", "#e9c46a", 203.00)
+    new Account("2a6f5e8d-5d0f-403c-b318-9faa670fe211", "Account 1", "#264653", 500.46),
+    new Account("a2099acd-fa90-445e-b9cb-dffd160cc489", "Account 2", "#e9c46a", 203.00)
 ]);
 
 export const categories = writable([

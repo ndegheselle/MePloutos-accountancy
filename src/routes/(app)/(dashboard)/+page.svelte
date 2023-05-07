@@ -1,10 +1,13 @@
 <script>
     import Categories from "@components/Categories.svelte";
-
+    import { accounts } from "@lib/store"
     import AccountsTotal from "./AccountsTotal.svelte";
     import Accounts from "./Accounts.svelte";
     import Projects from "./Projects.svelte";
     import Recap from "./Recap.svelte";
+
+    // TODO : param where you can choose which account categories are displayed
+    $: values = $accounts[0].categories.values;
 </script>
 
 <div class="columns is-variable is-1 mb-0">
@@ -13,7 +16,7 @@
         <Accounts />
     </div>
     <div class="column pb-2">
-        <Categories />
+        <Categories values={values}/>
     </div>
 </div>
 <div class="columns is-variable is-1">

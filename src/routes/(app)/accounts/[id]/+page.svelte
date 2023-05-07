@@ -5,17 +5,16 @@
     import { accounts, categories } from "@lib/store";
 
     let account = null;
-    $: updateAccount($accounts, data.accountId);
-    $: updateAccountCategories($categories, account);
+    $: updateAccount($accounts, $categories, data.accountId);
 
-    function updateAccount(_accounts, accountId)
+    function updateAccount(_accounts, _categories, accountId)
     {
         account = _accounts.find(a => a.id == accountId);
-    }
-
-    function updateAccountCategories(_categories, _account)
-    {
-        // Get the categories ?
+        
+        for (let cat of account.categories)
+        {
+            cat.category = _categories.find(c => c.id == cat.category.id);
+        }
     }
 
     export let data;

@@ -21,3 +21,11 @@
 .is-fullwidth {
     width: 100%;
 }
+
+div.progress {
+    background-color: $grey-lightest;
+}
+.progress .progress-bar {
+    float: left;
+    height: 100%;
+}

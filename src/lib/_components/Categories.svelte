@@ -1,7 +1,6 @@
 <script>
     import { onMount } from "svelte";
     import { PieChart } from "chartist";
-
     import { categories } from "@lib/store";
 
     let chart = null;
@@ -12,7 +11,7 @@
 
     function getChartData(_categories)
     {
-        console.log(_categories);
+        // TODO : filter categories with values
         const total = _categories.reduce((acc, cat) => acc + Math.abs(cat.total), 0);
         return {
             series: _categories.map(cat => {
@@ -38,6 +37,8 @@
             }
         );
     });
+
+    export let values = [];
 </script>
 
 <div class="box is-fullheight">
