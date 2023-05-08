@@ -21,6 +21,6 @@
         <AccountDetails account={$currentAccount}/>
     </div>
     <div class="column pb-2">
-        <Categories />
+        <Categories account={$currentAccount}/>
     </div>
 </div>

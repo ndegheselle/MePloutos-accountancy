@@ -14,10 +14,10 @@
         <span class="has-text-grey">{account.name}</span>
         <div class="progress">
             {#each $categories as category}
-                {#if account.categories.values.hasOwnProperty(category.id)}
+                {#if account.categories.hasOwnProperty(category.id)}
                 <div
                     class="progress-bar"
-                    style="background-color: {category.color}; width: {(account.categories.values[category.id] * 100) / account.categories.total}%;"
+                    style="background-color: {category.color}; width: {(account.categories[category.id] * 100) / account.recap.total}%;"
                 />
                 {/if}
             {/each}

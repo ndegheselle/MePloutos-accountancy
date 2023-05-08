@@ -24,7 +24,7 @@
         <Accounts />
     </div>
     <div class="column pb-2">
-        <Categories values={$currentAccount.categories}/>
+        <Categories account={$currentAccount}/>
     </div>
 </div>
 <div class="columns is-variable is-1">

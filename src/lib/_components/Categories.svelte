@@ -6,17 +6,16 @@
     let chart = null;
 
     $: {
-        if (chart) chart.update(getChartData($categories, values));
+        if (chart) chart.update(getChartData($categories, account));
     }
 
-    function getChartData(_categories, _values)
+    function getChartData(_categories, _account)
     {
-        _categories = _categories.filter(cat => !!_values[cat.id]);
-        const total = _categories.reduce((acc, cat) => acc + Math.abs(_values[cat.id]), 0);
+        _categories = _categories.filter(cat => !!_account.categories[cat.id]);
         return {
             series: _categories.map(cat => {
                 return {
-                    value: Math.abs(_values[cat.id]) * 100 / total,
+                    value: Math.abs(_account.categories[cat.id]) * 100 / _account.recap.total,
                     className: `category-${cat.id}`
                 }
             }),
@@ -38,7 +37,7 @@
         );
     });
 
-    export let values = {};
+    export let account = {};
 </script>
 
 <div class="box is-fullheight">
