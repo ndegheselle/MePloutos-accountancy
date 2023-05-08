@@ -1,17 +1,19 @@
 import { writable } from 'svelte/store';
 
-import { Account, Category } from './models';
+import { Account, Category, Transaction } from './models';
 
 export const accounts = writable([
     new Account("2a6f5e8d-5d0f-403c-b318-9faa670fe211", "Account 1", "#264653", 500.46),
     new Account("a2099acd-fa90-445e-b9cb-dffd160cc489", "Account 2", "#e9c46a", 203.00)
 ]);
+export const currentAccount = writable(null);
 
 export const categories = writable([
-    new Category('0', 'cat 1', '#f7ede2', 203.52),
-    new Category('1', 'cat 2', '#f5cac3', 400.52),
-    new Category('2', 'cat 3', '#84a59d', 203.52),
-    new Category('3', 'cat 4', '#f28482', 100.52),
+    new Category(null, 'None', 'hsl(0, 0%, 96%)'),
+    new Category('0', 'cat 1', '#f7ede2'),
+    new Category('1', 'cat 2', '#f5cac3'),
+    new Category('2', 'cat 3', '#84a59d'),
+    new Category('3', 'cat 4', '#f28482'),
 ]);
 
 export const projects = writable([
@@ -30,19 +32,8 @@ export const projects = writable([
 ]); 
 
 export const transactions = writable([
-    {
-        description: 'Transaction 1',
-        date: new Date('2023-03-01'),
-        value: 10.5
-    },
-    {
-        description: 'Transaction 2',
-        date: new Date('2023-03-30'),
-        value: -40.5
-    },
-    {
-        description: 'Transaction 3',
-        date: new Date('2023-04-10'),
-        value: 8
-    },
+    new Transaction('Transaction 1', new Date('2023-03-01'), 10.5, '0'),
+    new Transaction('Transaction 2', new Date('2023-04-01'), -40, '1'),
+    new Transaction('Transaction 3', new Date('2023-05-01'), 23, '1'),
+    new Transaction('Transaction 4', new Date('2023-06-01'), -85)
 ]); 

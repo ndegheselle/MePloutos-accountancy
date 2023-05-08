@@ -2,19 +2,15 @@
     import Categories from "@components/Categories.svelte";
     import AccountDetails from "./AccountDetails.svelte";
 
-    import { accounts, categories } from "@lib/store";
+    import { accounts, currentAccount, transactions } from "@lib/store";
 
-    let account = null;
-    $: updateAccount($accounts, $categories, data.accountId);
+    // if transactions or current account change
+    $: updateAccount($transactions, data.accountId);
 
-    function updateAccount(_accounts, _categories, accountId)
+    function updateAccount(_transactions, accountId)
     {
-        account = _accounts.find(a => a.id == accountId);
-        
-        for (let cat of account.categories)
-        {
-            cat.category = _categories.find(c => c.id == cat.category.id);
-        }
+        $currentAccount = $accounts.find(a => a.id == accountId);
+        $currentAccount.update(_transactions);
     }
 
     export let data;
@@ -22,7 +18,7 @@
 
 <div class="columns is-variable is-1 mb-0">
     <div class="column pb-2">
-        <AccountDetails account={account}/>
+        <AccountDetails account={$currentAccount}/>
     </div>
     <div class="column pb-2">
         <Categories />

@@ -6,17 +6,17 @@
     let chart = null;
 
     $: {
-        if (chart) chart.update(getChartData($categories));
+        if (chart) chart.update(getChartData($categories, values));
     }
 
-    function getChartData(_categories)
+    function getChartData(_categories, _values)
     {
-        // TODO : filter categories with values
-        const total = _categories.reduce((acc, cat) => acc + Math.abs(cat.total), 0);
+        _categories = _categories.filter(cat => !!_values[cat.id]);
+        const total = _categories.reduce((acc, cat) => acc + Math.abs(_values[cat.id]), 0);
         return {
             series: _categories.map(cat => {
                 return {
-                    value: Math.abs(cat.total) * 100 / total,
+                    value: Math.abs(_values[cat.id]) * 100 / total,
                     className: `category-${cat.id}`
                 }
             }),
@@ -27,7 +27,7 @@
     onMount(async () => {
         chart = new PieChart(
             ".ct-chart",
-            getChartData($categories),
+            [],
             {
                 donut: true,
                 donutWidth: 60,
@@ -38,7 +38,7 @@
         );
     });
 
-    export let values = [];
+    export let values = {};
 </script>
 
 <div class="box is-fullheight">
