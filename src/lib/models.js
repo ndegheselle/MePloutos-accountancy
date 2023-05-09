@@ -32,7 +32,6 @@ export class Account
         this.categories = Array.from(catTmpMap, function(entry) {
             return {id: entry[0], value: entry[1]};
         });
-        console.log(this.categories);
         this.recap.total = Math.abs(this.recap.positiveTotal) + Math.abs(this.recap.negativeTotal);
     }
 }

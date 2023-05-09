@@ -14,12 +14,10 @@
         <span class="has-text-grey">{account.name}</span>
         <div class="progress">
             {#each account.categories as category}
-                {#if account.categories.hasOwnProperty(category.id)}
                 <div
-                    class="progress-bar"
-                    style="background-color: {$categoriesMap[category.id].color}; width: {(category.value * 100) / account.recap.total}%;"
-                />
-                {/if}
+                class="progress-bar"
+                style="background-color: {$categoriesMap.get(category.id).color}; width: {(category.value * 100) / account.recap.total}%;"
+            />
             {/each}
         </div>
     {/if}
