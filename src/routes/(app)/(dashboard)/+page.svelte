@@ -1,16 +1,15 @@
 <script>
     import Categories from "@components/Categories.svelte";
-    import { accounts, currentAccount, transactions } from "@lib/store";
+    import { accounts, currentAccount, transactions, params } from "@lib/store";
     import AccountsTotal from "./AccountsTotal.svelte";
     import Accounts from "./Accounts.svelte";
     import Projects from "./Projects.svelte";
     import Recap from "./Recap.svelte";
 
     // if favorite account change
-    $: getFavoriteAccount("2a6f5e8d-5d0f-403c-b318-9faa670fe211");
+    $: getFavoriteAccount($params.favoriteAccount);
 
     function getFavoriteAccount(_favAccountId) {
-        // TODO : param where you can choose which account is default / favorite
         $currentAccount = $accounts.find(a => a.id == _favAccountId);
         // TODO : Also keep in param which filter get the transactions with
         // And also get transactions from a repo (and everything else)

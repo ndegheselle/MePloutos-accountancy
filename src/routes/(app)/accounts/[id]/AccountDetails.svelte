@@ -1,5 +1,5 @@
 <script>
-    import {categories} from "@lib/store";
+    import { categoriesMap } from "@lib/store";
     export let account = null;
 </script>
 
@@ -13,11 +13,11 @@
         </h2>
         <span class="has-text-grey">{account.name}</span>
         <div class="progress">
-            {#each $categories as category}
+            {#each account.categories as category}
                 {#if account.categories.hasOwnProperty(category.id)}
                 <div
                     class="progress-bar"
-                    style="background-color: {category.color}; width: {(account.categories[category.id] * 100) / account.recap.total}%;"
+                    style="background-color: {$categoriesMap[category.id].color}; width: {(category.value * 100) / account.recap.total}%;"
                 />
                 {/if}
             {/each}

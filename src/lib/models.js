@@ -12,7 +12,7 @@ export class Account
 
     update(_transactions)
     {
-        this.categories = {};
+        let catTmpDico = {};
         this.recap = {
             positiveTotal: 0,
             negativeTotal: 0,
@@ -21,13 +21,14 @@ export class Account
 
         for (let transaction of _transactions)
         {
-            this.categories[transaction.categoryId] = this.categories[transaction.categoryId] || 0;
-            this.categories[transaction.categoryId] += Math.abs(transaction.value);
+            catTmpDico[transaction.categoryId] = catTmpDicom[transaction.categoryId] || 0;
+            catTmpDico[transaction.categoryId] += Math.abs(transaction.value);
             if (transaction.value > 0)
                 this.recap.positiveTotal += transaction.value;
             else
                 this.recap.negativeTotal += transaction.value;
         }
+        this.categories = Object.keys(catTmpDico).map(key => {return {id: key, value: catTmpDico[key]}});
         this.recap.total = Math.abs(this.recap.positiveTotal) + Math.abs(this.recap.negativeTotal);
     }
 }

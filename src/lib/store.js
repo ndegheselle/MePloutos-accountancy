@@ -1,4 +1,4 @@
-import { writable } from 'svelte/store';
+import { writable, derived } from 'svelte/store';
 
 import { Account, Category, Transaction } from './models';
 
@@ -16,6 +16,17 @@ export const categories = writable([
     new Category('3', 'cat 4', '#f28482'),
 ]);
 
+export const categoriesMap = derived( categories,
+    $categories => new Map($categories.map((cat => [cat.id, cat])))
+    );
+
+export const transactions = writable([
+    new Transaction('Transaction 1', new Date('2023-03-01'), 10.5, '0'),
+    new Transaction('Transaction 2', new Date('2023-03-01'), -40, '1'),
+    new Transaction('Transaction 3', new Date('2023-05-01'), 23, '1'),
+    new Transaction('Transaction 4', new Date('2023-06-01'), -85)
+]); 
+
 export const projects = writable([
     {
         name: 'Project 1',
@@ -31,9 +42,6 @@ export const projects = writable([
     }
 ]); 
 
-export const transactions = writable([
-    new Transaction('Transaction 1', new Date('2023-03-01'), 10.5, '0'),
-    new Transaction('Transaction 2', new Date('2023-04-01'), -40, '1'),
-    new Transaction('Transaction 3', new Date('2023-05-01'), 23, '1'),
-    new Transaction('Transaction 4', new Date('2023-06-01'), -85)
-]); 
+export const params = writable({
+    favoriteAccount: "2a6f5e8d-5d0f-403c-b318-9faa670fe211",
+});

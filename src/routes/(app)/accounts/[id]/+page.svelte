@@ -3,6 +3,7 @@
     import AccountDetails from "./AccountDetails.svelte";
 
     import { accounts, currentAccount, transactions } from "@lib/store";
+    import Transactions from "./Transactions.svelte";
 
     // if transactions or current account change
     $: updateAccount($transactions, data.accountId);
@@ -23,4 +24,7 @@
     <div class="column pb-2">
         <Categories account={$currentAccount}/>
     </div>
+</div>
+<div>
+    <Transactions account={$currentAccount}/>
 </div>

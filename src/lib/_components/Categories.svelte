@@ -1,25 +1,24 @@
 <script>
     import { onMount } from "svelte";
     import { PieChart } from "chartist";
-    import { categories } from "@lib/store";
+    import { categoriesMap } from "@lib/store";
 
     let chart = null;
 
     $: {
-        if (chart) chart.update(getChartData($categories, account));
+        if (chart) chart.update(getChartData($categoriesMap, account));
     }
 
-    function getChartData(_categories, _account)
+    function getChartData(_categoriesMap, _account)
     {
-        _categories = _categories.filter(cat => !!_account.categories[cat.id]);
         return {
-            series: _categories.map(cat => {
+            series: _account.categories.map(key => {
                 return {
-                    value: Math.abs(_account.categories[cat.id]) * 100 / _account.recap.total,
-                    className: `category-${cat.id}`
+                    value: Math.abs(_categoriesMap[key]) * 100 / _account.recap.total,
+                    className: `category-${key}`
                 }
             }),
-            labels: _categories.map(cat => cat.name)
+            labels: _account.categories.map(key => _categoriesMap[key].name)
         }
     }
 

@@ -1,5 +1,6 @@
 <script>
     import { accounts } from "@lib/store";
+    import Money from "@components/Money.svelte";
     import ModalAccountCreateUpdate from "../accounts/ModalAccountCreateUpdate.svelte";
 
     let modal = null;
@@ -25,12 +26,7 @@
             </span>
             <div class="flex-container">
                 <span>{account.name}</span>
-                <b class="has-text-link"
-                    >{account.balance.toLocaleString(undefined, {
-                        currency: "EUR",
-                        style: "currency",
-                    })}</b
-                >
+                <Money value={account.balance}/>
             </div>
         </a>
     {/each}
