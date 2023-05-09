@@ -23,7 +23,6 @@
                 groupedTransactions.length - 1
             ].transactions.push(transaction);
         }
-        console.log(groupedTransactions);
     }
 
     export let account = null;

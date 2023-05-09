@@ -12,7 +12,7 @@ export class Account
 
     update(_transactions)
     {
-        let catTmpDico = {};
+        let catTmpMap = new Map();
         this.recap = {
             positiveTotal: 0,
             negativeTotal: 0,
@@ -21,14 +21,18 @@ export class Account
 
         for (let transaction of _transactions)
         {
-            catTmpDico[transaction.categoryId] = catTmpDicom[transaction.categoryId] || 0;
-            catTmpDico[transaction.categoryId] += Math.abs(transaction.value);
+            if (!catTmpMap.has(transaction.categoryId)) catTmpMap.set(transaction.categoryId, 0);
+            catTmpMap.set(transaction.categoryId, catTmpMap.get(transaction.categoryId) + Math.abs(transaction.value));
+
             if (transaction.value > 0)
                 this.recap.positiveTotal += transaction.value;
             else
                 this.recap.negativeTotal += transaction.value;
         }
-        this.categories = Object.keys(catTmpDico).map(key => {return {id: key, value: catTmpDico[key]}});
+        this.categories = Array.from(catTmpMap, function(entry) {
+            return {id: entry[0], value: entry[1]};
+        });
+        console.log(this.categories);
         this.recap.total = Math.abs(this.recap.positiveTotal) + Math.abs(this.recap.negativeTotal);
     }
 }

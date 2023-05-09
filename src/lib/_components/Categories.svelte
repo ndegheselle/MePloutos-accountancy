@@ -12,20 +12,20 @@
     function getChartData(_categoriesMap, _account)
     {
         return {
-            series: _account.categories.map(key => {
+            series: _account.categories.map(cat => {
                 return {
-                    value: Math.abs(_categoriesMap[key]) * 100 / _account.recap.total,
-                    className: `category-${key}`
+                    value: Math.abs(cat.value) * 100 / _account.recap.total,
+                    className: `category-${cat.id}`
                 }
             }),
-            labels: _account.categories.map(key => _categoriesMap[key].name)
+            labels: _account.categories.map(cat => _categoriesMap.get(cat.id).name)
         }
     }
 
     onMount(async () => {
         chart = new PieChart(
             ".ct-chart",
-            [],
+            {series: [], labels: []},
             {
                 donut: true,
                 donutWidth: 60,
