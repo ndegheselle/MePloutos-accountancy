@@ -22,7 +22,10 @@
         <AccountDetails account={$currentAccount}/>
     </div>
     <div class="column pb-2">
-        <Categories account={$currentAccount}/>
+        <div class="box is-fullheight mb-2">
+            <span class="has-text-grey-lighter">Categories</span>
+            <Categories account={$currentAccount}/>
+        </div>
     </div>
 </div>
 <div>

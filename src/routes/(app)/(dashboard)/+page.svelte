@@ -1,10 +1,11 @@
 <script>
     import Categories from "@components/Categories.svelte";
+    import AccountRecap from "@components/AccountRecap.svelte";
+
     import { accounts, currentAccount, transactions, params } from "@lib/store";
     import AccountsTotal from "./AccountsTotal.svelte";
     import Accounts from "./Accounts.svelte";
     import Projects from "./Projects.svelte";
-    import Recap from "./Recap.svelte";
 
     // if favorite account change
     $: getFavoriteAccount($params.favoriteAccount);
@@ -21,16 +22,16 @@
     <div class="column pb-2">
         <AccountsTotal />
         <Accounts />
+        <div class="box">
+            <span class="has-text-grey-lighter">This month</span>
+            <AccountRecap account={$currentAccount}/>
+        </div>
     </div>
     <div class="column pb-2">
-        <Categories account={$currentAccount}/>
-    </div>
-</div>
-<div class="columns is-variable is-1">
-    <div class="column pb-2">
+        <div class="box mb-2">
+            <span class="has-text-grey-lighter">Categories</span>
+            <Categories account={$currentAccount}/>
+        </div>
         <Projects />
-    </div>
-    <div class="column pb-2">
-        <Recap account={$currentAccount}/>
     </div>
 </div>

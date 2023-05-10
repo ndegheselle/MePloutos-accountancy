@@ -1,6 +1,9 @@
 <script>
     import { transactions } from "@lib/store";
+    import { context } from "@global/contextMenu";
+
     import Money from "@components/Money.svelte";
+    import CategoryIcon from "@components/CategoryIcon.svelte";
 
     let groupedTransactions = [];
 
@@ -25,6 +28,18 @@
         }
     }
 
+    function showTransactionContext(event, _transaction) {
+        context.show({ x: event.pageX, y: event.pageY }, [
+            {
+                title: "Set category",
+                icon: "fa-solid fa-tag",
+                action: setSelectedTransactionCategory,
+            },
+        ]);
+    }
+
+    function setSelectedTransactionCategory() {}
+
     export let account = null;
 </script>
 
@@ -34,10 +49,7 @@
 
         <div class="dropdown is-right">
             <div class="dropdown-trigger">
-                <button
-                    class="button is-small is-light"
-                    aria-haspopup="true"
-                >
+                <button class="button is-small is-light" aria-haspopup="true">
                     <span class="icon is-small">
                         <i class="fa-solid fa-ellipsis-vertical" />
                     </span>
@@ -45,7 +57,9 @@
             </div>
             <div class="dropdown-menu" role="menu">
                 <div class="dropdown-content">
-                    <a href="#" class="dropdown-item"> Import transactions </a>
+                    <a href="#" class="dropdown-item">
+                        <i class="fa-solid fa-file-import" /> Import transactions
+                    </a>
                 </div>
             </div>
         </div>
@@ -55,9 +69,21 @@
             {group.date.toLocaleDateString()}
         </div>
         {#each group.transactions as transaction}
-            <a class="panel-block">
+            <a
+                class="panel-block"
+                on:click={() => {
+                    transaction.selected = !transaction.selected;
+                }}
+                on:contextmenu|preventDefault={(e) => {
+                    transaction.selected = true;
+                    showTransactionContext(e, transaction);
+                }}
+            >
                 <span class="panel-icon">
-                    <i class="fas fa-book" aria-hidden="true" />
+                    <CategoryIcon
+                        categoryId={transaction.categoryId}
+                        selected={transaction.selected}
+                    />
                 </span>
                 <div class="flex-container">
                     {transaction.description}

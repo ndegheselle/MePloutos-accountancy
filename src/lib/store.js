@@ -21,10 +21,10 @@ export const categoriesMap = derived( categories,
     );
 
 export const transactions = writable([
+    new Transaction('Transaction 4', new Date('2023-06-01'), -85),
+    new Transaction('Transaction 3', new Date('2023-05-01'), 23, '1'),
     new Transaction('Transaction 1', new Date('2023-03-01'), 10.5, '0'),
     new Transaction('Transaction 2', new Date('2023-03-01'), -40, '1'),
-    new Transaction('Transaction 3', new Date('2023-05-01'), 23, '1'),
-    new Transaction('Transaction 4', new Date('2023-06-01'), -85)
 ]); 
 
 export const projects = writable([

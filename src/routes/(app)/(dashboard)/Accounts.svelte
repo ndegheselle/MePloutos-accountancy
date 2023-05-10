@@ -6,7 +6,7 @@
     let modal = null;
 </script>
 
-<div class="panel p-4">
+<div class="panel p-4 mb-2">
     <div class="panel-block flex-container p-0">
         <span class="has-text-grey-lighter">Accounts</span>
         <button class="button is-small is-light" on:click={() => modal.show()}>

@@ -28,7 +28,7 @@
             {series: [], labels: []},
             {
                 donut: true,
-                donutWidth: 60,
+                donutWidth: 40,
                 donutSolid: true,
                 startAngle: 270,
                 showLabel: true,
@@ -39,10 +39,7 @@
     export let account = {};
 </script>
 
-<div class="box is-fullheight">
-    <span class="has-text-grey-lighter">Categories</span>
-    <div class="ct-chart" />
-</div>
+<div class="ct-chart" />
 
 <style>
     .ct-chart {

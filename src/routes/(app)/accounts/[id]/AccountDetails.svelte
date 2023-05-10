@@ -1,11 +1,12 @@
 <script>
     import { categoriesMap } from "@lib/store";
+    import AccountRecap from "@components/AccountRecap.svelte";
     export let account = null;
 </script>
 
-<div class="box mb-2">
+<div class="box">
     {#if account}
-        <h2 class="title">
+        <h2 class="title has-text-centered">
             {account.balance.toLocaleString(undefined, {
                 currency: "EUR",
                 style: "currency",
@@ -20,5 +21,6 @@
             />
             {/each}
         </div>
+        <AccountRecap account={account}/>
     {/if}
 </div>

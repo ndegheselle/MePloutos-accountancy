@@ -13,6 +13,7 @@ export class Account
     update(_transactions)
     {
         let catTmpMap = new Map();
+        catTmpMap.set(null, 0);
         this.recap = {
             positiveTotal: 0,
             negativeTotal: 0,
@@ -29,9 +30,10 @@ export class Account
             else
                 this.recap.negativeTotal += transaction.value;
         }
+        // Reverse so that None category is always at the end
         this.categories = Array.from(catTmpMap, function(entry) {
             return {id: entry[0], value: entry[1]};
-        });
+        }).reverse();
         this.recap.total = Math.abs(this.recap.positiveTotal) + Math.abs(this.recap.negativeTotal);
     }
 }
