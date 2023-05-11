@@ -1,7 +1,7 @@
 <script>
     import { accounts } from "@lib/store";
     import Money from "@components/Money.svelte";
-    import ModalAccountCreateUpdate from "../accounts/ModalAccountCreateUpdate.svelte";
+    import AccountCreateUpdateModal from "../accounts/AccountCreateUpdateModal.svelte";
 
     let modal = null;
 </script>
@@ -32,4 +32,4 @@
     {/each}
 </div>
 
-<ModalAccountCreateUpdate bind:modal />
+<AccountCreateUpdateModal bind:modal />

@@ -54,7 +54,7 @@
             </div>
 
             <footer class="is-flex is-justify-content-flex-end p-2">
-                <button class="button" data-dismiss="modal">Cancel</button>
+                <button class="button" aria-label="close">Cancel</button>
                 <button class="ml-1 button is-success" on:click={handleSuccess}>{(edit)? 'Edit' : 'Add'}</button>
             </footer>
         </div>

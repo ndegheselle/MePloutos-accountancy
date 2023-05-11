@@ -19,7 +19,7 @@
 </script>
 
 <div class="columns is-variable is-1 mb-0">
-    <div class="column pb-2">
+    <div class="column py-0">
         <AccountsTotal />
         <Accounts />
         <div class="box">
@@ -27,7 +27,7 @@
             <AccountRecap account={$currentAccount}/>
         </div>
     </div>
-    <div class="column pb-2">
+    <div class="column py-0">
         <div class="box mb-2">
             <span class="has-text-grey-lighter">Categories</span>
             <Categories account={$currentAccount}/>

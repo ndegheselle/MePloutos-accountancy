@@ -5,7 +5,10 @@
     import Money from "@components/Money.svelte";
     import CategoryIcon from "@components/CategoryIcon.svelte";
 
+    import CategorySelectionModal from "./CategorySelectionModal.svelte";
+
     let groupedTransactions = [];
+    let modal = null;
 
     $: groupTransactions($transactions);
 
@@ -38,7 +41,9 @@
         ]);
     }
 
-    function setSelectedTransactionCategory() {}
+    function setSelectedTransactionCategory() {
+        modal.show();
+    }
 
     export let account = null;
 </script>
@@ -93,3 +98,5 @@
         {/each}
     {/each}
 </nav>
+
+<CategorySelectionModal bind:modal />

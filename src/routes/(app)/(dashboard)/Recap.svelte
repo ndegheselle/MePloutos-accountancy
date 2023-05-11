@@ -1,9 +1,8 @@
 <script>
-    import { transactions } from "@lib/store";
     export let account = null;
 </script>
 
-<div class="box">
+<div class="box mb-2">
     <span class="has-text-grey-lighter">This month</span>
     <div class="columns is-mobile has-text-centered">
         <div class="column summary">

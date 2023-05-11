@@ -1,11 +1,13 @@
 <script>
     export let availableColors = [];
     export let color = "#c8b6ff";
+    let clazz;
+    export { clazz as class };
 </script>
 
 <div class="dropdown">
     <div class="dropdown-trigger">
-        <button class="button is-fullwidth" aria-haspopup="true">
+        <button class="button is-fullwidth {clazz}" aria-haspopup="true">
             <span
                 class="color-preview mr-1"
                 style="background-color: {color};"

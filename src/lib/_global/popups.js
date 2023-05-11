@@ -1,7 +1,7 @@
 // Functions to show and close
 const targets = [
     {
-        selector: '.modal-background, .modal-card-head .delete[aria-label="close"], .modal .button[data-dismiss="modal"]',
+        selector: '.modal-background, .modal button[aria-label="close"]',
         callback: function (element) {
             const $target = element.closest('.modal');
             close($target);
