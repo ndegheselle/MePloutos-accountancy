@@ -44,8 +44,6 @@
     function setSelectedTransactionCategory() {
         modal.show();
     }
-
-    export let account = null;
 </script>
 
 <nav class="panel">
