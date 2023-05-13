@@ -15,7 +15,7 @@
             <span>{color}</span>
         </button>
     </div>
-    <div class="dropdown-menu" role="menu">
+    <div class="dropdown-menu in-modal" role="menu">
         <div class="dropdown-content">
             <div class="dropdown-item">
                 <div class="colors-container">

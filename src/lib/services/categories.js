@@ -10,7 +10,7 @@ function create(_category)
     });
 }
 
-function edit(_category)
+function update(_category)
 {
     categories.update(_categories => {
         let index = _categories.findIndex(c => c.id == _category.id);
@@ -32,6 +32,6 @@ function remove(_categoryId)
 
 export default {
     create,
-    edit,
+    update,
     remove
 }

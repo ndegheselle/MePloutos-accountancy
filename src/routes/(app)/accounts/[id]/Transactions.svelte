@@ -1,5 +1,6 @@
 <script>
     import { transactions } from "@lib/store";
+    import transactionsService from "@lib/services/transactions";
     import { context } from "@global/contextMenu";
 
     import Money from "@components/Money.svelte";
@@ -42,7 +43,9 @@
     }
 
     function setSelectedTransactionCategory() {
-        modal.show();
+        modal.show().then((selectedCategory) => {
+            transactionsService.updateCategory($transactions.filter(t => t.selected), selectedCategory);
+        });
     }
 </script>
 

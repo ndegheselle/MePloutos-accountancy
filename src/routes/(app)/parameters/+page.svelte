@@ -11,7 +11,7 @@
     function handleModalFinish() {
         console.log(modalCategory);
         if (modalCategory.id)
-            categoriesService.edit(modalCategory);
+            categoriesService.update(modalCategory);
         else
             categoriesService.create(modalCategory);
             
