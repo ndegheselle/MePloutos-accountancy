@@ -21,7 +21,7 @@
             <p>{$confirmModal.message}</p>
         </section>
         <footer class="modal-card-foot is-justify-content-flex-end p-2">
-            <button class="button" data-dismiss="modal">Cancel</button>
+            <button class="button" aria-label="close">Cancel</button>
             <button class="button {$confirmModal.type}" on:click={() => handleClosing(true)}>Confirm</button
             >
         </footer>

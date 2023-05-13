@@ -27,29 +27,13 @@
   </div>
 
   <div id="navbarBasicExample" class="navbar-menu" class:is-active={menuOpen}>
-    <div class="navbar-start is-hidden-desktop">
-      <a class="navbar-item">
-        <span class="icon-text">
-          <span class="icon">
-            <i class="fas fa-folder"></i>
-          </span>
-          <span>Accounts</span>
-        </span>
-      </a>
-      <a class="navbar-item">
-        <span class="icon-text">
-          <span class="icon">
-            <i class="fas fa-folder-tree"></i>
-          </span>
-          <span>Projects</span>
-        </span>
-      </a>
+    <div class="navbar-start">
     </div>
 
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
-          <a class="button is-light">
+          <a class="button is-light" href="/parameters">
             <span class="icon is-small">
               <i class="fa-solid fa-gear"></i>
             </span>
@@ -60,38 +44,6 @@
   </div>
 </nav>
 
-<section class="columns is-gapless">
-  <div class="column is-narrow is-hidden-touch">
-    <aside class="menu p-2">
-      <p class="menu-label">
-        Accountancy
-      </p>
-      <ul class="menu-list">
-        <li>
-          <a>
-          <span class="icon-text">
-            <span class="icon">
-              <i class="fas fa-folder"></i>
-            </span>
-            <span>Accounts</span>
-          </span>
-        </a>
-        </li>
-        <li>
-          <a>
-          <span class="icon-text">
-            <span class="icon">
-              <i class="fas fa-folder-tree"></i>
-            </span>
-            <span>Projects</span>
-          </span>
-        </a>
-        </li>
-      </ul>
-    </aside>
-  </div>
-  <main class="column">
-    <slot />
-  </main>
-</section>
-
+<main class="container">
+  <slot />
+</main>
