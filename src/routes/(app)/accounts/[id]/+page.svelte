@@ -3,7 +3,7 @@
     import AccountDetails from "./AccountDetails.svelte";
 
     import { accounts, currentAccount, transactions } from "@lib/store";
-    import Transactions from "./Transactions.svelte";
+    import Transactions from "./transactions/Transactions.svelte";
 
     // if transactions or current account change
     $: updateAccount($transactions, data.accountId);
