@@ -1,6 +1,6 @@
 <script>
     import { categories } from "@lib/store";
-    import CategoryIcon from "@components/CategoryIcon.svelte";
+    import CategoryIcon from "./CategoryIcon.svelte";
 
     function select(_category)
     {

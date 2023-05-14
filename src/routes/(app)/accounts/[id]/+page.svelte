@@ -1,5 +1,5 @@
 <script>
-    import Categories from "@components/Categories.svelte";
+    import Categories from "@app/categories/Categories.svelte";
     import AccountDetails from "./AccountDetails.svelte";
 
     import { accounts, currentAccount, transactions } from "@lib/store";

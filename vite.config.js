@@ -13,7 +13,8 @@ export default defineConfig({
             '@styles': path.resolve('./src/scss'),
             '@lib': path.resolve('./src/lib'),
             '@global': path.resolve('./src/lib/_global'),
-            '@components': path.resolve('./src/lib/_components'),
+            '@components': path.resolve('./src/components'),
+            '@app': path.resolve('./src/routes/(app)'),
         }
     },
     server: {

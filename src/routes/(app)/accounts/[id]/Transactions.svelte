@@ -4,9 +4,9 @@
     import { context } from "@global/contextMenu";
 
     import Money from "@components/Money.svelte";
-    import CategoryIcon from "@components/CategoryIcon.svelte";
+    import CategoryIcon from "@app/categories/CategoryIcon.svelte";
 
-    import CategorySelectionModal from "./CategorySelectionModal.svelte";
+    import CategorySelectionModal from "@app/categories/CategorySelectionModal.svelte";
 
     let groupedTransactions = [];
     let modal = null;

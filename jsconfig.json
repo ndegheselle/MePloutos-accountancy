@@ -5,7 +5,8 @@
              // name and path to aliases
 			"@lib": ["src/lib"],
 			"@global": ["src/lib/_global"],
-            "@components": ["src/lib/_components"],
+            "@components": ["src/components"],
+			"@app": ["src/routes/(app)"],
 		}
 	},
 	"include": ["src/**/*.js", "src/**/*.svelte"]

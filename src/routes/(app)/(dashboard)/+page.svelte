@@ -1,6 +1,6 @@
 <script>
-    import Categories from "@components/Categories.svelte";
-    import AccountRecap from "@components/AccountRecap.svelte";
+    import Categories from "@app/categories/Categories.svelte";
+    import AccountRecap from "@app/accounts/AccountRecap.svelte";
 
     import { accounts, currentAccount, transactions, params } from "@lib/store";
     import AccountsTotal from "./AccountsTotal.svelte";
