@@ -11,6 +11,12 @@ function updateCategory(_selectedTransactions, _category)
     })
 }
 
+function imports(file, options)
+{
+    return 0;
+}
+
 export default {
-    updateCategory
+    updateCategory,
+    imports
 }

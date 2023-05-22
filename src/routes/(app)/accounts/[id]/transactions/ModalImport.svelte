@@ -1,29 +1,18 @@
 <script>
-    import { accounts } from "@lib/accountancy/store.js";
+    import { accounts } from "@lib/store.js";
     import { alerts } from "@global/dialogs.js";
-    import { createEventDispatcher } from 'svelte';
-
-    const dispatch = createEventDispatcher();
-
-    let files;
-    let bank = "labanquepostale";
+    import transactionsService from "@lib/services/transactions";
 
     function isFormValid(files) {
         return files && files.length === 1;
     }
 
-    async function sendImport()
+    async function importFile()
     {
-        let result = await importFile(files[0], {accountId: accountId, bank: bank});
-        dispatch('transactionsImported', result.count);
+        let result = transactionsService.imports(files[0], {accountId: accountId, bank: bank});
 
-        if (result.count) {
+        if (result.count)
             alerts.success(`${result.count} new transactions imported.`);
-            accounts.update((_accounts) => {
-                _accounts.find(a => a.id == accountId).balance = result.balance;
-                return _accounts;
-            });
-        }
         else
             alerts.success(`No new transaction imported.`);
         
@@ -34,6 +23,10 @@
     {
         accountId = null;
     }
+
+
+    let files;
+    let bank = "labanquepostale";
 
     export let accountId = null;
     export const modal = {
@@ -94,7 +87,7 @@
         </section>
         <footer class="modal-card-foot is-justify-content-flex-end">
             <button class="button" data-dismiss="modal">Cancel</button>
-            <button class="button is-success" disabled={!isFormValid(files)} on:click={sendImport}
+            <button class="button is-success" disabled={!isFormValid(files)} on:click={importFile}
                 >Import</button
             >
         </footer>

@@ -1,5 +1,5 @@
 <script>
-    import { transactions } from "@lib/store";
+    import { transactions, currentAccount } from "@lib/store";
     import transactionsService from "@lib/services/transactions";
     import { context } from "@global/contextMenu";
 
@@ -7,9 +7,11 @@
     import CategoryIcon from "@app/categories/CategoryIcon.svelte";
 
     import CategorySelectionModal from "@app/categories/CategorySelectionModal.svelte";
+    import ModalImport from "./ModalImport.svelte";
 
     let groupedTransactions = [];
-    let modal = null;
+    let categoryModal = null;
+    let importModal = null;
 
     $: groupTransactions($transactions);
 
@@ -42,11 +44,17 @@
         ]);
     }
 
+    function showImportModal()
+    {
+        importModal.show($currentAccount.id);
+    }
+
     function setSelectedTransactionCategory() {
-        modal.show().then((selectedCategory) => {
+        categoryModal.show().then((selectedCategory) => {
             transactionsService.updateCategory($transactions.filter(t => t.selected), selectedCategory);
         });
     }
+
 </script>
 
 <nav class="panel">
@@ -63,7 +71,7 @@
             </div>
             <div class="dropdown-menu" role="menu">
                 <div class="dropdown-content">
-                    <a href="#" class="dropdown-item">
+                    <a class="dropdown-item" on:click={showImportModal}>
                         <i class="fa-solid fa-file-import" /> Import transactions
                     </a>
                 </div>
@@ -100,4 +108,5 @@
     {/each}
 </nav>
 
-<CategorySelectionModal bind:modal />
+<CategorySelectionModal bind:modal={categoryModal} />
+<ModalImport bind:modal={importModal}/>
