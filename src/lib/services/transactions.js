@@ -1,4 +1,5 @@
 import { transactions } from "../store"
+import { importFile } from "../base/import";
 
 function updateCategory(_selectedTransactions, _category)
 {
@@ -11,9 +12,12 @@ function updateCategory(_selectedTransactions, _category)
     })
 }
 
-function imports(file, options)
+async function imports(file, options)
 {
-    return 0;
+    let { balance, dateMin, dateMax, transactions } = await importFile(file, options.bank);
+    console.log(transactions);
+    // Get transactions that are new compared to actual
+    // Add them to the transactions in the store
 }
 
 export default {
