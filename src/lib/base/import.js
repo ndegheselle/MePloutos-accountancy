@@ -16,15 +16,6 @@ const importOptions = {
     }
 }
 
-export async function importFile(file, bank) {
-    switch (bank) {
-        case 'labanquepostale':
-            return convertFromDatable(
-                await csvToDatatable(file),
-                importOptions[bank].csv);
-    }
-}
-
 function csvToDatatable(csv) {
     return new Promise((resolve, reject) => {
         Papa.parse(csv, {
@@ -75,4 +66,66 @@ function convertFromDatable(datatable, options) {
         dateMax: date,
         transactions
     }
+}
+
+export async function importFile(file, bank) {
+    switch (bank) {
+        case 'labanquepostale':
+            return convertFromDatable(
+                await csvToDatatable(file),
+                importOptions[bank].csv);
+    }
+}
+
+export function filterAlreadyExisting(accountId, lastTransaction, transactionsList) {
+
+    const transacNumberByDate = {};
+    // Reverse loop to keep orderNumber logical (oldest to newest)
+    for (let i = transactionsList.length - 1; i >= 0; i--) {
+        let transaction = transactionsList[i];
+
+        const dateString = transaction.date.toDateString();
+        transacNumberByDate[dateString] = (transacNumberByDate[dateString] + 1) || 0;
+
+        transaction.orderNumber = transacNumberByDate[dateString];
+        transaction.accountId = accountId;
+    }
+
+    transactionsList.sort((a, b) => b.date - a.date || b.orderNumber - a.orderNumber);
+
+    // XXX : is it possible that a bank add transaction in the past ? -> that actually may append
+    // If transactions are too old we don't import it
+    if (transactionsList[0].date <= lastTransaction?.date) return { count: 0 };
+
+    // Don't import the transactions that are already present
+    if (lastTransaction) {
+        lastTransaction.orderNumber += 1;
+        let indexSameDayLastTransaction = null;
+        for (let i = transactionsList.length - 1; i >= 0; i--) {
+
+            // Search last imported
+            if (transactionsList[i].date.getTime() == lastTransaction.date.getTime() &&
+                transactionsList[i].description == lastTransaction.description &&
+                transactionsList[i].value == lastTransaction.value) {
+
+                transactionsList = transactionsList.slice(0, i);
+                break;
+            }
+
+            if (transactionsList[i].date.getTime() == lastTransaction.date.getTime()) {
+                // Keep same day as last index so that we can resolve specific cases
+                if (!indexSameDayLastTransaction) indexSameDayLastTransaction = i + 1;
+
+                transactionsList[i].orderNumber += lastTransaction.orderNumber;
+            }
+
+            // Safe guard / optimisation since bank can change transactions names between two imports
+            if (transactionsList[i].date > lastTransaction.date) {
+                transactionsList = transactionsList.slice(0, indexSameDayLastTransaction || i);
+                break;
+            }
+        }
+    }
+
+    return transactionsList;
 }
