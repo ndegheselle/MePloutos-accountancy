@@ -1,5 +1,7 @@
 import { transactions } from "../store"
-import { importFile } from "../base/import";
+import { filterAlreadyExisting, importFile } from "../base/import";
+import transactionsRepo from "../repos/transactions";
+import accountsRepo from "../repos/accounts";
 
 function updateCategory(_selectedTransactions, _category)
 {
@@ -15,9 +17,12 @@ function updateCategory(_selectedTransactions, _category)
 async function imports(file, options)
 {
     let { balance, dateMin, dateMax, transactions } = await importFile(file, options.bank);
-    console.log(transactions);
-    // Get transactions that are new compared to actual
-    // Add them to the transactions in the store
+    const lastTransaction = transactionsRepo.getLast();
+    const newTransactions = filterAlreadyExisting(options.accountId, lastTransaction, transactions);
+
+    transactionsRepo.saveBulks(newTransactions);
+    accountsRepo.updateBalance(options.accountId, balance);
+    // update le store
 }
 
 export default {

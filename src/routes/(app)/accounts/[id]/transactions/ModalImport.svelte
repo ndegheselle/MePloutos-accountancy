@@ -24,7 +24,6 @@
         accountId = null;
     }
 
-
     let files;
     let bank = "labanquepostale";
 
