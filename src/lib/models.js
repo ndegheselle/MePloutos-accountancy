@@ -2,6 +2,8 @@ import { uuidv4 } from "./helpers";
 
 export class Account
 {
+    static dexieDefinition = "++id, name, color, balance";
+
     constructor(_id, _name, _color, _balance)
     {
         this.id = _id || uuidv4();
@@ -40,6 +42,8 @@ export class Account
 
 export class Category
 {
+    static dexieDefinition = "++id, name, color";
+
     constructor(_id, _name, _color)
     {
         this.id = _id;
@@ -50,6 +54,8 @@ export class Category
 
 export class Transaction
 {
+    static dexieDefinition = "++id, date, description, value, categoryId";
+
     constructor(_description, _date, _value, _categoryId)
     {
         this.id = uuidv4();

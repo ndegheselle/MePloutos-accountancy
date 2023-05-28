@@ -1,7 +1,7 @@
 <script>
     import accountsService from '@lib/services/accounts.js';
     import {Account} from "@lib/models";
-    import {colors} from '@lib/services/colors.js';
+    import {colors} from '@lib/base/colors.js';
 
     import ColorInput from '@components/ColorInput.svelte';
 

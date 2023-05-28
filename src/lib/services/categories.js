@@ -3,6 +3,7 @@ import { categories } from "../store"
 
 function create(_category)
 {
+    // TODO : update database
     _category.id = uuidv4();
     categories.update(_categories => {
         _categories.push(_category);

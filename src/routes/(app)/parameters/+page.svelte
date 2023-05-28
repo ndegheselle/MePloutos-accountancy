@@ -2,7 +2,7 @@
     import { confirm } from "@global/dialogs"
     import { categories } from "@lib/store";
     import { Category } from "@lib/models";
-    import { colors } from "@lib/services/colors.js";
+    import { colors } from "@lib/base/colors.js";
     import categoriesService from "@lib/services/categories";
 
     import CategoryIcon from "@components/CategoryIcon.svelte";

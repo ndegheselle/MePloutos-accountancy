@@ -1,6 +1,6 @@
 <script>
     import { transactions, currentAccount } from "@lib/store";
-    import transactionsService from "@lib/services/transactions";
+    import transactionsService from "@lib/services/transactions/transactions";
     import { context } from "@global/contextMenu";
 
     import Money from "@components/Money.svelte";
@@ -13,26 +13,7 @@
     let categoryModal = null;
     let importModal = null;
 
-    $: groupTransactions($transactions);
-
-    function groupTransactions(_transactions) {
-        groupedTransactions = [];
-
-        // Work because we know that the transactions are sorted
-        let previousDate = new Date(0);
-        for (let transaction of _transactions) {
-            if (transaction.date.getTime() != previousDate.getTime()) {
-                groupedTransactions.push({
-                    date: transaction.date,
-                    transactions: [],
-                });
-                previousDate = transaction.date;
-            }
-            groupedTransactions[
-                groupedTransactions.length - 1
-            ].transactions.push(transaction);
-        }
-    }
+    $: groupedTransactions = transactionsService.groupTransactions($transactions);
 
     function showTransactionContext(event, _transaction) {
         context.show({ x: event.pageX, y: event.pageY }, [
