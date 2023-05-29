@@ -11,33 +11,6 @@ export class Account
         this.color = _color || "#DDD";
         this.balance = _balance || 0;
     }
-
-    update(_transactions)
-    {
-        let catTmpMap = new Map();
-        catTmpMap.set(null, 0);
-        this.recap = {
-            positiveTotal: 0,
-            negativeTotal: 0,
-            total: 0,
-        };
-
-        for (let transaction of _transactions)
-        {
-            if (!catTmpMap.has(transaction.categoryId)) catTmpMap.set(transaction.categoryId, 0);
-            catTmpMap.set(transaction.categoryId, catTmpMap.get(transaction.categoryId) + Math.abs(transaction.value));
-
-            if (transaction.value > 0)
-                this.recap.positiveTotal += transaction.value;
-            else
-                this.recap.negativeTotal += transaction.value;
-        }
-        // Reverse so that None category is always at the end
-        this.categories = Array.from(catTmpMap, function(entry) {
-            return {id: entry[0], value: entry[1]};
-        }).reverse();
-        this.recap.total = Math.abs(this.recap.positiveTotal) + Math.abs(this.recap.negativeTotal);
-    }
 }
 
 export class Category
@@ -63,5 +36,16 @@ export class Transaction
         this.description = _description || "";
         this.value = _value || 0;
         this.categoryId = _categoryId || null;
+    }
+}
+
+export class Project
+{
+    static dexieDefinition = "++id, name";
+
+    constructor(_name)
+    {
+        this.id = uuidv4();
+        this.name = _name || "";
     }
 }

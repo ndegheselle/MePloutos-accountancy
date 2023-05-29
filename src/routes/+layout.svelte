@@ -11,6 +11,8 @@
 
   function updateCategoriesCSS(categories)
   {
+    if (!categories) return;
+    
     let styles = "";
     for(const category of categories)
     {
