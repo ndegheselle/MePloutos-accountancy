@@ -1,11 +1,13 @@
+import { createAccount, removeAccount } from "../repos/accounts";
+
 function save(_account)
 {
-    /*
-    // TODO : update database
-    accounts.update(_accounts => {
-        _accounts.push(_account);
-        return _accounts;
-    })*/
+    return createAccount(_account);
+}
+
+function remove(_accountId)
+{
+    removeAccount(_accountId);
 }
 
 function updateAccountTransactions(_account, _transactions)
@@ -18,7 +20,7 @@ function updateAccountTransactions(_account, _transactions)
         total: 0,
     };
 
-    for (let transaction of _transactions)
+    for (let transaction of _transactions || [])
     {
         if (!catTmpMap.has(transaction.categoryId)) catTmpMap.set(transaction.categoryId, 0);
         catTmpMap.set(transaction.categoryId, catTmpMap.get(transaction.categoryId) + Math.abs(transaction.value));

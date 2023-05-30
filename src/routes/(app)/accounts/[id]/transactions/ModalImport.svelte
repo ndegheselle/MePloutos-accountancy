@@ -1,5 +1,4 @@
 <script>
-    import { accounts } from "@lib/store.js";
     import { alerts } from "@global/dialogs.js";
     import transactionsService from "@lib/services/transactions/transactions";
 

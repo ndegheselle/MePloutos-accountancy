@@ -1,6 +1,6 @@
 <script>
-    import { transactions, currentAccount } from "@lib/store";
-    import transactionsService from "@lib/services/transactions/transactions";
+    import { currentTransactions, currentAccount } from "@lib/store";
+    import transactionsService from "@lib/services/transactions/transactions.js";
     import { context } from "@global/contextMenu";
 
     import Money from "@components/Money.svelte";
@@ -13,7 +13,7 @@
     let categoryModal = null;
     let importModal = null;
 
-    $: groupedTransactions = transactionsService.groupTransactions($transactions);
+    $: groupedTransactions = transactionsService.groupTransactions($currentTransactions);
 
     function showTransactionContext(event, _transaction) {
         context.show({ x: event.pageX, y: event.pageY }, [
@@ -32,7 +32,7 @@
 
     function setSelectedTransactionCategory() {
         categoryModal.show().then((selectedCategory) => {
-            transactionsService.updateCategory($transactions.filter(t => t.selected), selectedCategory);
+            transactionsService.updateCategory($currentTransactions.filter(t => t.selected), selectedCategory);
         });
     }
 

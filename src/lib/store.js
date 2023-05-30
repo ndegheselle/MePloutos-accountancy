@@ -52,7 +52,9 @@ export const currentTransactions = derived([
 
 // currentAccountId -> currentAccount -> currentTransactions -> updateAccountTransactions
 currentTransactions.subscribe($currentTransactions => {
-  if (!$currentTransactions) return;
+  let $currentAccount = get(currentAccount);
+  if (!$currentAccount) return;
+  
   accountsService.updateAccountTransactions($currentAccount, $currentTransactions);
 });
 

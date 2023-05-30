@@ -1,22 +1,28 @@
-// Get the transactions from IndexedDB with dexie
-// Also load it from a file (that will be get from drive later ?)
+import { db } from '@lib/base/indexDB.js';
 
-function getLast()
+// update transactions categories
+export function updateTransactionsCategory(_transactions, _category)
+{
+    return b.transactions.update(_transactions => {
+        for(let transac of _transactions)
+        {
+            transac.categoryId = _category.id;
+        }
+        return _transactions;
+    });
+}
+
+export function getMostRecentTransaction()
 {
    
 }
 
-function getByAccountId()
+export function getTransactionsByAccountId()
 {
 
 }
 
-function saveBulks()
+export function saveTransactionsBulks()
 {
     
-}
-
-export default {
-    getLast,
-    saveBulks
 }

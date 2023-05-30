@@ -1,34 +1,29 @@
-import { transactions } from "@lib/store"
-import transactionsRepo from "@lib/repos/transactions";
-import accountsRepo from "@lib/repos/accounts";
+import { currentTransactions } from "@lib/store"
+import { saveTransactionsBulks, getMostRecentTransaction, updateTransactionsCategory } from "@lib/repos/transactions";
+import { updateAccountBalance } from "@lib/repos/accounts";
 
 import { filterAlreadyExisting, importFile } from "./import.js";
 
 function updateCategory(_selectedTransactions, _category)
 {
-    transactions.update(_transactions => {
-        for(let transac of _selectedTransactions)
-        {
-            transac.categoryId = _category.id;
-        }
-        return _transactions;
-    })
+    return updateTransactionsCategory(_selectedTransactions, _category);
 }
 
 async function imports(file, options)
 {
     let { balance, dateMin, dateMax, transactions } = await importFile(file, options.bank);
-    const lastTransaction = transactionsRepo.getLast();
+    const lastTransaction = getMostRecentTransaction();
     const newTransactions = filterAlreadyExisting(options.accountId, lastTransaction, transactions);
 
-    transactionsRepo.saveBulks(newTransactions);
-    accountsRepo.updateBalance(options.accountId, balance);
-    // update le store
+    saveTransactionsBulks(newTransactions);
+    updateAccountBalance(options.accountId, balance);
 }
 
 function groupTransactions(_transactions)
 {
     let groupedTransactions = [];
+
+    if (!_transactions) return groupedTransactions;
 
     // Work because we know that the transactions are sorted
     let previousDate = new Date(0);

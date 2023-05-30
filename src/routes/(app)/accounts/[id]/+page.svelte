@@ -2,16 +2,15 @@
     import Categories from "@app/categories/Categories.svelte";
     import AccountDetails from "./AccountDetails.svelte";
 
-    import { accounts, currentAccount, transactions } from "@lib/store";
+    import { currentAccount, currentAccountId } from "@lib/store";
     import Transactions from "./transactions/Transactions.svelte";
 
     // if transactions or current account change
-    $: updateAccount($transactions, data.accountId);
+    $: updateAccount(data.accountId);
 
-    function updateAccount(_transactions, accountId)
+    function updateAccount(_accountId)
     {
-        $currentAccount = $accounts.find(a => a.id == accountId);
-        $currentAccount.update(_transactions);
+        $currentAccountId = _accountId;
     }
 
     export let data;
@@ -29,5 +28,5 @@
     </div>
 </div>
 <div>
-    <Transactions account={$currentAccount}/>
+    <Transactions />
 </div>
