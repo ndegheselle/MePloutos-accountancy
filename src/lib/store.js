@@ -37,7 +37,8 @@ export const categoriesMap = derived(categories,
 
 export const currentAccount = derived([accounts, currentAccountId], ([$accounts, $currentAccountId]) => {
   if ($currentAccountId == null) return null;
-  return $accounts.find(acc => acc.id == $currentAccountId);
+  let account = $accounts.find(acc => acc.id == $currentAccountId);
+  return account;
 });
 
 // Get current transactions if DB or currentAccountId is updated

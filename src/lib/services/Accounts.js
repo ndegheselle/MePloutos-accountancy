@@ -35,6 +35,7 @@ function updateAccountTransactions(_account, _transactions)
     _account.categories = Array.from(catTmpMap, function(entry) {
         return {id: entry[0], value: entry[1]};
     }).reverse();
+    console.log(_account.categories);
     _account.recap.total = Math.abs(_account.recap.positiveTotal) + Math.abs(_account.recap.negativeTotal);
 }
 

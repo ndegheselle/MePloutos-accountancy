@@ -6,7 +6,7 @@
     let chart = null;
 
     $: {
-        if (chart) chart.update(getChartData($categoriesMap, account));
+        if (chart && account.categories) chart.update(getChartData($categoriesMap, account));
     }
 
     function getChartData(_categoriesMap, _account)

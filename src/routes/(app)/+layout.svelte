@@ -44,6 +44,6 @@
   </div>
 </nav>
 
-<main class="container">
+<main class="container mt-4">
   <slot />
 </main>

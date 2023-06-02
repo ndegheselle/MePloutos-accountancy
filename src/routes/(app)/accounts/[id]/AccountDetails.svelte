@@ -1,6 +1,9 @@
 <script>
     import { categoriesMap } from "@lib/store";
     import AccountRecap from "../AccountRecap.svelte";
+
+    $: console.log(account);
+
     export let account = null;
 </script>
 

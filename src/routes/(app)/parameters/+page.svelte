@@ -5,7 +5,7 @@
     import { colors } from "@lib/base/colors.js";
     import categoriesService from "@lib/services/categories";
 
-    import CategoryIcon from "@components/CategoryIcon.svelte";
+    import CategoryIcon from "@app/categories/CategoryIcon.svelte";
     import ColorInput from "@components/ColorInput.svelte";
 
     function handleModalFinish() {
