@@ -2,18 +2,11 @@
     import Categories from "@app/categories/Categories.svelte";
     import AccountRecap from "@app/accounts/AccountRecap.svelte";
 
-    import { currentAccount, currentAccountId, params } from "@lib/store";
+    import { favoriteAccount } from "./store";
+
     import AccountsTotal from "./AccountsTotal.svelte";
     import Accounts from "./Accounts.svelte";
     import Projects from "./Projects.svelte";
-
-    // if favorite account change
-    $: getFavoriteAccount($params.favoriteAccount);
-
-    function getFavoriteAccount(_accounts, _favAccountId) {
-        if (!_favAccountId) return;
-        $currentAccountId = _favAccountId;
-    }
 </script>
 
 <div class="columns is-variable is-1 mb-0">
@@ -22,8 +15,8 @@
         <Accounts />
         <div class="box">
             <span class="has-text-grey-lighter">This month</span>
-            {#if $currentAccount}
-                <AccountRecap account={$currentAccount} />
+            {#if $favoriteAccount}
+                <AccountRecap account={$favoriteAccount} />
             {:else}
                 <div class="flex-centered p-5">
                     <span class="has-text-grey">No favorite account</span>
@@ -31,12 +24,13 @@
             {/if}
         </div>
     </div>
+
     <div class="column py-0">
         <div class="box mb-2">
             <span class="has-text-grey-lighter">Categories</span>
 
-            {#if $currentAccount}
-                <Categories account={$currentAccount} />
+            {#if $favoriteAccount}
+                <Categories account={$favoriteAccount} />
             {:else}
                 <div class="flex-centered p-5">
                     <span class="has-text-grey">No favorite account</span>

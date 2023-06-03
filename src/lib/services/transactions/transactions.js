@@ -1,4 +1,3 @@
-import { currentTransactions } from "@lib/store"
 import { saveTransactionsBulks, getMostRecentTransaction, updateTransactionsCategory } from "@lib/repos/transactions";
 import { updateAccountBalance } from "@lib/repos/accounts";
 
@@ -19,7 +18,7 @@ async function imports(file, options)
     updateAccountBalance(options.accountId, balance);
 }
 
-function groupTransactions(_transactions)
+function groupTransactionsByDate(_transactions)
 {
     let groupedTransactions = [];
 
@@ -43,8 +42,47 @@ function groupTransactions(_transactions)
     return groupedTransactions;
 }
 
+// Create a summary of the given transactions (positive, negative, total, categories values)
+function getTransactionsRecap(_transactions)
+{
+    let catTmpMap = new Map();
+    // transactions without a category (None category)
+    catTmpMap.set(null, 0);
+
+    let recap = {
+        positiveTotal: 0,
+        negativeTotal: 0,
+        total: 0,
+    };
+
+    for (let transaction of _transactions || [])
+    {
+        // Categories values
+        if (!catTmpMap.has(transaction.categoryId)) catTmpMap.set(transaction.categoryId, 0);
+        catTmpMap.set(transaction.categoryId, catTmpMap.get(transaction.categoryId) + Math.abs(transaction.value));
+
+        // Transactions totals
+        if (transaction.value > 0)
+            recap.positiveTotal += transaction.value;
+        else
+            recap.negativeTotal += transaction.value;
+    }
+
+    // Reverse so that None category is always at the end
+    let categoriesValues = Array.from(catTmpMap, function(entry) {
+        return {id: entry[0], value: entry[1]};
+    }).reverse();
+    recap.total = Math.abs(_account.recap.positiveTotal) + Math.abs(_account.recap.negativeTotal);
+
+    return {
+        categoriesValues,
+        recap
+    }
+}
+
 export default {
     updateCategory,
     imports,
-    groupTransactions
+    groupTransactionsByDate,
+    getTransactionsRecap
 }

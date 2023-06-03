@@ -1,5 +1,4 @@
 <script>
-    import { currentTransactions, currentAccount } from "@lib/store";
     import transactionsService from "@lib/services/transactions/transactions.js";
     import { context } from "@global/contextMenu";
 

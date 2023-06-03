@@ -6,19 +6,19 @@
     let chart = null;
 
     $: {
-        if (chart && account.categories) chart.update(getChartData($categoriesMap, account));
+        if (chart && account.categoriesValues) chart.update(getChartData($categoriesMap, account));
     }
 
     function getChartData(_categoriesMap, _account)
     {
         return {
-            series: _account.categories.map(cat => {
+            series: _account.categoriesValues.map(cat => {
                 return {
                     value: Math.abs(cat.value) * 100 / _account.recap.total,
                     className: `category-${cat.id}`
                 }
             }),
-            labels: _account.categories.map(cat => _categoriesMap.get(cat.id).name)
+            labels: _account.categoriesValues.map(cat => _categoriesMap.get(cat.id).name)
         }
     }
 

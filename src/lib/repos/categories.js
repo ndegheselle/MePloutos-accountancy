@@ -1,4 +1,12 @@
 import { db } from '@lib/base/indexDB.js';
+import {liveQuery} from "dexie";
+
+export function getAllCategoriesLive()
+{
+    return liveQuery(
+        () => db.categories.toArray()
+      );
+}
 
 export function createCategory(_category)
 {

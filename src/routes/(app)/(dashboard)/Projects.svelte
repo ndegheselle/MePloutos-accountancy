@@ -1,5 +1,5 @@
 <script>
-    import { projects } from "@lib/store";
+    import { projects } from "./store";
 </script>
 
 <div class="panel p-4">
