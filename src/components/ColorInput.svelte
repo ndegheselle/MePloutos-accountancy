@@ -1,7 +1,7 @@
 <script>
     export let availableColors = [];
     export let color = "#c8b6ff";
-    let clazz;
+    let clazz = "";
     export { clazz as class };
 </script>
 

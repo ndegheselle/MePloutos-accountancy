@@ -18,6 +18,7 @@
     let edit = false;
     let show = false;
     let currentAccount = {};
+
     export const modal = {
         show(_account) {
             edit = !!_account;
