@@ -6,19 +6,19 @@
     let chart = null;
 
     $: {
-        if (chart && account.categoriesValues) chart.update(getChartData($categoriesMap, account));
+        if (chart && transactionsRecap.categoriesValues) chart.update(getChartData($categoriesMap, transactionsRecap));
     }
 
-    function getChartData(_categoriesMap, _account)
+    function getChartData(_categoriesMap, _transactionsRecap)
     {
         return {
-            series: _account.categoriesValues.map(cat => {
+            series: _transactionsRecap.categoriesValues.map(cat => {
                 return {
-                    value: Math.abs(cat.value) * 100 / _account.recap.total,
+                    value: Math.abs(cat.value) * 100 / _transactionsRecap.totals.total,
                     className: `category-${cat.id}`
                 }
             }),
-            labels: _account.categoriesValues.map(cat => _categoriesMap.get(cat.id).name)
+            labels: _transactionsRecap.categoriesValues.map(cat => _categoriesMap.get(cat.id).name)
         }
     }
 
@@ -36,7 +36,7 @@
         );
     });
 
-    export let account = {};
+    export let transactionsRecap = {};
 </script>
 
 <div class="ct-chart" />

@@ -25,5 +25,6 @@ export function saveTransactionsBulks()
 // get transactions by account id and filters (start date, end date)
 export function getTransactionsByAccount(_accountId, _endDate)
 {
+    if (!_accountId) return Promise.resolve([]);
     return db.transactions.where(["accountId", "date"]).above(_accountId).toArray();
 }

@@ -12,7 +12,7 @@
     let categoryModal = null;
     let importModal = null;
 
-    $: groupedTransactions = transactionsService.groupTransactions($currentTransactions);
+    $: groupedTransactions = transactionsService.groupTransactionsByDate(transactions);
 
     function showTransactionContext(event, _transaction) {
         context.show({ x: event.pageX, y: event.pageY }, [
@@ -26,15 +26,17 @@
 
     function showImportModal()
     {
-        importModal.show($currentAccount.id);
+        importModal.show(accountId);
     }
 
     function setSelectedTransactionCategory() {
         categoryModal.show().then((selectedCategory) => {
-            transactionsService.updateCategory($currentTransactions.filter(t => t.selected), selectedCategory);
+            transactionsService.updateCategory(transactions.filter(t => t.selected), selectedCategory);
         });
     }
 
+    export let accountId = null;
+    export let transactions = null;
 </script>
 
 <nav class="panel">

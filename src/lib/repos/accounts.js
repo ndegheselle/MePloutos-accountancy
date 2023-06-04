@@ -1,5 +1,4 @@
 import { db } from '@lib/base/indexDB.js';
-import {liveQuery} from "dexie";
 
 export function createAccount(_account)
 {
@@ -16,15 +15,13 @@ export function updateAccountBalance(_accountId, _balance)
     return db.accounts.update(_accountId, { balance: _balance });
 }
 
-export function getAllAccountsLive()
+export function getAllAccounts()
 {
-    return liveQuery(
-        () => db.accounts.toArray()
-      );
+    return db.accounts.toArray();
 }
 
-// Get account by id
 export function getAccountById(_accountId)
 {
+    if (!_accountId) return Promise.resolve(null);
     return db.accounts.get(_accountId);
 }

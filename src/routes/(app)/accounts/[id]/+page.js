@@ -1,5 +1,5 @@
+import { setCurrentAccountId } from "./store";
+
 export async function load({ params }) {
-    return {
-        accountId: params.id
-    };
+    setCurrentAccountId(params.id);
 }

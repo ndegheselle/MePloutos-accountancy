@@ -46,10 +46,10 @@ function groupTransactionsByDate(_transactions)
 function getTransactionsRecap(_transactions)
 {
     let catTmpMap = new Map();
-    // transactions without a category (None category)
+    // transactions without a category (None category) so that its first in the list
     catTmpMap.set(null, 0);
 
-    let recap = {
+    let totals = {
         positiveTotal: 0,
         negativeTotal: 0,
         total: 0,
@@ -63,20 +63,21 @@ function getTransactionsRecap(_transactions)
 
         // Transactions totals
         if (transaction.value > 0)
-            recap.positiveTotal += transaction.value;
+            totals.positiveTotal += transaction.value;
         else
-            recap.negativeTotal += transaction.value;
+            totals.negativeTotal += transaction.value;
     }
 
     // Reverse so that None category is always at the end
+    
     let categoriesValues = Array.from(catTmpMap, function(entry) {
         return {id: entry[0], value: entry[1]};
     }).reverse();
-    recap.total = Math.abs(_account.recap.positiveTotal) + Math.abs(_account.recap.negativeTotal);
+    totals.total = Math.abs(totals.positiveTotal) + Math.abs(totals.negativeTotal);
 
     return {
         categoriesValues,
-        recap
+        totals
     }
 }
 
