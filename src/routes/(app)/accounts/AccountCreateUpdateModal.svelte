@@ -11,7 +11,12 @@
 
     function handleSuccess()
     {
-        accountsService.save(currentAccount);
+        console.log(currentAccount);
+        if (currentAccount.id)
+            accountsService.update(currentAccount);
+        else
+            accountsService.create(currentAccount);
+        
         show = false;
     }
 

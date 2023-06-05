@@ -1,16 +1,24 @@
-import { createAccount, removeAccount } from "../repos/accounts";
+import { createAccount, updateAccount, removeAccount } from "../repos/accounts";
+import { removeTransactionsByAccount} from "../repos/transactions";
 
-function save(_account)
+function create(_account)
 {
     return createAccount(_account);
 }
 
+function update(_account)
+{
+    return updateAccount(_account);
+}
+
 function remove(_accountId)
 {
+    removeTransactionsByAccount(_accountId);
     removeAccount(_accountId);
 }
 
 export default {
-    save,
+    create,
+    update,
     remove
 }

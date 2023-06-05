@@ -1,13 +1,20 @@
 import { db } from '@lib/base/indexDB.js';
+import { uuidv4 } from "../helpers";
 
 export function createAccount(_account)
 {
+    _account.id = uuidv4();
     return db.accounts.add(_account);
 }
 
 export function removeAccount(_accountId)
 {
     return db.accounts.delete(_accountId);
+}
+
+export function updateAccount(_account)
+{
+    return db.accounts.update(_account.id, _account);
 }
 
 export function updateAccountBalance(_accountId, _balance)

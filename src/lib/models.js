@@ -1,15 +1,12 @@
-import { uuidv4 } from "./helpers";
-
 export class Account
 {
     static dexieDefinition = "++id, name, color, balance";
 
-    constructor(_id, _name, _color, _balance)
+    constructor()
     {
-        this.id = _id || uuidv4();
-        this.name = _name || "";
-        this.color = _color || "#DDD";
-        this.balance = _balance || 0;
+        this.name = "";
+        this.color = "#DDD";
+        this.balance = 0;
     }
 }
 
@@ -31,7 +28,6 @@ export class Transaction
 
     constructor(_description, _date, _value, _categoryId)
     {
-        this.id = uuidv4();
         this.date = _date || new Date();
         this.description = _description || "";
         this.value = _value || 0;
@@ -47,7 +43,6 @@ export class Project
 
     constructor(_name)
     {
-        this.id = uuidv4();
         this.name = _name || "";
     }
 }

@@ -14,12 +14,21 @@ export function updateTransactionsCategory(_transactions, _category)
 
 export function getMostRecentTransaction()
 {
-   
+   throw new Error("Not implemented");
 }
 
 export function saveTransactionsBulks()
 {
-    
+    throw new Error("Not implemented");
+}
+
+// remove all transactions linked to a accountid
+export function removeTransactionsByAccount(_accountId)
+{
+    return db.transactions
+        .where("accountId")
+        .equals(_accountId)
+        .delete();
 }
 
 // get transactions by account id and filters (start date, end date)
