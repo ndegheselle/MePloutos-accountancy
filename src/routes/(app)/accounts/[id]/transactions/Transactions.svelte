@@ -91,4 +91,4 @@
 </nav>
 
 <CategorySelectionModal bind:modal={categoryModal} />
-<ModalImport bind:modal={importModal}/>
+<ModalImport bind:modal={importModal} />

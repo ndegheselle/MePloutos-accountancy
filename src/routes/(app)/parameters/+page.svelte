@@ -9,7 +9,6 @@
     import ColorInput from "@components/ColorInput.svelte";
 
     function handleModalFinish() {
-        console.log(modalCategory);
         if (modalCategory.id)
             categoriesService.update(modalCategory);
         else

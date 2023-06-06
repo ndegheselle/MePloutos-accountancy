@@ -11,7 +11,6 @@
 
     function handleSuccess()
     {
-        console.log(currentAccount);
         if (currentAccount.id)
             accountsService.update(currentAccount);
         else

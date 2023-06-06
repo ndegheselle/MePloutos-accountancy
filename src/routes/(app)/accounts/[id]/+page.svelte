@@ -18,5 +18,5 @@
     </div>
 </div>
 <div>
-    <Transactions transactions={$currentTransactions}/>
+    <Transactions transactions={$currentTransactions} accountId={$currentAccount?.id}/>
 </div>
