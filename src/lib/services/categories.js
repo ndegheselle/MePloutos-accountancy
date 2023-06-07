@@ -1,34 +1,20 @@
 import { uuidv4 } from "../helpers";
-import { categories } from "../store"
+import { createCategory, updateCategory, removeCategory } from '@lib/repos/categories.js';
 
 function create(_category)
 {
-    // TODO : update database
     _category.id = uuidv4();
-    categories.update(_categories => {
-        _categories.push(_category);
-        return _categories;
-    });
+    return createCategory(_category);
 }
 
 function update(_category)
 {
-    categories.update(_categories => {
-        let index = _categories.findIndex(c => c.id == _category.id);
-        _categories[index] = _category;
-        return _categories;
-    });
+    return updateCategory(_category);
 }
 
 function remove(_categoryId)
 {
-    categories.update(_categories => {
-        let index = _categories.findIndex(c => c.id == _categoryId);
-        if (index > -1) {
-            _categories.splice(index, 1);
-        }
-        return _categories;
-    });
+    return removeCategory(_categoryId);
 }
 
 export default {

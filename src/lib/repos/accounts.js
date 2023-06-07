@@ -1,9 +1,7 @@
 import { db } from '@lib/base/indexDB.js';
-import { uuidv4 } from "../helpers";
 
 export function createAccount(_account)
 {
-    _account.id = uuidv4();
     return db.accounts.add(_account);
 }
 

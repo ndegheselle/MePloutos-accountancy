@@ -10,12 +10,12 @@ export function createCategory(_category)
     return db.categories.add(_category);
 }
 
-export function removeAccount(_categoryId)
-{
-    return db.categories.delete(_categoryId);
-}
-
-export function updateAccountBalance(_category)
+export function updateCategory(_category)
 {
     return db.categories.update(_category.id, _category);
+}
+
+export function removeCategory(_categoryId)
+{
+    return db.categories.delete(_categoryId);
 }

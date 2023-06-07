@@ -13,7 +13,6 @@
             categoriesService.update(modalCategory);
         else
             categoriesService.create(modalCategory);
-            
         modalCategory = null;
     }
 

@@ -4,7 +4,7 @@
     import { categoriesMap } from "@lib/store";
 
     let chart = null;
-
+    
     $: {
         if (chart && transactionsRecap.categoriesValues) chart.update(getChartData($categoriesMap, transactionsRecap));
     }

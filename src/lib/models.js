@@ -16,7 +16,7 @@ export class Category
 
     constructor(_id, _name, _color)
     {
-        this.id = _id;
+        this.id = _id || null;
         this.name = _name || "";
         this.color = _color || "#DDD";
     }
