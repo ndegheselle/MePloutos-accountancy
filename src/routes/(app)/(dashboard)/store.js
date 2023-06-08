@@ -13,22 +13,19 @@ export const accounts = derived(
 
 export const projects = writable([]);
 
-export const transactionsRecap = writable(null);
-
 // XXX : Check if in the future params throw updates too often
-export const favoriteAccount = derived(
+export const transactionsRecap = derived(
     params,
-    $params => {
-        if (!$params.favoriteAccountId) return null;
+    ($params, set) => {
+        if (!$params?.favoriteAccountId) return null;
 
-        let account = getAccountById($params.favoriteAccountId);
-        // TODO : add date
-        let transactions = getTransactionsByAccount($params.favoriteAccountId);
-
-        transactionsRecap.set(
-            transactionsService.getTransactionsRecap(transactions)
-        );
-
-        return account;
+        // Can't use async function in derived
+        (async () => {
+            // TODO : add date
+            let transactions = await getTransactionsByAccount($params.favoriteAccountId);
+    
+            let recap = transactionsService.getTransactionsRecap(transactions);
+            set(recap);
+        })();
     }
 );

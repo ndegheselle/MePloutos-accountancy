@@ -2,7 +2,7 @@
     import Categories from "@app/categories/Categories.svelte";
     import AccountRecap from "@app/accounts/AccountRecap.svelte";
 
-    import { favoriteAccount, transactionsRecap } from "./store";
+    import { transactionsRecap } from "./store";
 
     import AccountsTotal from "./AccountsTotal.svelte";
     import Accounts from "./Accounts.svelte";
@@ -15,7 +15,7 @@
         <Accounts />
         <div class="box">
             <span class="has-text-grey-lighter">This month</span>
-            {#if $favoriteAccount}
+            {#if $transactionsRecap}
                 <AccountRecap transactionsTotals={$transactionsRecap.totals} />
             {:else}
                 <div class="flex-centered p-5">
@@ -29,8 +29,8 @@
         <div class="box mb-2">
             <span class="has-text-grey-lighter">Categories</span>
 
-            {#if $favoriteAccount}
-                <Categories account={$transactionsRecap} />
+            {#if $transactionsRecap}
+                <Categories transactionsRecap={$transactionsRecap} />
             {:else}
                 <div class="flex-centered p-5">
                     <span class="has-text-grey">No favorite account</span>

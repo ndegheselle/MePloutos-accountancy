@@ -45,13 +45,13 @@
                             class="dropdown-item"
                             on:click={() => modal.show(account)}
                         >
-                            <i class="fa-solid fa-file-pen" /> Edit account
+                            <i class="fa-solid fa-file-pen mr-1" /> Edit account
                         </a>
                         <a
                             class="dropdown-item has-text-danger"
                             on:click={deleteAccount}
                         >
-                            <i class="fa-solid fa-trash" /> Delete account
+                            <i class="fa-solid fa-trash mr-1" /> Delete account
                         </a>
                     </div>
                 </div>

@@ -46,3 +46,16 @@ export class Project
         this.name = _name || "";
     }
 }
+
+export class Params
+{
+    static dexieDefinition = "++id, favoriteAccountId";
+    // Id used for user params
+    static userId = "user";
+
+    constructor()
+    {
+        this.id = Params.userId;
+        this.favoriteAccountId = "";
+    }
+}
