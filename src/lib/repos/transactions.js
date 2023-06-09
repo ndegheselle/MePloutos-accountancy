@@ -14,12 +14,12 @@ export function updateTransactionsCategory(_transactions, _category)
 
 export function getMostRecentTransaction()
 {
-   throw new Error("Not implemented");
+    return db.transactions.orderBy("date").last();
 }
 
-export function saveTransactionsBulks()
+export function saveTransactionsBulks(_transactions)
 {
-    throw new Error("Not implemented");
+    return db.transactions.bulkAdd(_transactions);
 }
 
 // remove all transactions linked to a accountid

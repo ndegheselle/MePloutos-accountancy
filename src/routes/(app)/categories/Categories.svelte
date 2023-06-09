@@ -14,7 +14,7 @@
         return {
             series: _transactionsRecap.categoriesValues.map(cat => {
                 return {
-                    value: Math.abs(cat.value) * 100 / _transactionsRecap.totals.total,
+                    value: (Math.abs(cat.value) * 100 / _transactionsRecap.totals.total) || 1,
                     className: `category-${cat.id}`
                 }
             }),
