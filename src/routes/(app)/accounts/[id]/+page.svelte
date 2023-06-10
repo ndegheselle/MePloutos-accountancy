@@ -11,8 +11,7 @@
         <AccountDetails account={$currentAccount} transactionsRecap={$transactionsRecap}/>
     </div>
     <div class="column pb-2">
-        <div class="box is-fullheight mb-2">
-            <span class="has-text-grey-lighter">Categories</span>
+        <div class="flex-list">
             <Categories transactionsRecap={$transactionsRecap}/>
         </div>
     </div>

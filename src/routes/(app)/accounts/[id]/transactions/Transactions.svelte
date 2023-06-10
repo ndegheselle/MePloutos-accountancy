@@ -58,22 +58,43 @@
     <div class="panel-block flex-container">
         <span class="has-text-grey-lighter">Transactions</span>
 
-        <div class="dropdown is-right">
-            <div class="dropdown-trigger">
-                <button class="button is-small is-light" aria-haspopup="true">
-                    <span class="icon is-small">
-                        <i class="fa-solid fa-ellipsis-vertical" />
-                    </span>
-                </button>
+        <div>
+            <div class="dropdown is-right">
+                <div class="dropdown-trigger">
+                    <button class="button is-small is-light" aria-haspopup="true">
+                        <span class="icon is-small">
+                            <i class="fa-solid fa-filter" />
+                        </span>
+                    </button>
+                </div>
+                <div class="dropdown-menu" role="menu">
+                    <div class="dropdown-content">
+                        <a class="dropdown-item"> Current month </a>
+                        <a class="dropdown-item"> 1 month </a>
+                        <a class="dropdown-item"> 6 month </a>
+                        <a class="dropdown-item"> 1 year </a>
+                        <a class="dropdown-item"> All </a>
+                    </div>
+                </div>
             </div>
-            <div class="dropdown-menu" role="menu">
-                <div class="dropdown-content">
-                    <a class="dropdown-item" on:click={showImportModal}>
-                        <i class="fa-solid fa-file-import" /> Import transactions
-                    </a>
+            <div class="dropdown is-right">
+                <div class="dropdown-trigger">
+                    <button class="button is-small is-light" aria-haspopup="true">
+                        <span class="icon is-small">
+                            <i class="fa-solid fa-ellipsis-vertical" />
+                        </span>
+                    </button>
+                </div>
+                <div class="dropdown-menu" role="menu">
+                    <div class="dropdown-content">
+                        <a class="dropdown-item" on:click={showImportModal}>
+                            <i class="fa-solid fa-file-import" /> Import transactions
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
+
     </div>
     {#each groupedTransactions as group}
         <div class="panel-block has-text-grey-light has-background-light">

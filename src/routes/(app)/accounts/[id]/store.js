@@ -12,7 +12,11 @@ export function setCurrentAccountId(_accoundId)
     currentAccountId = _accoundId;
 }
 
-// If currentAccountId or account in DB is updated
+export const transactionsFilters = writable({
+    // 0 = current month
+    // -1 = all
+    monthsAgo: -1,
+});
 
 export const currentAccount = liveQuery(() => getAccountById(currentAccountId));
 export const currentTransactions = liveQuery(() => getTransactionsByAccount(currentAccountId));

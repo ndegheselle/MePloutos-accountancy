@@ -6,6 +6,8 @@ import transactionsService from "@lib/services/transactions/transactions";
 import { params } from "@lib/store";
 import {liveQuery} from "dexie";
 
+import { firstDayOfMonth } from "@lib/helpers";
+
 export const accounts = derived(
     liveQuery(getAllAccounts),
     $accounts => $accounts || []
@@ -21,8 +23,8 @@ export const transactionsRecap = derived(
 
         // Can't use async function in derived
         (async () => {
-            // TODO : add date
-            let transactions = await getTransactionsByAccount($params.favoriteAccountId);
+            // TODO : add global params to select the default date filter
+            let transactions = await getTransactionsByAccount($params.favoriteAccountId, firstDayOfMonth());
     
             let recap = transactionsService.getTransactionsRecap(transactions);
             set(recap);

@@ -23,6 +23,15 @@
     justify-content: center;
 }
 
+.flex-list {
+    display: flex;
+    height: 100%;
+    flex-flow: column;
+}
+.flex-list .flex-auto-height {
+    flex: 1 1 auto;
+}
+
 .is-fullheight {
     height: 100%;
 }

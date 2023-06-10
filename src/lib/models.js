@@ -35,6 +35,7 @@ export class Transaction
 
         this.accountId = _accountId || null;
         this.categoryId = null;
+        this.orderNumber = 0;
     }
 }
 

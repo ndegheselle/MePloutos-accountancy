@@ -20,7 +20,7 @@
     let modal = null;
 </script>
 
-<div class="panel p-4 mb-2">
+<div class="panel p-4 mb-0 accounts-container">
     <div class="panel-block flex-container p-0">
         <span class="has-text-grey-lighter">Accounts</span>
         <button class="button is-small is-light" on:click={() => modal.show()}>
@@ -40,14 +40,18 @@
         >
             <span class="panel-icon">
                 <i
-                    class="fa-{params.favoriteAccountId == account.id
+                    class="fa-{$params.favoriteAccountId == account.id
                         ? 'solid'
                         : 'regular'} fa-folder"
                     style="color: {account.color}"
                 />
             </span>
             <div class="flex-container">
-                <span>{account.name}</span>
+                {#if $params.favoriteAccountId == account.id}
+                    <b>{account.name}</b>
+                {:else}
+                    <span>{account.name}</span>
+                {/if}
                 <Money value={account.balance} />
             </div>
         </a>
@@ -55,3 +59,9 @@
 </div>
 
 <AccountCreateUpdateModal bind:modal />
+
+<style>
+.accounts-container {
+    min-height: 15rem;
+}
+</style>

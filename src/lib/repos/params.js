@@ -8,6 +8,5 @@ export function getUserParams()
 
 export function updateUserParams(params)
 {
-    console.log("updateUserParams", params)
     return db.params.update(Params.userId, params);
 }

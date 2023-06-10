@@ -35,6 +35,8 @@ function groupTransactionsByDate(_transactions)
 
     if (!_transactions) return groupedTransactions;
 
+    _transactions = _transactions.sort((a, b) => b.date - a.date || b.orderNumber - a.orderNumber);
+
     // Work because we know that the transactions are sorted
     let previousDate = new Date(0);
     for (let transaction of _transactions) {

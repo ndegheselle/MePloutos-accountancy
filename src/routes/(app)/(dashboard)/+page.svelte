@@ -9,34 +9,46 @@
     import Projects from "./Projects.svelte";
 </script>
 
-<div class="columns is-variable is-1 mb-0">
-    <div class="column py-0">
+<div class="columns is-variable is-1">
+    <div class="column">
         <AccountsTotal />
         <Accounts />
-        <div class="box">
-            <span class="has-text-grey-lighter">This month</span>
-            {#if $transactionsRecap}
-                <AccountRecap transactionsTotals={$transactionsRecap.totals} />
-            {:else}
-                <div class="flex-centered p-5">
-                    <span class="has-text-grey">No favorite account</span>
-                </div>
-            {/if}
-        </div>
     </div>
 
-    <div class="column py-0">
-        <div class="box mb-2">
-            <span class="has-text-grey-lighter">Categories</span>
+    <div class="column">
+        <div class="flex-list">
+            <Categories transactionsRecap={$transactionsRecap} class="mb-2"/>
 
-            {#if $transactionsRecap}
-                <Categories transactionsRecap={$transactionsRecap} />
-            {:else}
-                <div class="flex-centered p-5">
-                    <span class="has-text-grey">No favorite account</span>
-                </div>
-            {/if}
+            <div class="box">
+                <span class="has-text-grey-lighter">Account recap</span>
+                {#if $transactionsRecap}
+                    <AccountRecap transactionsTotals={$transactionsRecap.totals} />
+                {:else}
+                    <div class="flex-centered p-5">
+                        <span class="has-text-grey">No favorite account</span>
+                    </div>
+                {/if}
+            </div>
         </div>
-        <Projects />
     </div>
 </div>
+
+<h1 class="title">Planning</h1>
+
+<div class="box">
+    <div class="flex-centered p-5">
+        <span class="has-text-grey">Income</span>
+    </div>
+</div>
+
+<Projects />
+
+<div class="box">
+    <div class="flex-centered p-5">
+        <span class="has-text-grey">Investments</span>
+    </div>
+</div>
+
+<style>
+
+</style>
