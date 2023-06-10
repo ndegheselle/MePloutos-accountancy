@@ -1,4 +1,4 @@
-import { saveTransactionsBulks, getMostRecentTransaction, updateTransactionsCategory } from "@lib/repos/transactions";
+import { saveTransactionsBulks, getMostRecentTransaction, updateTransactionsCategory, removeTransactions } from "@lib/repos/transactions";
 import { updateAccountBalance } from "@lib/repos/accounts";
 
 import { filterAlreadyExisting, importFile } from "./import.js";
@@ -8,14 +8,25 @@ function updateCategory(_selectedTransactions, _category)
     return updateTransactionsCategory(_selectedTransactions, _category);
 }
 
+function remove(_selectedTransactions)
+{
+    return removeTransactions(_selectedTransactions);
+}
+
 async function imports(file, options)
 {
     let { balance, dateMin, dateMax, transactions } = await importFile(file, options.bank);
-    const lastTransaction = getMostRecentTransaction();
+    const lastTransaction = await getMostRecentTransaction();
     const newTransactions = filterAlreadyExisting(options.accountId, lastTransaction, transactions);
+
+    if (!newTransactions.length) return {count: 0};
 
     saveTransactionsBulks(newTransactions);
     updateAccountBalance(options.accountId, balance);
+
+    return {
+        count: newTransactions.length,
+    };
 }
 
 function groupTransactionsByDate(_transactions)
@@ -82,6 +93,7 @@ function getTransactionsRecap(_transactions)
 }
 
 export default {
+    remove,
     updateCategory,
     imports,
     groupTransactionsByDate,

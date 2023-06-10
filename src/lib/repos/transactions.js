@@ -31,6 +31,12 @@ export function removeTransactionsByAccount(_accountId)
         .delete();
 }
 
+// remove a list of transactions
+export function removeTransactions(_transactions)
+{
+    return db.transactions.bulkDelete(_transactions.map(x => x.id));
+}
+
 // get transactions by account id and filters (start date, end date)
 export function getTransactionsByAccount(_accountId, _endDate)
 {
@@ -38,6 +44,6 @@ export function getTransactionsByAccount(_accountId, _endDate)
     return db.transactions
         .where("accountId")
         .equals(_accountId)
-        .and(_transaction => _transaction.date > _endDate)
+        .and(_transaction => _endDate ? _transaction.date > _endDate : true)
         .toArray();
 }

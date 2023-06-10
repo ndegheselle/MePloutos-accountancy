@@ -92,10 +92,10 @@ export function filterAlreadyExisting(accountId, lastTransaction, transactionsLi
     }
 
     transactionsList.sort((a, b) => b.date - a.date || b.orderNumber - a.orderNumber);
-
+    if (!lastTransaction) return transactionsList;
     // XXX : is it possible that a bank add transaction in the past ? -> that actually may append
     // If transactions are too old we don't import it
-    if (transactionsList[0].date <= lastTransaction?.date) return { count: 0 };
+    if (transactionsList[0].date <= lastTransaction?.date) return [];
 
     // Don't import the transactions that are already present
     if (lastTransaction) {

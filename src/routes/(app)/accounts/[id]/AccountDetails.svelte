@@ -7,7 +7,10 @@
     import { confirm  } from "@global/dialogs";
 
     function deleteAccount() {
-        confirm.show(`Are you sure you want to delete the account '${account.name}' and all linked transactions ?`, "Delete account", "is-danger").then(() => {
+        confirm.show(`Are you sure you want to delete the account '${account.name}' and all linked transactions ?`, 
+        "Delete account", "is-danger").then((success) => {
+            if (!success) return;
+            
             accountsService.remove(account.id);
             goto("/");
         });

@@ -1,6 +1,7 @@
 <script>
     import transactionsService from "@lib/services/transactions/transactions.js";
     import { context } from "@global/contextMenu";
+    import { confirm  } from "@global/dialogs";
 
     import Money from "@components/Money.svelte";
     import CategoryIcon from "@app/categories/CategoryIcon.svelte";
@@ -21,6 +22,12 @@
                 icon: "fa-solid fa-tag",
                 action: setSelectedTransactionCategory,
             },
+            {
+                title: "Remove",
+                icon: "fa-solid fa-trash",
+                style: "has-text-danger",
+                action: removeSelectedTransactions,
+            },
         ]);
     }
 
@@ -32,6 +39,14 @@
     function setSelectedTransactionCategory() {
         categoryModal.show().then((selectedCategory) => {
             transactionsService.updateCategory(transactions.filter(t => t.selected), selectedCategory);
+        });
+    }
+
+    function removeSelectedTransactions() {
+        const selectedTransactions = transactions.filter(t => t.selected);
+        confirm.show(`Are you sure you want to delete these transactions (${selectedTransactions.length}) ?`, 
+        "Delete transactions", "is-danger").then((success) => {
+            if (success) transactionsService.remove(selectedTransactions);
         });
     }
 

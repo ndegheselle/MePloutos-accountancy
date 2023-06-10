@@ -8,12 +8,12 @@
 
     async function importFile()
     {
-        let result = transactionsService.imports(files[0], {accountId: accountId, bank: bank});
+        let result = await transactionsService.imports(files[0], {accountId: accountId, bank: bank});
 
         if (result.count)
             alerts.success(`${result.count} new transactions imported.`);
         else
-            alerts.success(`No new transaction imported.`);
+            alerts.info(`No new transaction imported.`);
         
         handleClosing();
     }
