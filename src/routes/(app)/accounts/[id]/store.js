@@ -1,4 +1,4 @@
-import { writable, derived, get } from 'svelte/store';
+import { writable, derived } from 'svelte/store';
 import { liveQuery } from "dexie";
 
 import { getAccountById } from "@lib/repos/accounts";
@@ -16,10 +16,6 @@ export function setCurrentAccountId(_accoundId)
 
 export const currentAccount = liveQuery(() => getAccountById(currentAccountId));
 export const currentTransactions = liveQuery(() => getTransactionsByAccount(currentAccountId));
-export const transactionsRecap = writable(null);
-
-currentTransactions.subscribe(_transactions => {
-    transactionsRecap.set(
-        transactionsService.getTransactionsRecap(_transactions)
-    );
-});
+export const transactionsRecap = derived(currentTransactions,
+    $transactions => transactionsService.getTransactionsRecap($transactions)
+);

@@ -26,14 +26,15 @@ export class Transaction
 {
     static dexieDefinition = "++id, date, description, value, *accountId, *categoryId";
 
-    constructor(_description, _date, _value, _categoryId)
+    constructor(_id, _date, _description, _value, _accountId)
     {
+        this.id = _id || null;
         this.date = _date || new Date();
         this.description = _description || "";
         this.value = _value || 0;
 
-        this.categoryId = _categoryId || null;
-        this.accountId = null;
+        this.accountId = _accountId || null;
+        this.categoryId = null;
     }
 }
 

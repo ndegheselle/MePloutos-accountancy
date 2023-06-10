@@ -1,4 +1,6 @@
 import Papa from "papaparse";
+import { uuidv4 } from "@lib/helpers";
+import { Transaction } from "@lib/models";
 
 const importOptions = {
     "labanquepostale": {
@@ -44,7 +46,7 @@ function convertToDate(string)
     return dt;
 }
 
-function convertFromDatable(datatable, options) {
+function convertFromDatable(datatable, options, accountId) {
     let transactions = [];
     let balance = convertToFloat(datatable[options.balance[0]][options.balance[1]].replace());
     let date = convertToDate(datatable[options.date[0]][options.date[1]]);
@@ -53,11 +55,14 @@ function convertFromDatable(datatable, options) {
 
     for (let i = options.transactions.startLine; i < datatable.length; i++)
     {
-        transactions.push({
-            date: convertToDate(datatable[i][options.transactions.dateCol]),
-            description: datatable[i][options.transactions.descriptionCol].trim(),
-            value: convertToFloat(datatable[i][options.transactions.valueCol])
-        });
+        transactions.push(
+            new Transaction(
+                uuidv4(),
+                convertToDate(datatable[i][options.transactions.dateCol]),
+                datatable[i][options.transactions.descriptionCol].trim(),
+                convertToFloat(datatable[i][options.transactions.valueCol],
+                accountId))
+        );
     }
 
     return {
@@ -68,12 +73,13 @@ function convertFromDatable(datatable, options) {
     }
 }
 
-export async function importFile(file, bank) {
-    switch (bank) {
+export async function importFile(file, options) {
+    switch (options.bank) {
         case 'labanquepostale':
             return convertFromDatable(
                 await csvToDatatable(file),
-                importOptions[bank].csv);
+                importOptions[options.bank].csv,
+                options.accountId);
     }
 }
 

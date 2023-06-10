@@ -15,7 +15,7 @@ function remove(_selectedTransactions)
 
 async function imports(file, options)
 {
-    let { balance, dateMin, dateMax, transactions } = await importFile(file, options.bank);
+    let { balance, dateMin, dateMax, transactions } = await importFile(file, options);
     const lastTransaction = await getMostRecentTransaction();
     const newTransactions = filterAlreadyExisting(options.accountId, lastTransaction, transactions);
 
