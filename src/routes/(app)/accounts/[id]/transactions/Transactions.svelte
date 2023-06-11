@@ -9,6 +9,8 @@
     import CategorySelectionModal from "@app/categories/CategorySelectionModal.svelte";
     import ModalImport from "./ModalImport.svelte";
 
+    import { transactionsFilters } from "../store";
+
     let groupedTransactions = [];
     let categoryModal = null;
     let importModal = null;
@@ -50,6 +52,11 @@
         });
     }
 
+    function transactionsFilterDate(filter)
+    {
+        $transactionsFilters.monthsAgo = filter;
+    }
+
     export let accountId = null;
     export let transactions = null;
 </script>
@@ -69,11 +76,11 @@
                 </div>
                 <div class="dropdown-menu" role="menu">
                     <div class="dropdown-content">
-                        <a class="dropdown-item"> Current month </a>
-                        <a class="dropdown-item"> 1 month </a>
-                        <a class="dropdown-item"> 6 month </a>
-                        <a class="dropdown-item"> 1 year </a>
-                        <a class="dropdown-item"> All </a>
+                        <a class="dropdown-item" on:click={() => transactionsFilterDate(0)}> Current month </a>
+                        <a class="dropdown-item" on:click={() => transactionsFilterDate(1)}> 1 month </a>
+                        <a class="dropdown-item" on:click={() => transactionsFilterDate(6)}> 6 month </a>
+                        <a class="dropdown-item" on:click={() => transactionsFilterDate(12)}> 1 year </a>
+                        <a class="dropdown-item" on:click={() => transactionsFilterDate(-1)}> All </a>
                     </div>
                 </div>
             </div>

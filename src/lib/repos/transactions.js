@@ -41,9 +41,19 @@ export function removeTransactions(_transactions)
 export function getTransactionsByAccount(_accountId, _endDate)
 {
     if (!_accountId) return Promise.resolve([]);
+
+    // Should be more efficient to filter by date first
+    if (_endDate)
+    {
+        return db.transactions
+        .where("date")
+        .above(_endDate)
+        .and(_transaction => _transaction.accountId === _accountId)
+        .toArray();
+    }
+
     return db.transactions
         .where("accountId")
         .equals(_accountId)
-        .and(_transaction => _endDate ? _transaction.date > _endDate : true)
         .toArray();
 }

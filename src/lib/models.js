@@ -1,6 +1,6 @@
 export class Account
 {
-    static dexieDefinition = "++id, name, color, balance";
+    static dexieDefinition = "++id";
 
     constructor()
     {
@@ -12,7 +12,7 @@ export class Account
 
 export class Category
 {
-    static dexieDefinition = "++id, name, color";
+    static dexieDefinition = "++id";
 
     constructor(_id, _name, _color)
     {
@@ -24,7 +24,7 @@ export class Category
 
 export class Transaction
 {
-    static dexieDefinition = "++id, date, description, value, *accountId, *categoryId";
+    static dexieDefinition = "++id, accountId, date, orderNumber";
 
     constructor(_id, _date, _description, _value, _accountId)
     {
@@ -41,7 +41,7 @@ export class Transaction
 
 export class Project
 {
-    static dexieDefinition = "++id, name";
+    static dexieDefinition = "++id";
 
     constructor(_name)
     {
@@ -51,7 +51,7 @@ export class Project
 
 export class Params
 {
-    static dexieDefinition = "++id, favoriteAccountId";
+    static dexieDefinition = "++id";
     // Id used for user params
     static userId = "user";
 

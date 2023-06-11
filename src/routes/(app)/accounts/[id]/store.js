@@ -19,7 +19,15 @@ export const transactionsFilters = writable({
 });
 
 export const currentAccount = liveQuery(() => getAccountById(currentAccountId));
-export const currentTransactions = liveQuery(() => getTransactionsByAccount(currentAccountId));
+export const currentTransactions = derived(
+    transactionsFilters,
+    $filters => {
+        return liveQuery(() => getTransactionsByAccount(currentAccountId, $filters.monthsAgo));
+    }
+);
 export const transactionsRecap = derived(currentTransactions,
-    $transactions => transactionsService.getTransactionsRecap($transactions)
+    $transactions => {
+        console.log("transactionsRecap", $transactions)
+        return transactionsService.getTransactionsRecap($transactions);
+    }
 );
