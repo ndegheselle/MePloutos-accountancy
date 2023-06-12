@@ -7,6 +7,12 @@
     import AccountsTotal from "./AccountsTotal.svelte";
     import Accounts from "./Accounts.svelte";
     import Projects from "./Projects.svelte";
+
+    import { getAllAccounts, getAccountById } from "@lib/repos/accounts";
+    import {liveQuery} from "dexie";
+
+    $: test = liveQuery(getAllAccounts);
+    $: console.log(test)
 </script>
 
 <div class="columns is-variable is-1">
