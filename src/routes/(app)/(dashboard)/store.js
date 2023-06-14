@@ -1,5 +1,5 @@
 import { writable, derived } from 'svelte/store';
-import { getAllAccounts, getAccountById } from "@lib/repos/accounts";
+import { getAllAccounts } from "@lib/repos/accounts";
 import { getTransactionsByAccount } from "@lib/repos/transactions";
 import transactionsService from "@lib/services/transactions/transactions";
 

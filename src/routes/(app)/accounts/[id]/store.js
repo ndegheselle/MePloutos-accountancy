@@ -12,22 +12,19 @@ export function setCurrentAccountId(_accoundId)
     currentAccountId = _accoundId;
 }
 
-export const transactionsFilters = writable({
-    // 0 = current month
-    // -1 = all
-    monthsAgo: -1,
-});
+const transactionsFilters = {
+    date: null,
+};
+export function setTransactionsDateFilter(_date)
+{
+    transactionsFilters.date = _date;
+    currentTransactions.doQuery();
+}
 
 export const currentAccount = liveQuery(() => getAccountById(currentAccountId));
-export const currentTransactions = derived(
-    transactionsFilters,
-    $filters => {
-        return liveQuery(() => getTransactionsByAccount(currentAccountId, $filters.monthsAgo));
-    }
-);
+export const currentTransactions = liveQuery(() => getTransactionsByAccount(currentAccountId, transactionsFilters.date));
 export const transactionsRecap = derived(currentTransactions,
     $transactions => {
-        console.log("transactionsRecap", $transactions)
         return transactionsService.getTransactionsRecap($transactions);
     }
 );

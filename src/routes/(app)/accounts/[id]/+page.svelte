@@ -2,7 +2,7 @@
     import Categories from "@app/categories/Categories.svelte";
     import AccountDetails from "./AccountDetails.svelte";
 
-    import { currentAccount, currentTransactions, transactionsRecap } from "./store";
+    import { currentAccount, currentTransactions, transactionsRecap} from "./store";
     import Transactions from "./transactions/Transactions.svelte";
 </script>
 

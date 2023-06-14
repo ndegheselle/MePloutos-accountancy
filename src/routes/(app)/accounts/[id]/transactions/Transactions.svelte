@@ -1,7 +1,7 @@
 <script>
     import transactionsService from "@lib/services/transactions/transactions.js";
     import { context } from "@global/contextMenu";
-    import { confirm  } from "@global/dialogs";
+    import { confirm } from "@global/dialogs";
 
     import Money from "@components/Money.svelte";
     import CategoryIcon from "@app/categories/CategoryIcon.svelte";
@@ -9,13 +9,15 @@
     import CategorySelectionModal from "@app/categories/CategorySelectionModal.svelte";
     import ModalImport from "./ModalImport.svelte";
 
-    import { transactionsFilters } from "../store";
+    import { setTransactionsDateFilter } from "../store";
+    import { firstDayOfMonth } from "@lib/helpers";
 
     let groupedTransactions = [];
     let categoryModal = null;
     let importModal = null;
 
-    $: groupedTransactions = transactionsService.groupTransactionsByDate(transactions);
+    $: groupedTransactions =
+        transactionsService.groupTransactionsByDate(transactions);
 
     function showTransactionContext(event, _transaction) {
         context.show({ x: event.pageX, y: event.pageY }, [
@@ -33,32 +35,66 @@
         ]);
     }
 
-    function showImportModal()
-    {
+    function showImportModal() {
         importModal.show(accountId);
     }
 
     function setSelectedTransactionCategory() {
         categoryModal.show().then((selectedCategory) => {
-            transactionsService.updateCategory(transactions.filter(t => t.selected), selectedCategory);
+            transactionsService.updateCategory(
+                transactions.filter((t) => t.selected),
+                selectedCategory
+            );
         });
     }
 
     function removeSelectedTransactions() {
-        const selectedTransactions = transactions.filter(t => t.selected);
-        confirm.show(`Are you sure you want to delete these transactions (${selectedTransactions.length}) ?`, 
-        "Delete transactions", "is-danger").then((success) => {
-            if (success) transactionsService.remove(selectedTransactions);
-        });
+        const selectedTransactions = transactions.filter((t) => t.selected);
+        confirm
+            .show(
+                `Are you sure you want to delete these transactions (${selectedTransactions.length}) ?`,
+                "Delete transactions",
+                "is-danger"
+            )
+            .then((success) => {
+                if (success) transactionsService.remove(selectedTransactions);
+            });
     }
 
-    function transactionsFilterDate(filter)
-    {
-        $transactionsFilters.monthsAgo = filter;
+    function transactionsFilterDate(filter) {
+        let date = null;
+        switch (filter) {
+            // Current month
+            case 0:
+                date = firstDayOfMonth();
+                break;
+            case 1:
+                date = new Date(
+                    new Date().setMonth(new Date().getMonth() - 1)
+                );
+                break;
+            case 6:
+                date = new Date(
+                    new Date().setMonth(new Date().getMonth() - 6)
+                );
+                break;
+            case 12:
+                date = new Date(
+                    new Date().setMonth(new Date().getMonth() - 12)
+                );
+                break;
+            // All
+            default:
+                date = null;
+        }
+
+        setTransactionsDateFilter(date);
     }
 
     export let accountId = null;
     export let transactions = null;
+
+    $: console.log(transactions);
 </script>
 
 <nav class="panel">
@@ -68,7 +104,10 @@
         <div>
             <div class="dropdown is-right">
                 <div class="dropdown-trigger">
-                    <button class="button is-small is-light" aria-haspopup="true">
+                    <button
+                        class="button is-small is-light"
+                        aria-haspopup="true"
+                    >
                         <span class="icon is-small">
                             <i class="fa-solid fa-filter" />
                         </span>
@@ -76,17 +115,45 @@
                 </div>
                 <div class="dropdown-menu" role="menu">
                     <div class="dropdown-content">
-                        <a class="dropdown-item" on:click={() => transactionsFilterDate(0)}> Current month </a>
-                        <a class="dropdown-item" on:click={() => transactionsFilterDate(1)}> 1 month </a>
-                        <a class="dropdown-item" on:click={() => transactionsFilterDate(6)}> 6 month </a>
-                        <a class="dropdown-item" on:click={() => transactionsFilterDate(12)}> 1 year </a>
-                        <a class="dropdown-item" on:click={() => transactionsFilterDate(-1)}> All </a>
+                        <a
+                            class="dropdown-item"
+                            on:click={() => transactionsFilterDate(0)}
+                        >
+                            Current month
+                        </a>
+                        <a
+                            class="dropdown-item"
+                            on:click={() => transactionsFilterDate(1)}
+                        >
+                            1 month
+                        </a>
+                        <a
+                            class="dropdown-item"
+                            on:click={() => transactionsFilterDate(6)}
+                        >
+                            6 month
+                        </a>
+                        <a
+                            class="dropdown-item"
+                            on:click={() => transactionsFilterDate(12)}
+                        >
+                            1 year
+                        </a>
+                        <a
+                            class="dropdown-item"
+                            on:click={() => transactionsFilterDate(-1)}
+                        >
+                            All
+                        </a>
                     </div>
                 </div>
             </div>
             <div class="dropdown is-right">
                 <div class="dropdown-trigger">
-                    <button class="button is-small is-light" aria-haspopup="true">
+                    <button
+                        class="button is-small is-light"
+                        aria-haspopup="true"
+                    >
                         <span class="icon is-small">
                             <i class="fa-solid fa-ellipsis-vertical" />
                         </span>
@@ -101,7 +168,6 @@
                 </div>
             </div>
         </div>
-
     </div>
     {#each groupedTransactions as group}
         <div class="panel-block has-text-grey-light has-background-light">
