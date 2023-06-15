@@ -49,6 +49,22 @@ export class Project
     }
 }
 
+export class Investment
+{
+    static dexieDefinition = "++id";
+
+    constructor(_name)
+    {
+        this.name = _name || "";
+        this.url = "";
+        this.initialValue = 0;
+        this.values = [];
+
+        this.startDate = null;
+        this.estimedInterestRate = 0.0;
+    }
+}
+
 export class Params
 {
     static dexieDefinition = "++id";

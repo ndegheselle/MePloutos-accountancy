@@ -93,8 +93,6 @@
 
     export let accountId = null;
     export let transactions = null;
-
-    $: console.log(transactions);
 </script>
 
 <nav class="panel">

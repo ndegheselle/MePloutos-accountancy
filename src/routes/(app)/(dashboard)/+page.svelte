@@ -33,6 +33,7 @@
     </div>
 </div>
 
+<!-- Will maybe do later :
 <h1 class="title">Planning</h1>
 
 <div class="box">
@@ -48,7 +49,4 @@
         <span class="has-text-grey">Investments</span>
     </div>
 </div>
-
-<style>
-
-</style>
+-->
