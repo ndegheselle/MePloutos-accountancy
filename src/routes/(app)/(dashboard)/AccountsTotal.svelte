@@ -5,7 +5,7 @@
 </script>
 
 <div class="box mb-2">
-    <span class="has-text-grey-lighter">Total</span>
+    <span class="has-text-grey-lighter box-title">Total</span>
     <h1 class="title">
         {total.toLocaleString(undefined, {
             currency: "EUR",

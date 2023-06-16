@@ -7,20 +7,21 @@
     import AccountsTotal from "./AccountsTotal.svelte";
     import Accounts from "./Accounts.svelte";
     import Projects from "./Projects.svelte";
+    import Investments from "./Investments.svelte";
 </script>
 
 <div class="columns is-variable is-1">
-    <div class="column">
+    <div class="column pb-0">
         <AccountsTotal />
         <Accounts />
     </div>
 
-    <div class="column">
+    <div class="column pb-0">
         <div class="flex-list">
             <Categories transactionsRecap={$transactionsRecap} class="mb-2"/>
 
             <div class="box">
-                <span class="has-text-grey-lighter">Account recap</span>
+                <span class="has-text-grey-lighter box-title">Account recap</span>
                 {#if $transactionsRecap}
                     <AccountRecap transactionsTotals={$transactionsRecap.totals} />
                 {:else}
@@ -33,20 +34,12 @@
     </div>
 </div>
 
-<!-- Will maybe do later :
-<h1 class="title">Planning</h1>
-
-<div class="box">
-    <div class="flex-centered p-5">
-        <span class="has-text-grey">Income</span>
+<hr class="mx-5 my-4"/>
+<div class="columns is-variable is-1">
+    <div class="column pb-0">
+        <Projects />
+    </div>
+    <div class="column">
+        <Investments />
     </div>
 </div>
-
-<Projects />
-
-<div class="box">
-    <div class="flex-centered p-5">
-        <span class="has-text-grey">Investments</span>
-    </div>
-</div>
--->

@@ -1,6 +1,7 @@
 import { writable, derived } from 'svelte/store';
 import { getAllAccounts } from "@lib/repos/accounts";
 import { getTransactionsByAccount } from "@lib/repos/transactions";
+import { getAllInvestments } from "@lib/repos/investments";
 import transactionsService from "@lib/services/transactions/transactions";
 
 import { params } from "@lib/store";
@@ -30,4 +31,9 @@ export const transactionsRecap = derived(
             set(recap);
         })();
     }
+);
+
+export const investments = derived(
+    liveQuery(getAllInvestments),
+    $investments => $investments || []  
 );

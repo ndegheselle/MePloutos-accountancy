@@ -45,7 +45,7 @@
 </script>
 
 <div class="box flex-auto-height {clazz}">
-    <span class="has-text-grey-lighter">Categories</span>
+    <span class="has-text-grey-lighter box-title">Categories</span>
     {#if transactionsRecap}
         <div class="ct-chart" />
     {:else}

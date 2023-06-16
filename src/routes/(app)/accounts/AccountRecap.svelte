@@ -3,13 +3,13 @@
 </script>
 
 <div class="columns is-mobile has-text-centered">
-    <div class="column summary">
+    <div class="column">
         <span class="title is-spaced">{transactionsTotals.positiveTotal.toLocaleString(undefined, {
             currency: "EUR",
             style: "currency",
         })}</span>
         <span class="percent has-text-success subtitle is-4"
-            >{Math.round(transactionsTotals.positiveTotal * 100 / transactionsTotals.total)} %<i class="fa-solid fa-arrow-trend-up"></i></span
+            >{Math.round(transactionsTotals.positiveTotal * 100 / transactionsTotals.total) || 0} %<i class="fa-solid fa-arrow-trend-up"></i></span
         >
     </div>
     <div class="column summary">
@@ -18,7 +18,7 @@
             style: "currency",
         })}</span>
         <span class="percent has-text-danger subtitle is-4"
-            >{Math.round(transactionsTotals.negativeTotal * 100 / transactionsTotals.total)} %<i class="fa-solid fa-arrow-trend-down"></i></span
+            >{Math.round(transactionsTotals.negativeTotal * 100 / transactionsTotals.total) || 0 } %<i class="fa-solid fa-arrow-trend-down"></i></span
         >
     </div>
 </div>
