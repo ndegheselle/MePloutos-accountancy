@@ -65,14 +65,13 @@ export class Investment
     }
 }
 
-export class Suscription
+export class Subscription
 {
     static dexieDefinition = "++id";
 
     constructor(_name)
     {
         this.name = _name || "";
-        this.logo = "";
         this.price = 0;
         this.dueEvery = 1;
     }

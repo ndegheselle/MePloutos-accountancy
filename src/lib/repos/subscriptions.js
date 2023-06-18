@@ -15,11 +15,11 @@ export function createSubscription(subscription)
 // Update subscription
 export function updateSubscription(subscription)
 {
-    return db.subscriptions.update(subscription);
+    return db.subscriptions.update(subscription.id, subscription);
 }
 
 // Delete subscription
-export function deleteSubscription(subscriptionId)
+export function removeSubscription(subscriptionId)
 {
-    db.subscriptions.delete(subscriptionId);
+    return db.subscriptions.delete(subscriptionId);
 }

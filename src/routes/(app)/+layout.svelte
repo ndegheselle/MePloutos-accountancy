@@ -1,9 +1,5 @@
-<script>
-  let menuOpen = false;
-</script>
-
 <nav class="navbar" aria-label="main navigation">
-  <div class="navbar-brand">
+  <div class="navbar-brand is-fullwidth">
     <a class="navbar-item" href="/">
       <span class="icon-text">
         <span class="icon">
@@ -13,34 +9,11 @@
       </span>
     </a>
 
-    <a
-      class="navbar-burger"
-      aria-label="menu"
-      aria-expanded="false"
-      data-target="navbarBasicExample"
-      on:click={() => (menuOpen = !menuOpen)}
-    >
-      <span aria-hidden="true" />
-      <span aria-hidden="true" />
-      <span aria-hidden="true" />
+    <a class="navbar-item ml-auto" href="/parameters">
+      <span class="icon is-small">
+        <i class="fa-solid fa-gear"></i>
+      </span>
     </a>
-  </div>
-
-  <div id="navbarBasicExample" class="navbar-menu" class:is-active={menuOpen}>
-    <div class="navbar-start">
-    </div>
-
-    <div class="navbar-end">
-      <div class="navbar-item">
-        <div class="buttons">
-          <a class="button is-light" href="/parameters">
-            <span class="icon is-small">
-              <i class="fa-solid fa-gear"></i>
-            </span>
-          </a>
-        </div>
-      </div>
-    </div>
   </div>
 </nav>
 
