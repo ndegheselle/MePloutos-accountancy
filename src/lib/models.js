@@ -56,12 +56,25 @@ export class Investment
     constructor(_name)
     {
         this.name = _name || "";
-        this.url = "";
+        this.logo = "";
         this.initialValue = 0;
         this.values = [];
 
         this.startDate = null;
         this.estimedInterestRate = 0.0;
+    }
+}
+
+export class Suscription
+{
+    static dexieDefinition = "++id";
+
+    constructor(_name)
+    {
+        this.name = _name || "";
+        this.logo = "";
+        this.price = 0;
+        this.dueEvery = 1;
     }
 }
 

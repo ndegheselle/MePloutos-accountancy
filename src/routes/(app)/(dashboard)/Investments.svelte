@@ -24,7 +24,7 @@
                 currency: "EUR",
                 style: "currency",
             })}</span>
-            <span class="percent subtitle is-4 percent { (investmentsRecap.percentage < 0) ? 'has-text-danger' : 'has-text-success' }"
+            <span class="percent subtitle is-4 { (investmentsRecap.percentage < 0) ? 'has-text-danger' : 'has-text-success' }"
                 >{investmentsRecap.percentage} %<i class="fa-solid fa-arrow-trend-{ (investmentsRecap.percentage < 0) ? 'down' : 'up' }"></i></span
             >
         </div>

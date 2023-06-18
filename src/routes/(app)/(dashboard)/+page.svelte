@@ -6,8 +6,8 @@
 
     import AccountsTotal from "./AccountsTotal.svelte";
     import Accounts from "./Accounts.svelte";
-    import Projects from "./Projects.svelte";
     import Investments from "./Investments.svelte";
+    import Subscriptions from "./Subscriptions.svelte";
 </script>
 
 <div class="columns is-variable is-1">
@@ -37,9 +37,9 @@
 <hr class="mx-5 my-4"/>
 <div class="columns is-variable is-1">
     <div class="column pb-0">
-        <Projects />
+        <Investments />
     </div>
     <div class="column">
-        <Investments />
+        <Subscriptions />
     </div>
 </div>
