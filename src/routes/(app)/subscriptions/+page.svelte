@@ -116,15 +116,14 @@
                     <div class="flex-container">
                         <span class="is-size-4 title mb-0 has-text-danger"
                             >{(
-                                (subscription.price / subscription.dueEvery) *
-                                12
+                                (subscription.price / subscription.dueEvery)
                             ).toLocaleString(undefined, {
                                 currency: "EUR",
                                 style: "currency",
                             })}</span
                         >
                         <span class="is-size-6 has-text-grey-lighter"
-                            >per year</span
+                            >per month</span
                         >
                     </div>
                 </div>

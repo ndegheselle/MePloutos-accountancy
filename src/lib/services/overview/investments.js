@@ -1,3 +1,6 @@
+import { uuidv4 } from "@lib/helpers";
+
+import { createInvestment, updateInvestment, removeInvestment } from "@lib/repos/investments";
 
 // Get investments recap
 function getInvestmentsRecap(_investments) {
@@ -27,6 +30,32 @@ function getInvestmentsRecap(_investments) {
     return recap;
 }
 
+function create(_investment)
+{
+    _investment.id = uuidv4();
+    return createInvestment(_investment);
+}
+
+function update(_investment)
+{
+    return updateInvestment(_investment);
+}
+
+function remove(_investmentId)
+{
+    return removeInvestment(_investmentId);
+}
+
+function addValue(_investment, _value)
+{
+    _investment.values.push(_value);
+    return update(_investment);
+}
+
 export default {
-    getInvestmentsRecap
+    getInvestmentsRecap,
+    create,
+    update,
+    remove,
+    addValue
 };

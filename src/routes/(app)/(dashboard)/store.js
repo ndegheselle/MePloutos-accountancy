@@ -34,5 +34,11 @@ export const transactionsRecap = derived(
     }
 );
 
-export const investments = writable(await getAllInvestments());
-export const subscriptions = writable(await getAllSubscriptions());
+export const investments = writable([]);
+export const subscriptions = writable([]);
+
+// self invoked function to load the data
+(async () => {
+    investments.set(await getAllInvestments());
+    subscriptions.set(await getAllSubscriptions());
+});

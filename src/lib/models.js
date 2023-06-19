@@ -56,12 +56,11 @@ export class Investment
     constructor(_name)
     {
         this.name = _name || "";
-        this.logo = "";
-        this.initialValue = 0;
+        this.initialValue = 100;
         this.values = [];
 
         this.startDate = null;
-        this.estimedInterestRate = 0.0;
+        this.estimedInterestRate = 2.0;
     }
 }
 
