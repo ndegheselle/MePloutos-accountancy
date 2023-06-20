@@ -59,8 +59,7 @@ export class Investment
         this.initialValue = 100;
         this.values = [];
 
-        this.startDate = null;
-        this.estimedInterestRate = 2.0;
+        this.startDate = new Date();
     }
 }
 

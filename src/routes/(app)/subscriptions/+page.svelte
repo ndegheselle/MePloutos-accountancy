@@ -73,7 +73,7 @@
             <div class="box is-fullheight flex-container">
                 <div class="is-fullwidth">
                     <div class="flex-container">
-                        <span class="title is-size-4 subscription-title mb-0">
+                        <span class="title is-size-4 subscription-title mb-0 ">
                             <i
                                 class="fa-solid fa-dollar-sign has-text-grey-lighter"
                             />
@@ -113,7 +113,7 @@
                         </div>
                     </div>
 
-                    <div class="flex-container">
+                    <div>
                         <span class="is-size-4 title mb-0 has-text-danger"
                             >{(
                                 (subscription.price / subscription.dueEvery)

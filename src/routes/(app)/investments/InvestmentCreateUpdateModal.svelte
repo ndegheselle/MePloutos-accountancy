@@ -1,5 +1,6 @@
 <script>
     import { Investment } from "@lib/models";
+    import { parseDate } from "@lib/helpers";
 
     import investmentsService from "@lib/services/overview/investments.js";
 
@@ -19,12 +20,11 @@
     let edit = false;
     let show = false;
     let currentInvestment = {};
-
+    
     export const modal = {
         show(_investment) {
             edit = !!_investment;
             currentInvestment = _investment || new Investment();
-            console.log(currentInvestment);
             show = true;
         },
     };
@@ -52,7 +52,7 @@
                     </div>
                 </div>
                 <div class="columns mb-0">
-                    <div class="field column">
+                    <div class="field column mb-0">
                         <div class="control">
                             <label class="label"
                                 >Initial investment
@@ -67,27 +67,15 @@
                     <div class="field column">
                         <div class="control">
                             <label class="label"
-                            >Estimed interest rate
+                            >Start date
                             <input
                                 class="input"
-                                type="number"
-                                bind:value={currentInvestment.estimedInterestRate}
+                                type="date"
+                                value={currentInvestment.startDate?.toISOString().split('T')[0]}
+                                on:change={e => currentInvestment.startDate = parseDate(e.target.value)}
                             />
                         </label>
                         </div>
-                    </div>
-                </div>
-
-                <div class="field">
-                    <div class="control">
-                        <label class="label"
-                        >Start date
-                        <input
-                            class="input"
-                            type="date"
-                            bind:value={currentInvestment.startDate}
-                        />
-                    </label>
                     </div>
                 </div>
             </div>

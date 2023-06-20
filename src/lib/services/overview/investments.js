@@ -21,11 +21,11 @@ function getInvestmentsRecap(_investments) {
             actualValue = investment.initialValue;
 
         recap.number += 1;
-        recap.total += actualValue;
+        recap.total += actualValue.value;
         totalInitialValue += investment.initialValue;
     }
 
-    recap.percentage = recap.total / totalInitialValue * 100;
+    recap.percentage = recap.total / totalInitialValue * 100 - 100;
 
     return recap;
 }
@@ -33,6 +33,10 @@ function getInvestmentsRecap(_investments) {
 function create(_investment)
 {
     _investment.id = uuidv4();
+    _investment.values = [{
+        date: _investment.startDate,
+        value: _investment.initialValue
+    }];
     return createInvestment(_investment);
 }
 
