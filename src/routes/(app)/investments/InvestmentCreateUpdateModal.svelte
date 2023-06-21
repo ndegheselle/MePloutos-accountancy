@@ -59,7 +59,7 @@
                                 <input
                                     class="input"
                                     type="number"
-                                    bind:value={currentInvestment.initialValue}
+                                    bind:value={currentInvestment.investedValue}
                                 />
                             </label>
                         </div>
@@ -78,6 +78,20 @@
                         </div>
                     </div>
                 </div>
+                {#if edit}
+                <div class="field">
+                    <div class="control">
+                        <label class="label"
+                            >Actual value
+                            <input
+                                class="input"
+                                type="number"
+                                bind:value={currentInvestment.actualValue}
+                            />
+                        </label>
+                    </div>
+                </div>
+                {/if}
             </div>
 
             <footer class="is-flex is-justify-content-flex-end p-2">

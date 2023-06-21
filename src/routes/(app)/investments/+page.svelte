@@ -4,12 +4,9 @@
     import investmentsService from "@lib/services/overview/investments";
 
     import InvestmentCreateUpdateModal from "./InvestmentCreateUpdateModal.svelte";
-    import InvestementAddValueModal from "./InvestementAddValueModal.svelte";
     import InvestmentChart from "./InvestmentChart.svelte";
-    import Investments from "../(dashboard)/Investments.svelte";
 
     let modal = null;
-    let modalValue = null;
     $: investmentsRecap = investmentsService.getInvestmentsRecap($investments);
 
     function deleteInvestment(_investment) {
@@ -27,10 +24,7 @@
     }
 
     function getGains(_investment) {
-        return (
-            _investment.values[_investment.values.length - 1].value -
-            _investment.initialValue
-        );
+        return _investment.actualValue - _investment.investedValue;
     }
 </script>
 
@@ -106,9 +100,6 @@
                             </div>
                             <div class="dropdown-menu" role="menu">
                                 <div class="dropdown-content">
-                                    <a class="dropdown-item" on:click={() => modalValue.show(investment)}>
-                                        <i class="fa-solid fa-plus" /> Add value
-                                    </a>
                                     <a
                                         class="dropdown-item"
                                         on:click={() => modal.show(investment)}
@@ -129,14 +120,9 @@
                         </div>
                     </div>
 
-                    
-                    <InvestmentChart investment={investment} />
-
                     <div class="flex-container">
                         <span class="is-size-4 title mb-0"
-                            >{investment.values[
-                                investment.values.length - 1
-                            ].value.toLocaleString(undefined, {
+                            >{investment.actualValue.toLocaleString(undefined, {
                                 currency: "EUR",
                                 style: "currency",
                             })}</span
@@ -153,8 +139,7 @@
                                     ? 'down'
                                     : 'up'}"
                             />
-                            {(getGains(investment) * 100) /
-                                investment.initialValue}% (<span
+                            {(getGains(investment) * 100) / investment.investedValue}% (<span
                                 >{getGains(investment).toLocaleString(
                                     undefined,
                                     {
@@ -172,7 +157,6 @@
 </div>
 
 <InvestmentCreateUpdateModal bind:modal />
-<InvestementAddValueModal bind:modal={modalValue} />
 
 <style>
     .text-header {

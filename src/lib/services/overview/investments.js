@@ -14,15 +14,9 @@ function getInvestmentsRecap(_investments) {
 
     let totalInitialValue = 0;
     for (const investment of _investments) {
-        let actualValue = 0;
-        if (investment.values.length)
-            actualValue = investment.values[investment.values.length - 1];
-        else 
-            actualValue = investment.initialValue;
-
         recap.number += 1;
-        recap.total += actualValue.value;
-        totalInitialValue += investment.initialValue;
+        recap.total += investment.actualValue;
+        totalInitialValue += investment.investedValue;
     }
 
     recap.percentage = recap.total / totalInitialValue * 100 - 100;
@@ -33,10 +27,7 @@ function getInvestmentsRecap(_investments) {
 function create(_investment)
 {
     _investment.id = uuidv4();
-    _investment.values = [{
-        date: _investment.startDate,
-        value: _investment.initialValue
-    }];
+    _investment.actualValue = _investment.investedValue;
     return createInvestment(_investment);
 }
 
