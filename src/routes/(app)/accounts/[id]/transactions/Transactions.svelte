@@ -90,7 +90,7 @@
 
         setTransactionsDateFilter(date);
     }
-
+    
     export let accountId = null;
     export let transactions = null;
 </script>
