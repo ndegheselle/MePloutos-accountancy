@@ -8,7 +8,6 @@
     }
 
     function getChartData(_values) {
-        console.log(_values);
         return {
             series: [
                 {
