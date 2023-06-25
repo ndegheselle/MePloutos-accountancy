@@ -15,15 +15,6 @@ db.version(1.4).stores({
 
 db.open();
 db.on("ready", function () {
-
-  /*
-  db.accounts.clear();
-  db.transactions.clear();
-  db.categories.clear();
-  db.projects.clear();
-  db.params.clear();
-  */
-
   // Create default params if not exist
   db.params.get(Params.userId).then((params) => {
     if (!params) {

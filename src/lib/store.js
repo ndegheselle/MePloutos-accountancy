@@ -20,7 +20,9 @@ export const categories = derived(
   liveQuery(getAllCategories),
   $categories => {
     $categories = $categories || [];
-    $categories.unshift(new Category(null, "None", "#DDD"));
+    // Add a "None" category if it doesn't exist
+    if ($categories.length === 0 || $categories[0]?.id !== null)
+      $categories.unshift(new Category(null, "None", "#DDD"));
     return $categories;
   }
 );

@@ -29,5 +29,8 @@
     "#root/*": {
       "default": "./src/*"
     }
+  },
+  "dependencies": {
+    "dexie-export-import": "^4.0.7"
   }
 }
