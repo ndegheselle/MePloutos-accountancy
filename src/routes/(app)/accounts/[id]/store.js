@@ -10,32 +10,20 @@ import { useLiveQuery } from "@lib/base/dexieLiveQuery";
 
 let currentAccountId = null;
 
-export function setCurrentAccountId(_accoundId)
-{
+export function setCurrentAccountId(_accoundId) {
     currentAccountId = _accoundId;
 }
 
-export const filtersTest = writable({
+export const transactionsFilters = writable({
     date: firstDayOfMonth(),
 });
 
-const transactionsFilters = {
-    date: firstDayOfMonth(),
-};
-export function setTransactionsDateFilter(_date)
-{
-    transactionsFilters.date = _date;
-    currentTransactions.doQuery();
-}
-
 export const currentAccount = liveQuery(() => getAccountById(currentAccountId));
-export const currentTransactions = liveQuery(() => getTransactionsByAccount(currentAccountId, transactionsFilters.date));
+export const currentTransactions = useLiveQuery(
+    (_transactionsFilters) => getTransactionsByAccount(currentAccountId, _transactionsFilters.date),
+    transactionsFilters, { initialValue: [] });
 export const transactionsRecap = derived(currentTransactions,
     $transactions => {
         return transactionsService.getTransactionsRecap($transactions);
     }
 );
-
-export const transactionsTest = useLiveQuery(
-    (_filterTest) => getTransactionsByAccount(currentAccountId, _filterTest.date), 
-    filtersTest, {initialValue: []});

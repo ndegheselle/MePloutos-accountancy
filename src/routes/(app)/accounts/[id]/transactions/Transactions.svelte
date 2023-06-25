@@ -9,7 +9,7 @@
     import CategorySelectionModal from "@app/categories/CategorySelectionModal.svelte";
     import ModalImport from "./ModalImport.svelte";
 
-    import { setTransactionsDateFilter } from "../store";
+    import { transactionsFilters } from "../store";
     import { firstDayOfMonth } from "@lib/helpers";
 
     let groupedTransactions = [];
@@ -90,7 +90,7 @@
                 date = null;
         }
 
-        setTransactionsDateFilter(date);
+        $transactionsFilters.date = date;
     }
     
     export let accountId = null;

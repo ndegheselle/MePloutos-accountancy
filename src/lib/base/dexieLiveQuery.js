@@ -4,14 +4,13 @@ import { liveQuery } from "dexie";
 export function useLiveQuery(querier, params, options) {
     const store = readable(options?.initialValue, (set) => {
 
-        let unsubscribe = null;
-
+        let subscribtion = null;
         const updateQuery = (_params) => {
 
-            if (unsubscribe) unsubscribe();
+            if (subscribtion) subscribtion.unsubscribe();
 
             const observable = liveQuery(() => querier(_params));
-            unsubscribe = observable.subscribe({
+            subscribtion = observable.subscribe({
                 next: (val) => {
                     set(val);
                 },
@@ -19,9 +18,12 @@ export function useLiveQuery(querier, params, options) {
             });
         };
 
-        params.subscribe((val) => {
-            updateQuery(val);
-        });
+        if (params)
+        {
+            params.subscribe((val) => {
+                updateQuery(val);
+            });
+        }
     });
 
     return store;
