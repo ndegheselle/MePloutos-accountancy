@@ -86,5 +86,7 @@ export class Params
     {
         this.id = Params.userId;
         this.favoriteAccountId = "";
+        this.saveDataLocallyOnClose = true;
+        this.saveImportedFiles = true;
     }
 }

@@ -1,14 +1,16 @@
 <script>
+    import { isDesktop } from "@lib/helpers";
     import { confirm } from "@global/dialogs";
     import { categories } from "@lib/store";
     import { Category } from "@lib/models";
     import { colors } from "@lib/base/colors.js";
     import categoriesService from "@lib/services/categories";
+    import paramsService from "@lib/services/parameters";
 
     import CategoryIcon from "@app/categories/CategoryIcon.svelte";
     import ColorInput from "@components/ColorInput.svelte";
 
-    import paramsService from "@lib/services/parameters";
+    import { params } from "@lib/store";
 
     function handleModalFinish() {
         if (modalCategory.id) categoriesService.update(modalCategory);
@@ -24,13 +26,11 @@
                 "is-danger"
             )
             .then((result) => {
-                if (result)
-                    categoriesService.remove(_category.id);
+                if (result) categoriesService.remove(_category.id);
             });
     }
 
-    function importFromFile(e)
-    {
+    function importFromFile(e) {
         confirm
             .show(
                 `Importing from a file will clear all current data, are you sure ?`,
@@ -38,8 +38,7 @@
                 "is-warning"
             )
             .then((result) => {
-                if (result)
-                    paramsService.importDB(e.target.files[0])
+                if (result) paramsService.importDB(e.target.files[0]);
             });
     }
 
@@ -49,12 +48,32 @@
 <h1 class="title">Parameters</h1>
 
 <div class="box">
+    <span class="has-text-grey-lighter">Global</span>
+    <div>
+        <label class="checkbox" disabled={!isDesktop()}>
+            <input type="checkbox" bind:checked={$params.saveDataLocallyOnClose} disabled={!isDesktop()}/>
+            Save all data locally on close
+        </label>
+        <label class="checkbox" disabled={!isDesktop()}>
+            <input type="checkbox" bind:checked={$params.saveImportedFiles} disabled={!isDesktop()}/>
+            Save imported files locally
+        </label>
+    </div>
+</div>
+
+<div class="box">
     <span class="has-text-grey-lighter">Export / import</span>
     <div class="columns">
         <div class="column">
             <div class="file">
-                <label class="file-label is-fullwidth ">
-                    <input class="file-input" type="file" name="resume" accept="application/JSON" on:change={importFromFile}/>
+                <label class="file-label is-fullwidth">
+                    <input
+                        class="file-input"
+                        type="file"
+                        name="resume"
+                        accept="application/JSON"
+                        on:change={importFromFile}
+                    />
                     <span class="file-cta is-fullwidth">
                         <span class="file-icon">
                             <i class="fa fa-file-import" />
@@ -65,7 +84,10 @@
             </div>
         </div>
         <div class="column">
-            <button class="button is-fullwidth" on:click={paramsService.exportDB}>
+            <button
+                class="button is-fullwidth"
+                on:click={paramsService.exportDB}
+            >
                 <span class="icon">
                     <i class="fa-solid fa-file-export" />
                 </span>

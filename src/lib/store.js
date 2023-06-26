@@ -1,4 +1,4 @@
-import { writable, derived } from 'svelte/store';
+import {  derived } from 'svelte/store';
 import {liveQuery} from "dexie";
 
 import { getAllCategories } from "@lib/repos/categories";

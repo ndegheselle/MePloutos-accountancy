@@ -3,6 +3,8 @@ import { updateAccountBalance } from "@lib/repos/accounts";
 
 import { filterAlreadyExisting, importFile } from "./import.js";
 
+import desktopSave from "@lib/desktop/save.js";
+
 function updateCategory(_selectedTransactions, _category)
 {
     return updateTransactionsCategory(_selectedTransactions, _category);
@@ -23,6 +25,9 @@ async function imports(file, options)
 
     saveTransactionsBulks(newTransactions);
     updateAccountBalance(options.accountId, balance);
+
+    // Keep track of all the imported files
+    desktopSave.saveImportedFile(file);
 
     return {
         count: newTransactions.length,

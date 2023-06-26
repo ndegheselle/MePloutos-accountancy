@@ -1,4 +1,4 @@
-import { init as initPopups } from "@global/popups.js"
+import { init as initPopups } from "@global/popups.js";
 
 // Check for each page is still connected
 export const load = async ({ route }) => {
