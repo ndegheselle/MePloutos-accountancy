@@ -28,5 +28,5 @@ export function parseDate(date)
 
 export function isDesktop()
 {
-    return window.__TAURI__;
+    return !!window.__TAURI__;
 }

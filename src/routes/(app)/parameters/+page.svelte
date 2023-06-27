@@ -47,19 +47,25 @@
 
 <h1 class="title">Parameters</h1>
 
+{#if isDesktop()}
 <div class="box">
-    <span class="has-text-grey-lighter">Global</span>
+    <span class="has-text-grey-lighter">Desktop</span>
     <div>
-        <label class="checkbox" disabled={!isDesktop()}>
-            <input type="checkbox" bind:checked={$params.saveDataLocallyOnClose} disabled={!isDesktop()}/>
-            Save all data locally on close
-        </label>
-        <label class="checkbox" disabled={!isDesktop()}>
-            <input type="checkbox" bind:checked={$params.saveImportedFiles} disabled={!isDesktop()}/>
-            Save imported files locally
-        </label>
+        <div class="field">
+            <label class="checkbox">
+                <input type="checkbox" bind:checked={$params.saveDataLocallyOnClose}/>
+                Save all data locally on close
+            </label>
+        </div>
+        <div class="field">
+            <label class="checkbox">
+                <input type="checkbox" bind:checked={$params.saveImportedFiles} />
+                Save imported files locally
+            </label>
+        </div>
     </div>
 </div>
+{/if}
 
 <div class="box">
     <span class="has-text-grey-lighter">Export / import</span>

@@ -25,10 +25,13 @@
   <slot />
 </main>
 
+{#if $loading.show}
 <div class="loading-container has-background-light">
   <span class="loader" />
   <span class="ml-2">{$loading.message}</span>
 </div>
+
+{/if}
 
 <style>
   .loading-container {

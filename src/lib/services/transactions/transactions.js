@@ -26,8 +26,9 @@ async function imports(file, options)
     saveTransactionsBulks(newTransactions);
     updateAccountBalance(options.accountId, balance);
 
-    // Keep track of all the imported files
-    desktopSave.saveImportedFile(file);
+    // Keep all imported files localy
+    if (options.saveImportedFile)
+        desktopSave.saveImportedFile(file);
 
     return {
         count: newTransactions.length,

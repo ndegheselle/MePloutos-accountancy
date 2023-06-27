@@ -1,25 +1,30 @@
 <script>
     import { alerts } from "@global/dialogs.js";
     import transactionsService from "@lib/services/transactions/transactions";
+    import desktopSave from "@lib/desktop/save.js";
+    import { params } from "@lib/store";
 
     function isFormValid(files) {
         return files && files.length === 1;
     }
 
-    async function importFile()
-    {
-        let result = await transactionsService.imports(files[0], {accountId: accountId, bank: bank});
+    async function importFile() {
+        desktopSave.saveImportedFile(files[0]);
+
+        let result = await transactionsService.imports(files[0], {
+            accountId: accountId,
+            bank: bank,
+            saveImportedFiles: $params.saveImportedFiles,
+        });
 
         if (result.count)
             alerts.success(`${result.count} new transactions imported.`);
-        else
-            alerts.info(`No new transaction imported.`);
-        
+        else alerts.info(`No new transaction imported.`);
+
         handleClosing();
     }
 
-    function handleClosing()
-    {
+    function handleClosing() {
         accountId = null;
     }
 
@@ -30,7 +35,7 @@
     export const modal = {
         show(_accountId = null) {
             accountId = _accountId;
-        }
+        },
     };
 </script>
 
@@ -48,7 +53,9 @@
                     <div class="control">
                         <div class="select is-fullwidth">
                             <select bind:value={bank}>
-                                <option value="labanquepostale">La banque postal : CSV</option>
+                                <option value="labanquepostale"
+                                    >La banque postal : CSV</option
+                                >
                             </select>
                         </div>
                     </div>
@@ -85,8 +92,10 @@
         </section>
         <footer class="modal-card-foot is-justify-content-flex-end">
             <button class="button" data-dismiss="modal">Cancel</button>
-            <button class="button is-success" disabled={!isFormValid(files)} on:click={importFile}
-                >Import</button
+            <button
+                class="button is-success"
+                disabled={!isFormValid(files)}
+                on:click={importFile}>Import</button
             >
         </footer>
     </div>

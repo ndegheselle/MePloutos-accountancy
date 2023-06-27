@@ -12,7 +12,13 @@
   },
   "tauri": {
     "allowlist": {
-      "all": false
+      "fs": {
+        "all": true,
+        "scope": ["$APPDATA/**/*"]
+      },
+      "path": {
+        "all": true
+      }
     },
     "bundle": {
       "active": true,
@@ -29,7 +35,7 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "com.tauri.dev",
+      "identifier": "accountancy.ndegheselle.fr",
       "longDescription": "",
       "macOS": {
         "entitlements": null,

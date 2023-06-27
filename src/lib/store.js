@@ -6,12 +6,20 @@ import { updateUserParams } from "@lib/repos/params";
 
 import { getUserParams } from "@lib/repos/params";
 import { Category, Params } from "@lib/models";
+import { isDesktop } from './helpers';
 
 // Fixed
 export const params = derived(
   liveQuery(getUserParams),
   ($params) => {
-    return $params || new Params();
+    let params = $params || new Params();
+
+    // Default params for web
+    if (!isDesktop()) {
+      params.saveDataLocallyOnClose = false;
+      params.saveImportedFiles = false;
+    }
+    return params;
   }
 );
 params.set = updateUserParams
