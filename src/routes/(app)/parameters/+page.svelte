@@ -53,12 +53,6 @@
     <div>
         <div class="field">
             <label class="checkbox">
-                <input type="checkbox" bind:checked={$params.saveDataLocallyOnClose}/>
-                Save all data locally on close
-            </label>
-        </div>
-        <div class="field">
-            <label class="checkbox">
                 <input type="checkbox" bind:checked={$params.saveImportedFiles} />
                 Save imported files locally
             </label>
