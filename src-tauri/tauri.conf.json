@@ -7,8 +7,8 @@
     "distDir": "../static"
   },
   "package": {
-    "productName": "pwa-accountancy",
-    "version": "0.1.0"
+    "productName": "personnal-accountancy",
+    "version": "0.0.1"
   },
   "tauri": {
     "allowlist": {
@@ -62,10 +62,10 @@
     "windows": [
       {
         "fullscreen": false,
-        "height": 600,
+        "height": 650,
         "resizable": true,
-        "title": "pwa-accountancy",
-        "width": 800
+        "title": "Personnal accountancy",
+        "width": 1024
       }
     ]
   }

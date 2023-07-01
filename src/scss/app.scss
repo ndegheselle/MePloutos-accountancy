@@ -5,6 +5,10 @@
 @import "override.scss";
 @import "custom.scss";
 
+html {
+    overflow-y: auto;
+}
+
 .is-disable {
     pointer-events: none;
     opacity: .5;
