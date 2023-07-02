@@ -9,12 +9,13 @@
     import CategorySelectionModal from "@app/categories/CategorySelectionModal.svelte";
     import ModalImport from "./ModalImport.svelte";
 
-    import { setTransactionsDateFilter } from "../store";
+    import { transactionsFilters } from "../store";
     import { firstDayOfMonth } from "@lib/helpers";
 
     let groupedTransactions = [];
     let categoryModal = null;
     let importModal = null;
+    let currentFilter = 0;
 
     $: groupedTransactions =
         transactionsService.groupTransactionsByDate(transactions);
@@ -62,6 +63,7 @@
     }
 
     function transactionsFilterDate(filter) {
+        currentFilter = filter;
         let date = null;
         switch (filter) {
             // Current month
@@ -88,9 +90,9 @@
                 date = null;
         }
 
-        setTransactionsDateFilter(date);
+        $transactionsFilters.date = date;
     }
-
+    
     export let accountId = null;
     export let transactions = null;
 </script>
@@ -114,31 +116,31 @@
                 <div class="dropdown-menu" role="menu">
                     <div class="dropdown-content">
                         <a
-                            class="dropdown-item"
+                            class="dropdown-item {currentFilter == 0 ? 'is-active' : ''}"
                             on:click={() => transactionsFilterDate(0)}
                         >
                             Current month
                         </a>
                         <a
-                            class="dropdown-item"
+                            class="dropdown-item {currentFilter == 1 ? 'is-active' : ''}"
                             on:click={() => transactionsFilterDate(1)}
                         >
                             1 month
                         </a>
                         <a
-                            class="dropdown-item"
+                            class="dropdown-item {currentFilter == 6 ? 'is-active' : ''}"
                             on:click={() => transactionsFilterDate(6)}
                         >
                             6 month
                         </a>
                         <a
-                            class="dropdown-item"
+                            class="dropdown-item {currentFilter == 12 ? 'is-active' : ''}"
                             on:click={() => transactionsFilterDate(12)}
                         >
                             1 year
                         </a>
                         <a
-                            class="dropdown-item"
+                            class="dropdown-item {currentFilter == -1 ? 'is-active' : ''}"
                             on:click={() => transactionsFilterDate(-1)}
                         >
                             All

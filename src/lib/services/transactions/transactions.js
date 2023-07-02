@@ -3,6 +3,8 @@ import { updateAccountBalance } from "@lib/repos/accounts";
 
 import { filterAlreadyExisting, importFile } from "./import.js";
 
+import desktopSave from "@lib/desktop/save.js";
+
 function updateCategory(_selectedTransactions, _category)
 {
     return updateTransactionsCategory(_selectedTransactions, _category);
@@ -23,6 +25,10 @@ async function imports(file, options)
 
     saveTransactionsBulks(newTransactions);
     updateAccountBalance(options.accountId, balance);
+
+    // Keep all imported files localy
+    if (options.saveImportedFile)
+        desktopSave.saveImportedFile(file, options.bank);
 
     return {
         count: newTransactions.length,
@@ -58,9 +64,13 @@ function groupTransactionsByDate(_transactions)
 // Create a summary of the given transactions (positive, negative, total, categories values)
 function getTransactionsRecap(_transactions)
 {
-    let catTmpMap = new Map();
     // transactions without a category (None category) so that its first in the list
-    catTmpMap.set(null, 0);
+    let catTmpMapTotal = new Map();
+    let catTmpMapPositive = new Map();
+    let catTmpMapNegative = new Map();
+    catTmpMapTotal.set(null, 0);
+    catTmpMapPositive.set(null, 0);
+    catTmpMapNegative.set(null, 0);
 
     let totals = {
         positiveTotal: 0,
@@ -70,26 +80,45 @@ function getTransactionsRecap(_transactions)
 
     for (let transaction of _transactions || [])
     {
-        // Categories values
-        if (!catTmpMap.has(transaction.categoryId)) catTmpMap.set(transaction.categoryId, 0);
-        catTmpMap.set(transaction.categoryId, catTmpMap.get(transaction.categoryId) + Math.abs(transaction.value));
+        // Categories values totals
+        if (!catTmpMapTotal.has(transaction.categoryId)) catTmpMapTotal.set(transaction.categoryId, 0);
+        catTmpMapTotal.set(transaction.categoryId, catTmpMapTotal.get(transaction.categoryId) + Math.abs(transaction.value));
 
-        // Transactions totals
+        // Categories values totals (positive)
         if (transaction.value > 0)
-            totals.positiveTotal += transaction.value;
-        else
-            totals.negativeTotal += transaction.value;
-    }
+        {
+            if (!catTmpMapPositive.has(transaction.categoryId)) catTmpMapPositive.set(transaction.categoryId, 0);
+            catTmpMapPositive.set(transaction.categoryId, catTmpMapPositive.get(transaction.categoryId) + transaction.value);
 
-    // Reverse so that None category is always at the end
+            totals.positiveTotal += transaction.value;
+        }
+        // Categories values totals (negative)
+        else
+        {
+            if (!catTmpMapNegative.has(transaction.categoryId)) catTmpMapNegative.set(transaction.categoryId, 0);
+            catTmpMapNegative.set(transaction.categoryId, catTmpMapNegative.get(transaction.categoryId) + transaction.value);
+
+            totals.negativeTotal += transaction.value;
+        }
+    }
     
-    let categoriesValues = Array.from(catTmpMap, function(entry) {
+    // Reverse so that None category is always at the end
+    let categoriesTotal = Array.from(catTmpMapTotal, function(entry) {
         return {id: entry[0], value: entry[1]};
     }).reverse();
+    let categoriesPositive = Array.from(catTmpMapPositive, function(entry) {
+        return {id: entry[0], value: entry[1]};
+    }).reverse();
+    let categoriesNegative = Array.from(catTmpMapNegative, function(entry) {
+        return {id: entry[0], value: entry[1]};
+    }).reverse();
+
     totals.total = Math.abs(totals.positiveTotal) + Math.abs(totals.negativeTotal);
 
     return {
-        categoriesValues,
+        categoriesTotal,
+        categoriesPositive,
+        categoriesNegative,
         totals
     }
 }

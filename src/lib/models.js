@@ -56,12 +56,23 @@ export class Investment
     constructor(_name)
     {
         this.name = _name || "";
-        this.url = "";
-        this.initialValue = 0;
-        this.values = [];
+        this.startDate = new Date();
 
-        this.startDate = null;
-        this.estimedInterestRate = 0.0;
+        // XXX : amélioration possible avec valeurs passés, gestion d'investissement régulier, etc.
+        this.actualValue = 0;
+        this.investedValue = 0;
+    }
+}
+
+export class Subscription
+{
+    static dexieDefinition = "++id";
+
+    constructor(_name)
+    {
+        this.name = _name || "";
+        this.price = 0;
+        this.dueEvery = 1;
     }
 }
 
@@ -75,5 +86,8 @@ export class Params
     {
         this.id = Params.userId;
         this.favoriteAccountId = "";
+        // XXX : not used yet, seems a bit overkill
+        this.saveDataLocallyOnClose = true;
+        this.saveImportedFiles = true;
     }
 }

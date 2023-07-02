@@ -3,13 +3,7 @@ import { db } from '@lib/base/indexDB.js';
 // update transactions categories
 export function updateTransactionsCategory(_transactions, _category)
 {
-    return db.transactions.update(_transactions => {
-        for(let transac of _transactions)
-        {
-            transac.categoryId = _category.id;
-        }
-        return _transactions;
-    });
+    return db.transactions.where('id').anyOf(_transactions.map(x => x.id)).modify({ categoryId: _category.id });
 }
 
 export function getMostRecentTransaction()

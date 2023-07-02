@@ -16,3 +16,8 @@ export const contextMenu = writable({
     items: [],
     context: null,
 });
+
+export const loading = writable({
+    show: false,
+    message: "Loading...",
+});

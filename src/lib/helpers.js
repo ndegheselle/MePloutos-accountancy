@@ -16,3 +16,17 @@ export function getDateFromMonthsAgo(months) {
     date.setMonth(date.getMonth() - months);
     return date;
 }
+
+export function parseDate(date)
+{
+    let timestamp = Date.parse(date);
+
+    if (isNaN(timestamp) == false)
+        return new Date(timestamp);
+    return new Date();
+}
+
+export function isDesktop()
+{
+    return !!window.__TAURI__;
+}

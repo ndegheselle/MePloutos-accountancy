@@ -7,12 +7,18 @@
     "distDir": "../static"
   },
   "package": {
-    "productName": "pwa-accountancy",
-    "version": "0.1.0"
+    "productName": "personnal-accountancy",
+    "version": "0.0.1"
   },
   "tauri": {
     "allowlist": {
-      "all": false
+      "fs": {
+        "all": true,
+        "scope": ["$APPDATA/**/*"]
+      },
+      "path": {
+        "all": true
+      }
     },
     "bundle": {
       "active": true,
@@ -29,7 +35,7 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "com.tauri.dev",
+      "identifier": "accountancy.ndegheselle.fr",
       "longDescription": "",
       "macOS": {
         "entitlements": null,
@@ -56,10 +62,10 @@
     "windows": [
       {
         "fullscreen": false,
-        "height": 600,
+        "height": 650,
         "resizable": true,
-        "title": "pwa-accountancy",
-        "width": 800
+        "title": "Personnal accountancy",
+        "width": 1024
       }
     ]
   }
