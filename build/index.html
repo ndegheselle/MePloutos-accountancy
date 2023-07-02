@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="manifest" href="/manifest.webmanifest">
+		<link rel="icon" href="/favicon.png" />
+		<meta name="viewport" content="width=device-width" />
+		
+		<style id="customStyles"></style>
+		
+		<link rel="modulepreload" href="/_app/immutable/entry/start.c5afff6a.js">
+		<link rel="modulepreload" href="/_app/immutable/chunks/index.14546b91.js">
+		<link rel="modulepreload" href="/_app/immutable/chunks/singletons.92adc078.js">
+		<link rel="modulepreload" href="/_app/immutable/chunks/index.9e8dd097.js">
+		<link rel="modulepreload" href="/_app/immutable/entry/app.4d4d6297.js">
+	</head>
+	<body data-sveltekit-preload-data="tap">
+		<div style="display: contents">
+			<script>
+				{
+					__sveltekit_tp6esb = {
+						base: "",
+						env: {"PUBLIC_API_URL":"http://api.lightcloud.local"}
+					};
+
+					const element = document.currentScript.parentElement;
+
+					Promise.all([
+						import("/_app/immutable/entry/start.c5afff6a.js"),
+						import("/_app/immutable/entry/app.4d4d6297.js")
+					]).then(([kit, app]) => {
+						kit.start(app, element);
+					});
+				}
+			</script>
+		</div>
+	</body>
+</html>
