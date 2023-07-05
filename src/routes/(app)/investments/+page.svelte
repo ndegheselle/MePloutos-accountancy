@@ -4,7 +4,6 @@
     import investmentsService from "@lib/services/overview/investments";
 
     import InvestmentCreateUpdateModal from "./InvestmentCreateUpdateModal.svelte";
-    import InvestmentChart from "./InvestmentChart.svelte";
 
     let modal = null;
     $: investmentsRecap = investmentsService.getInvestmentsRecap($investments);
@@ -27,6 +26,10 @@
         return _investment.actualValue - _investment.investedValue;
     }
 </script>
+
+<svelte:head>
+    <title>MePloutos - Investments</title> 
+</svelte:head>
 
 <div class="box is-flex">
     <div class="flex-container">

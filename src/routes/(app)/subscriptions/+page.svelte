@@ -19,6 +19,10 @@
     }
 </script>
 
+<svelte:head>
+    <title>MePloutos - Subscriptions</title> 
+</svelte:head>
+
 <div class="box is-flex">
     <div class="flex-container">
         <span class="text-header">

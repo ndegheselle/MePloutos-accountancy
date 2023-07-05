@@ -23,6 +23,10 @@
   }
 </script>
 
+<svelte:head>
+    <title>MePloutos - Home</title> 
+</svelte:head>
+
 <slot />
 
 <Alerts />
