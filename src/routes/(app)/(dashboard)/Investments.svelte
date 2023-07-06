@@ -1,5 +1,5 @@
 <script>
-    import { investments } from "./store";
+    import { investments } from "./_store";
     import investmentsService from "@lib/services/overview/investments";
 
     $: investmentsRecap = investmentsService.getInvestmentsRecap($investments);

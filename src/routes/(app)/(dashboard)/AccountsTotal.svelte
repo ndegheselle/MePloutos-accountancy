@@ -1,5 +1,5 @@
 <script>
-    import { accounts } from "./store";
+    import { accounts } from "./_store";
 
     $: total = $accounts.reduce((acc, account) => acc + account.balance, 0);
 </script>

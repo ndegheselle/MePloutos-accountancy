@@ -1,4 +1,4 @@
-import init from "@global/$init.js";
+import init from "@global/_init.js";
 
 // Check for each page is still connected
 export const load = async ({ route }) => {

@@ -1,5 +1,5 @@
 <script>
-    import { accounts } from "./store";
+    import { accounts } from "./_store";
     import Money from "@components/Money.svelte";
     import AccountCreateUpdateModal from "../accounts/AccountCreateUpdateModal.svelte";
     import { params } from "@lib/store";

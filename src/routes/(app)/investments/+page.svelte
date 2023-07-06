@@ -1,6 +1,6 @@
 <script>
-    import { confirm } from "@global/dialogs";
-    import { investments } from "./store";
+    import { confirm } from "@global/dialogs/Confirm";
+    import { investments } from "./_store";
     import investmentsService from "@lib/services/overview/investments";
 
     import InvestmentCreateUpdateModal from "./InvestmentCreateUpdateModal.svelte";
@@ -76,9 +76,9 @@
     </div>
 </div>
 
-<div class="columns">
+<div class="columns is-multiline px-2">
     {#each $investments as investment}
-        <div class="column is-half">
+        <div class="column is-half p-1">
             <div class="box is-fullheight flex-container">
                 <div class="is-fullwidth">
                     <div class="flex-container">

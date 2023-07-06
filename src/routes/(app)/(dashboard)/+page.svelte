@@ -2,7 +2,7 @@
     import Categories from "@app/categories/Categories.svelte";
     import AccountRecap from "@app/accounts/AccountRecap.svelte";
 
-    import { transactionsRecap } from "./store";
+    import { transactionsRecap } from "./_store";
 
     import AccountsTotal from "./AccountsTotal.svelte";
     import Accounts from "./Accounts.svelte";

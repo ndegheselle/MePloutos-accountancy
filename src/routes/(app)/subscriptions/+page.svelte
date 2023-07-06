@@ -1,6 +1,6 @@
 <script>
     import { confirm  } from "@global/dialogs/Confirm.js";
-    import { subscriptions } from "./store";
+    import { subscriptions } from "./_store";
     import subscriptionsService from "@lib/services/overview/subscriptions";
 
     import SubscriptionCreateUpdateModal from "./SubscriptionCreateUpdateModal.svelte";
@@ -34,7 +34,7 @@
         </span>
 
         <span class="text-header">
-            <span class="title mb-0 has-text-danger"
+            <span class="title mb-0 has-text-link"
                 >{subscriptionsRecap.perMonth.toLocaleString(undefined, {
                     currency: "EUR",
                     style: "currency",
@@ -44,7 +44,7 @@
         </span>
 
         <span class="text-header">
-            <span class="title mb-0 has-text-danger"
+            <span class="title mb-0 has-text-link"
                 >{(subscriptionsRecap.perMonth * 12).toLocaleString(undefined, {
                     currency: "EUR",
                     style: "currency",
@@ -71,9 +71,9 @@
     </div>
 </div>
 
-<div class="columns">
+<div class="columns is-multiline px-2">
     {#each $subscriptions as subscription}
-        <div class="column is-one-third">
+        <div class="column is-one-third p-1">
             <div class="box is-fullheight flex-container">
                 <div class="is-fullwidth">
                     <div class="flex-container">
@@ -118,7 +118,7 @@
                     </div>
 
                     <div>
-                        <span class="is-size-4 title mb-0 has-text-danger"
+                        <span class="is-size-4 title mb-0 has-text-link"
                             >{(
                                 (subscription.price / subscription.dueEvery)
                             ).toLocaleString(undefined, {
