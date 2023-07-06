@@ -1,5 +1,5 @@
 <script>
-    import { confirm  } from "@global/dialogs";
+    import { confirm  } from "@global/dialogs/Confirm.js";
     import { subscriptions } from "./store";
     import subscriptionsService from "@lib/services/overview/subscriptions";
 

@@ -3,7 +3,7 @@
     import Money from "@components/Money.svelte";
     import AccountCreateUpdateModal from "../accounts/AccountCreateUpdateModal.svelte";
     import { params } from "@lib/store";
-    import { context } from "@global/contextMenu";
+    import { context } from "@global/dialogs/contextMenu.js";
 
     function showAccountContext(event, _account) {
         context.show({ x: event.pageX, y: event.pageY }, [

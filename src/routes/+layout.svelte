@@ -1,9 +1,10 @@
 <script>
   import "../scss/app.scss";
 
-  import Alerts from "./Alerts.svelte";
-  import ConfirmModal from "./ConfirmModal.svelte";
-  import ContextMenu from "./ContextMenu.svelte";
+  import Alert from "@global/dialogs/Alert.svelte";
+  import Confirm from "@global/dialogs/Confirm.svelte";
+  import ContextMenu from "@global/dialogs/ContextMenu.svelte";
+  import Loading from "@global/page/Loading.svelte";
 
   import { categories } from "@lib/store";
 
@@ -19,7 +20,7 @@
       styles += `.category-${category.id} {stroke: ${category.color};}`;
     }
 
-    document.getElementById("customStyles").innerHTML = styles;
+    document.getElementById("generatedStyles").innerHTML = styles;
   }
 </script>
 
@@ -29,6 +30,8 @@
 
 <slot />
 
-<Alerts />
-<ConfirmModal />
+<Loading />
+
+<Alert />
+<Confirm />
 <ContextMenu />

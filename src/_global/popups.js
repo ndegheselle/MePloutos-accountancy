@@ -37,7 +37,7 @@ function closeAll(selector) {
     });
 }
 
-export function init() {
+export function initPopups() {
 
     document.addEventListener("click", function (e) {
         for (const target of targets) {
