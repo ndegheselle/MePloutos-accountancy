@@ -9,7 +9,7 @@
     import CategorySelectionModal from "@app/categories/CategorySelectionModal.svelte";
     import ModalImport from "./ModalImport.svelte";
 
-    import { transactionsFilters } from "../store";
+    import { transactionsFilters } from "../_store";
     import { firstDayOfMonth } from "@lib/helpers";
 
     let groupedTransactions = [];

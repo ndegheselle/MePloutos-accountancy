@@ -1,6 +1,6 @@
 <script>
     import { isDesktop } from "@lib/helpers";
-    import { confirm } from "@global/dialogs";
+    import { confirm } from "@global/dialogs/Confirm";
     import { categories } from "@lib/store";
     import { Category } from "@lib/models";
     import { colors } from "@lib/base/colors.js";
