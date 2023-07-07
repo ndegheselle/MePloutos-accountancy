@@ -1,5 +1,5 @@
 <script>
-    import { alerts } from "@global/dialogs.js";
+    import { alert } from "@global/dialogs/Alert.js";
     import transactionsService from "@lib/services/transactions/transactions";
     import desktopSave from "@lib/desktop/save.js";
     import { params } from "@lib/store";
@@ -18,8 +18,9 @@
         });
 
         if (result.count)
-            alerts.success(`${result.count} new transactions imported.`);
-        else alerts.info(`No new transaction imported.`);
+            alert.success(`${result.count} new transactions imported.`);
+        else 
+            alert.info(`No new transaction imported.`);
 
         handleClosing();
     }

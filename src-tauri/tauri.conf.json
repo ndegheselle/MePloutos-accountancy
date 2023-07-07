@@ -3,12 +3,12 @@
   "build": {
     "beforeBuildCommand": "npm run build",
     "beforeDevCommand": "npm run dev",
-    "devPath": "http://localhost",
-    "distDir": "../static"
+    "devPath": "http://0.0.0.0",
+    "distDir": "../build"
   },
   "package": {
     "productName": "personnal-accountancy",
-    "version": "0.0.1"
+    "version": "0.0.2"
   },
   "tauri": {
     "allowlist": {

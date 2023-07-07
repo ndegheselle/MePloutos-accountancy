@@ -4,7 +4,7 @@
     import AccountRecap from "../AccountRecap.svelte";
     import AccountCreateUpdateModal from "../AccountCreateUpdateModal.svelte";
     import accountsService from '@lib/services/accounts.js';
-    import { confirm  } from "@global/dialogs";
+    import { confirm } from "@global/dialogs/Confirm.js";
 
     function deleteAccount() {
         confirm.show(`Are you sure you want to delete the account '${account.name}' and all linked transactions ?`, 

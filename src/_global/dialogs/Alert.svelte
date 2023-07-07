@@ -1,13 +1,13 @@
 <script>
-    import { alert } from "@global/store.js";
+    import { alertStore } from "./Alert.js";
 
     // 3s
     const ALERT_DELAY = 3000;
     let alertsNumber = 0;
 
-    const onAlertChange = (alert) => {
+    const onAlertChange = (_alert) => {
 
-        if (!alert) return;
+        if (!_alert) return;
         
         alertsNumber++;
 
@@ -16,14 +16,14 @@
                 alertsNumber--;
         }, ALERT_DELAY);
     };
-    $: onAlertChange($alert);
+    $: onAlertChange($alertStore);
 </script>
 
 {#if alertsNumber > 0}
 <div class="notification-container">
-    <div class="notification {$alert.type}">
+    <div class="notification {$alertStore.type}">
         <button class="delete" on:click={() => alertsNumber=0}></button>
-        {$alert.message}
+        {$alertStore.message}
     </div>
 </div>
 {/if}

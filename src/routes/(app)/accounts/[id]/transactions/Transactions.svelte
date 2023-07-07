@@ -1,7 +1,7 @@
 <script>
     import transactionsService from "@lib/services/transactions/transactions.js";
-    import { context } from "@global/contextMenu";
-    import { confirm } from "@global/dialogs";
+    import { context } from "@global/dialogs/contextMenu.js";
+    import { confirm } from "@global/dialogs/Confirm.js";
 
     import Money from "@components/Money.svelte";
     import CategoryIcon from "@app/categories/CategoryIcon.svelte";

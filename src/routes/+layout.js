@@ -1,8 +1,8 @@
-import { init as initPopups } from "@global/popups.js";
+import init from "@global/_init.js";
 
 // Check for each page is still connected
 export const load = async ({ route }) => {
-  initPopups();
+  init();
 };
 
 export const prerender = false;

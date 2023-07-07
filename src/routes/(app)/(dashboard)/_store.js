@@ -41,4 +41,4 @@ export const subscriptions = writable([]);
 (async () => {
     investments.set(await getAllInvestments());
     subscriptions.set(await getAllSubscriptions());
-});
+})();

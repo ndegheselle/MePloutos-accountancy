@@ -45,6 +45,10 @@
     let modalCategory = null;
 </script>
 
+<svelte:head>
+    <title>MePloutos - Parameters</title> 
+</svelte:head>
+
 <h1 class="title">Parameters</h1>
 
 {#if isDesktop()}

@@ -1,10 +1,9 @@
 <script>
-    import { confirm } from "@global/dialogs";
-    import { investments } from "./store";
+    import { confirm } from "@global/dialogs/Confirm";
+    import { investments } from "./_store";
     import investmentsService from "@lib/services/overview/investments";
 
     import InvestmentCreateUpdateModal from "./InvestmentCreateUpdateModal.svelte";
-    import InvestmentChart from "./InvestmentChart.svelte";
 
     let modal = null;
     $: investmentsRecap = investmentsService.getInvestmentsRecap($investments);
@@ -27,6 +26,10 @@
         return _investment.actualValue - _investment.investedValue;
     }
 </script>
+
+<svelte:head>
+    <title>MePloutos - Investments</title> 
+</svelte:head>
 
 <div class="box is-flex">
     <div class="flex-container">
@@ -73,9 +76,9 @@
     </div>
 </div>
 
-<div class="columns">
+<div class="columns is-multiline px-2">
     {#each $investments as investment}
-        <div class="column is-half">
+        <div class="column is-half p-1">
             <div class="box is-fullheight flex-container">
                 <div class="is-fullwidth">
                     <div class="flex-container">

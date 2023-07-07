@@ -1,24 +1,24 @@
 <script>
-    import { contextMenu } from "@global/store.js";
+    import { contextMenuStore } from "./ContextMenu.js";
 </script>
 
-{#if $contextMenu.visible}
+{#if $contextMenuStore.show}
     <div
         class="context-menu dropdown"
-        class:is-active={$contextMenu.visible}
-        on:closing={($contextMenu.visible = false)}
-        style="left: {$contextMenu.position.x}px;top: {$contextMenu.position
+        class:is-active={$contextMenuStore.show}
+        on:closing={($contextMenuStore.show = false)}
+        style="left: {$contextMenuStore.position.x}px;top: {$contextMenuStore.position
             .y}px;"
     >
         <div class="dropdown-menu" id="dropdown-menu" role="menu">
             <div class="dropdown-content">
-                {#each $contextMenu.items as item}
+                {#each $contextMenuStore.items as item}
                     {#if item == "divider"}
                         <hr class="dropdown-divider" />
                     {:else}
                         <a
                             class="dropdown-item {item.style || ''}"
-                            on:click={() => item.action($contextMenu.context) }
+                            on:click={() => item.action($contextMenuStore.context) }
                         >
                             <span class="icon-text">
                                 {#if item.icon}
