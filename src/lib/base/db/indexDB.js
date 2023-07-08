@@ -1,5 +1,5 @@
 import Dexie from 'dexie';
-import { Account, Transaction, Category, Project, Params, Investment, Subscription } from '../models';
+import { Account, Transaction, Category, Project, Params, Investment, Subscription } from '@lib/models';
 
 // tuto : https://dexie.org/docs/Tutorial/Svelte
 export const db = new Dexie('myDatabase');

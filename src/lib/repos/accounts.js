@@ -1,32 +1,23 @@
-import { db } from '@lib/base/indexDB.js';
+import { BaseRepo } from '@lib/base/db/BaseRepo';
+import TransactionsRepo from "./transactions.js"
 
-export function createAccount(_account)
+class AccountsRepo extends BaseRepo
 {
-    return db.accounts.add(_account);
+    constructor()
+    {
+        super("accounts");
+    }
+
+    updateBalance(_accountId, _balance)
+    {
+        return this.table.update(_accountId, { balance: _balance });
+    }
+
+    remove(_accountId)
+    {
+        TransactionsRepo.removeByAccount(_accountId);
+        return super.remove(_accountId);
+    }
 }
 
-export function removeAccount(_accountId)
-{
-    return db.accounts.delete(_accountId);
-}
-
-export function updateAccount(_account)
-{
-    return db.accounts.update(_account.id, _account);
-}
-
-export function updateAccountBalance(_accountId, _balance)
-{
-    return db.accounts.update(_accountId, { balance: _balance });
-}
-
-export function getAllAccounts()
-{
-    return db.accounts.toArray();
-}
-
-export function getAccountById(_accountId)
-{
-    if (!_accountId) return Promise.resolve(null);
-    return db.accounts.get(_accountId);
-}
+export default new AccountsRepo();

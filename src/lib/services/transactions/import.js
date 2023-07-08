@@ -1,5 +1,4 @@
 import Papa from "papaparse";
-import { uuidv4 } from "@lib/helpers";
 import { Transaction } from "@lib/models";
 
 const importOptions = {
@@ -57,7 +56,6 @@ function convertFromDatable(datatable, options, accountId) {
     {
         transactions.push(
             new Transaction(
-                uuidv4(),
                 convertToDate(datatable[i][options.transactions.dateCol]),
                 datatable[i][options.transactions.descriptionCol].trim(),
                 convertToFloat(datatable[i][options.transactions.valueCol],

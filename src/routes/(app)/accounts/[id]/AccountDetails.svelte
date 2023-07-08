@@ -3,7 +3,7 @@
     import { categoriesMap } from "@lib/store";
     import AccountRecap from "../AccountRecap.svelte";
     import AccountCreateUpdateModal from "../AccountCreateUpdateModal.svelte";
-    import accountsService from '@lib/services/accounts.js';
+    import AccountsRepo from '@lib/repos/accounts.js';
     import { confirm } from "@global/dialogs/Confirm.js";
 
     function deleteAccount() {
@@ -11,7 +11,7 @@
         "Delete account", "is-danger").then((success) => {
             if (!success) return;
             
-            accountsService.remove(account.id);
+            AccountsRepo.remove(account.id);
             goto("/");
         });
     }

@@ -1,16 +1,15 @@
 import {  derived } from 'svelte/store';
 import {liveQuery} from "dexie";
 
-import { getAllCategories } from "@lib/repos/categories";
-import { updateUserParams } from "@lib/repos/params";
+import ParamsRepo from "@lib/repos/params";
+import CategoriesRepo from "@lib/repos/categories";
 
-import { getUserParams } from "@lib/repos/params";
 import { Category, Params } from "@lib/models";
 import { isDesktop } from './helpers';
 
 // Fixed
 export const params = derived(
-  liveQuery(getUserParams),
+  liveQuery(() => ParamsRepo.getUserParams()),
   ($params) => {
     let params = $params || new Params();
 
@@ -22,15 +21,15 @@ export const params = derived(
     return params;
   }
 );
-params.set = updateUserParams
+params.set = ParamsRepo.updateUserParams
 
 export const categories = derived(
-  liveQuery(getAllCategories),
+  liveQuery(() => CategoriesRepo.getAll()),
   $categories => {
     $categories = $categories || [];
     // Add a "None" category if it doesn't exist
     if ($categories.length === 0 || $categories[0]?.id !== null)
-      $categories.unshift(new Category(null, "None", "#DDD"));
+      $categories.unshift(new Category("None", "#DDD"));
     return $categories;
   }
 );

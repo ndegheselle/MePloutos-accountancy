@@ -14,9 +14,9 @@ export class Category
 {
     static dexieDefinition = "++id";
 
-    constructor(_id, _name, _color)
+    constructor(_name, _color)
     {
-        this.id = _id || null;
+        this.id = null;
         this.name = _name || "";
         this.color = _color || "#DDD";
     }
@@ -26,9 +26,9 @@ export class Transaction
 {
     static dexieDefinition = "++id, accountId, date, orderNumber";
 
-    constructor(_id, _date, _description, _value, _accountId)
+    constructor(_date, _description, _value, _accountId)
     {
-        this.id = _id || null;
+        this.id = null;
         this.date = _date || new Date();
         this.description = _description || "";
         this.value = _value || 0;

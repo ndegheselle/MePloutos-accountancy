@@ -1,12 +1,17 @@
-import { db } from '@lib/base/indexDB.js';
+import { db } from '@lib/base/db/indexDB';
 import { Params } from '@lib/models';
 
-export function getUserParams()
+class ParamsRepo
 {
-    return db.params.get(Params.userId);
+    getUserParams()
+    {
+        return db.params.get(Params.userId);
+    }
+    
+    updateUserParams(params)
+    {
+        return db.params.update(Params.userId, params);
+    }
 }
 
-export function updateUserParams(params)
-{
-    return db.params.update(Params.userId, params);
-}
+export default new ParamsRepo();

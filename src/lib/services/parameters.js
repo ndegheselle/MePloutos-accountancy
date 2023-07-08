@@ -1,5 +1,5 @@
-import { db } from "@lib/base/indexDB";
 import "dexie-export-import";
+import { db } from "@lib/base/db/indexDB";
 
 function clearDB() {
     db.tables.forEach(function (table) {

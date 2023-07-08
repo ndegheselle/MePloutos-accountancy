@@ -1,5 +1,5 @@
 <script>
-    import accountsService from '@lib/services/accounts.js';
+    import AccountsRepo from '@lib/repos/accounts.js';
     import {Account} from "@lib/models";
     import {colors} from '@lib/base/colors.js';
 
@@ -12,9 +12,9 @@
     function handleSuccess()
     {
         if (currentAccount.id)
-            accountsService.update(currentAccount);
+            AccountsRepo.update(currentAccount);
         else
-            accountsService.create(currentAccount);
+            AccountsRepo.create(currentAccount);
         
         show = false;
     }

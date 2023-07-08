@@ -1,30 +1,20 @@
-import { saveTransactionsBulks, getMostRecentTransaction, updateTransactionsCategory, removeTransactions } from "@lib/repos/transactions";
-import { updateAccountBalance } from "@lib/repos/accounts";
+import TransactionsRepo from "@lib/repos/transactions";
+import AccountsRepo from "@lib/repos/accounts";
 
 import { filterAlreadyExisting, importFile } from "./import.js";
 
 import desktopSave from "@lib/desktop/save.js";
 
-function updateCategory(_selectedTransactions, _category)
-{
-    return updateTransactionsCategory(_selectedTransactions, _category);
-}
-
-function remove(_selectedTransactions)
-{
-    return removeTransactions(_selectedTransactions);
-}
-
 async function imports(file, options)
 {
     let { balance, dateMin, dateMax, transactions } = await importFile(file, options);
-    const lastTransaction = await getMostRecentTransaction();
+    const lastTransaction = await TransactionsRepo.getMostRecent();
     const newTransactions = filterAlreadyExisting(options.accountId, lastTransaction, transactions);
 
     if (!newTransactions.length) return {count: 0};
 
-    saveTransactionsBulks(newTransactions);
-    updateAccountBalance(options.accountId, balance);
+    TransactionsRepo.createAll(newTransactions);
+    AccountsRepo.updateBalance(options.accountId, balance);
 
     // Keep all imported files localy
     if (options.saveImportedFile)
@@ -124,8 +114,6 @@ function getTransactionsRecap(_transactions)
 }
 
 export default {
-    remove,
-    updateCategory,
     imports,
     groupTransactionsByDate,
     getTransactionsRecap
