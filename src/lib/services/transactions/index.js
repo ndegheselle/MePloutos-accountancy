@@ -1,30 +1,3 @@
-import TransactionsRepo from "@lib/repos/transactions";
-import AccountsRepo from "@lib/repos/accounts";
-
-import { filterAlreadyExisting, importFile } from "./import.js";
-
-import desktopSave from "@lib/desktop/save.js";
-
-async function imports(file, options)
-{
-    let { balance, dateMin, dateMax, transactions } = await importFile(file, options);
-    const lastTransaction = await TransactionsRepo.getMostRecent();
-    const newTransactions = filterAlreadyExisting(options.accountId, lastTransaction, transactions);
-
-    if (!newTransactions.length) return {count: 0};
-
-    TransactionsRepo.createAll(newTransactions);
-    AccountsRepo.updateBalance(options.accountId, balance);
-
-    // Keep all imported files localy
-    if (options.saveImportedFile)
-        desktopSave.saveImportedFile(file, options.bank);
-
-    return {
-        count: newTransactions.length,
-    };
-}
-
 function groupTransactionsByDate(_transactions)
 {
     let groupedTransactions = [];
@@ -114,7 +87,6 @@ function getTransactionsRecap(_transactions)
 }
 
 export default {
-    imports,
     groupTransactionsByDate,
     getTransactionsRecap
 }

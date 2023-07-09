@@ -1,7 +1,7 @@
 <script>
     import { Subscription } from "@lib/models";
 
-    import subscriptionsService from "@lib/services/overview/subscriptions.js";
+    import subscriptionsService from "@lib/services/tracking/subscriptions.js";
 
     function handleClosing() {
         show = false;

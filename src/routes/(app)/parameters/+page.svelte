@@ -4,7 +4,7 @@
     import { categories } from "@lib/store";
     import { Category } from "@lib/models";
     import { colors } from "@lib/base/colors.js";
-    import categoriesService from "@lib/services/categories";
+    import CategoriesRepo from "@lib/repos/categories";
     import paramsService from "@lib/services/parameters";
 
     import CategoryIcon from "@app/categories/CategoryIcon.svelte";
@@ -13,8 +13,8 @@
     import { params } from "@lib/store";
 
     function handleModalFinish() {
-        if (modalCategory.id) categoriesService.update(modalCategory);
-        else categoriesService.create(modalCategory);
+        if (modalCategory.id) CategoriesRepo.update(modalCategory);
+        else CategoriesRepo.create(modalCategory);
         modalCategory = null;
     }
 
@@ -26,7 +26,7 @@
                 "is-danger"
             )
             .then((result) => {
-                if (result) categoriesService.remove(_category.id);
+                if (result) CategoriesRepo.remove(_category.id);
             });
     }
 

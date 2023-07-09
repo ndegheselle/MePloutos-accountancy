@@ -2,7 +2,7 @@
     import { Investment } from "@lib/models";
     import { parseDate } from "@lib/helpers";
 
-    import investmentsService from "@lib/services/overview/investments.js";
+    import investmentsService from "@lib/services/tracking/investments.js";
 
     function handleClosing() {
         show = false;

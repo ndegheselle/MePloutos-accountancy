@@ -1,6 +1,6 @@
 <script>
     import { subscriptions } from "./_store";
-    import subscriptionsService from "@lib/services/overview/subscriptions";
+    import subscriptionsService from "@lib/services/tracking/subscriptions";
 
     $: subscriptionsRecap = subscriptionsService.getSubscriptionsRecap($subscriptions);
 </script>

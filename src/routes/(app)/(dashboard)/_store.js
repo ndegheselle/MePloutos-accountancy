@@ -5,7 +5,7 @@ import TransactionsRepo from "@lib/repos/transactions";
 import InvestmentsRepo from "@lib/repos/investments";
 import SubscriptionsRepo from "@lib/repos/subscriptions";
 
-import transactionsService from "@lib/services/transactions/transactions";
+import transactionsService from "@lib/services/transactions";
 
 import { params } from "@lib/store";
 import {liveQuery} from "dexie";
@@ -27,7 +27,7 @@ export const transactionsRecap = derived(
         // Can't use async function in derived
         (async () => {
             // TODO : add global params to select the default date filter
-            let transactions = await TransactionsRepo.getByAccount($params.favoriteAccountId, firstDayOfMonth());
+            let transactions = await TransactionsRepo.getByAccount($params.favoriteAccountId, new Date(new Date().setMonth(new Date().getMonth() - 1)));
     
             let recap = transactionsService.getTransactionsRecap(transactions);
             set(recap);

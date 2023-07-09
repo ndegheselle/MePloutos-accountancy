@@ -1,6 +1,6 @@
 <script>
     import { alert } from "@global/dialogs/Alert.js";
-    import transactionsService from "@lib/services/transactions/transactions";
+    import importService from "@lib/services/transactions/import";
     import desktopSave from "@lib/desktop/save.js";
     import { params } from "@lib/store";
 
@@ -11,7 +11,7 @@
     async function importFile() {
         desktopSave.saveImportedFile(files[0]);
 
-        let result = await transactionsService.imports(files[0], {
+        let result = await importService.importTransactions(files[0], {
             accountId: accountId,
             bank: bank,
             saveImportedFiles: $params.saveImportedFiles,

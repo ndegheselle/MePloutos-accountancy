@@ -4,7 +4,7 @@ import { liveQuery } from "dexie";
 import AccountsRepo from "@lib/repos/accounts";
 import TransactionsRepo from "@lib/repos/transactions";
 
-import transactionsService from "@lib/services/transactions/transactions";
+import transactionsService from "@lib/services/transactions";
 import { firstDayOfMonth } from "@lib/helpers";
 
 import { useLiveQuery } from "@lib/base/db/dexieLiveQuery";
@@ -16,7 +16,8 @@ export function setCurrentAccountId(_accoundId) {
 }
 
 export const transactionsFilters = writable({
-    date: firstDayOfMonth(),
+    // - 1 month
+    date: new Date(new Date().setMonth(new Date().getMonth() - 1)),
 });
 
 export const currentAccount = liveQuery(() => AccountsRepo.getById(currentAccountId));
