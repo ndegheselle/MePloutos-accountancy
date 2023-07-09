@@ -38,6 +38,9 @@
 </div>
 
 <style>
+    .dropdown {
+        display: inline;
+    }
     .dropdown-content {
         max-width: 6.5rem;
     }

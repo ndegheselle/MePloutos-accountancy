@@ -66,9 +66,9 @@
 {/if}
 
 <div class="box">
-    <span class="has-text-grey-lighter">Export / import</span>
     <div class="columns">
         <div class="column">
+            <span class="has-text-grey-lighter">Import</span>
             <div class="file">
                 <label class="file-label is-fullwidth">
                     <input
@@ -88,6 +88,7 @@
             </div>
         </div>
         <div class="column">
+            <span class="has-text-grey-lighter">Export</span>
             <button
                 class="button is-fullwidth"
                 on:click={paramsService.exportDB}

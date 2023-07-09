@@ -1,73 +1,31 @@
 <script>
-    import AccountsRepo from '@lib/repos/accounts.js';
-    import {Account} from "@lib/models";
-    import {colors} from '@lib/base/colors.js';
+    import CreateEditModal from "@components/layout/CreateEditModal.svelte";
 
-    import ColorInput from '@components/ColorInput.svelte';
+    import AccountsRepo from "@lib/repos/accounts.js";
+    import { Account } from "@lib/models";
 
-    function handleClosing() {
-        show = false;
-    }
-
-    function handleSuccess()
-    {
-        if (currentAccount.id)
-            AccountsRepo.update(currentAccount);
-        else
-            AccountsRepo.create(currentAccount);
-        
-        show = false;
-    }
-
-    let edit = false;
-    let show = false;
-    let currentAccount = {};
-
+    let internalModal = null;
     export const modal = {
         show(_account) {
-            edit = !!_account;
-            currentAccount = _account || new Account();
-            show = true;
+            internalModal.show(_account || new Account());
         },
     };
 </script>
 
-<div class="modal" class:is-active={show} on:closing={handleClosing}>
-    <div class="modal-background" />
-    <div class="modal-content">
-        <div class="box p-0">
-            <div class="p-4">
-                <span class="has-text-grey-lighter">{(edit)? 'Edit account' : 'Add account'}</span>
-
-                <div class="field">
-                    <div class="control">
-                        <label class="label">Name
-                            <input
-                            class="input"
-                            type="text"
-                            bind:value={currentAccount.name}
-                        />
-                        </label>
-                    </div>
-                </div>
-                <div class="field">
-                    <div class="control">
-                        <label class="label">Color</label>
-                        <ColorInput bind:color={currentAccount.color} availableColors={colors}/>
-                    </div>
-                </div>
-            </div>
-
-            <footer class="is-flex is-justify-content-flex-end p-2">
-                <button class="button" aria-label="close">Cancel</button>
-                <button class="ml-1 button is-success" on:click={handleSuccess}>{(edit)? 'Edit' : 'Add'}</button>
-            </footer>
-        </div>
-    </div>
-</div>
-
-<style scoped>
-    .modal-content {
-        overflow: initial;
-    }
-</style>
+<CreateEditModal
+    name="Account"
+    form={[
+        [
+            {
+                prop: "color",
+                type: "color",
+                class: "is-one-quarter"
+            },
+            {
+                prop: "name",
+            },
+        ],
+    ]}
+    repo={AccountsRepo}
+    bind:modal={internalModal}
+/>
