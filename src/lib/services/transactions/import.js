@@ -1,8 +1,8 @@
 import Papa from "papaparse";
-import { Transaction } from "@lib/models";
+import { Transaction } from "@lib/db/transactions";
 
-import TransactionsRepo from "@lib/repos/transactions";
-import AccountsRepo from "@lib/repos/accounts";
+import {TransactionsRepo} from "@lib/db/transactions";
+import {AccountsRepo} from "@lib/db/accounts";
 
 import desktopSave from "@lib/desktop/save.js";
 

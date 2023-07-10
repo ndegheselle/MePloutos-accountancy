@@ -1,6 +1,6 @@
 <script>
     import TransactionsService from "@lib/services/transactions";
-    import TransactionsRepo from "@lib/repos/transactions";
+    import {TransactionsRepo} from "@lib/db/transactions";
     import { context } from "@global/dialogs/contextMenu.js";
     import { confirm } from "@global/dialogs/Confirm.js";
 

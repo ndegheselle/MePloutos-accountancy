@@ -1,7 +1,7 @@
 import { BaseRepo } from '@lib/base/db/BaseRepo';
-import TransactionsRepo from "./transactions.js"
+import {TransactionsRepo} from "./transactions.js"
 
-class AccountsRepo extends BaseRepo
+class AccountsRepository extends BaseRepo
 {
     constructor()
     {
@@ -20,4 +20,13 @@ class AccountsRepo extends BaseRepo
     }
 }
 
-export default new AccountsRepo();
+export const AccountsRepo = new AccountsRepository();
+export class Account
+{
+    constructor()
+    {
+        this.name = "";
+        this.color = "#DDD";
+        this.balance = 0;
+    }
+}

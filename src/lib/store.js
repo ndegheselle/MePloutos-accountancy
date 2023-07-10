@@ -1,10 +1,10 @@
 import {  derived } from 'svelte/store';
 import {liveQuery} from "dexie";
 
-import ParamsRepo from "@lib/repos/params";
-import CategoriesRepo from "@lib/repos/categories";
+import {ParamsRepo} from "@lib/db/params";
+import {CategoriesRepo} from "@lib/db/categories";
 
-import { Category, Params } from "@lib/models";
+import { Category, Params } from "@lib/db";
 import { isDesktop } from './helpers';
 
 // Fixed

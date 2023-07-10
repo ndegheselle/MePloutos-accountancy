@@ -20,9 +20,9 @@
     let value = {};
 
     export let name = "";
-    export let form = [];
     // XXX : maybe pass callback instead of repo ?
     export let repo = null;
+    export let form = [];
     export const modal = {
         show(_value) {
             value = _value;

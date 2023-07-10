@@ -1,7 +1,7 @@
 <script>
-    import { Subscription } from "@lib/models";
+    import { Subscription } from "@lib/db/subscriptions";
 
-    import subscriptionsService from "@lib/services/tracking/subscriptions.js";
+    import SubscriptionsService from "@lib/services/tracking/subscriptions.js";
 
     function handleClosing() {
         show = false;
@@ -9,9 +9,9 @@
 
     function handleSuccess() {
         if (currentSubscription.id)
-            subscriptionsService.update(currentSubscription);
+            SubscriptionsService.update(currentSubscription);
         else
-            subscriptionsService.create(currentSubscription);
+            SubscriptionsService.create(currentSubscription);
 
         handleClosing();
     }

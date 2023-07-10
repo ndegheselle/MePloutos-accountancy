@@ -3,7 +3,7 @@
     import { categoriesMap } from "@lib/store";
     import AccountRecap from "../AccountRecap.svelte";
     import AccountCreateUpdateModal from "../AccountCreateUpdateModal.svelte";
-    import AccountsRepo from '@lib/repos/accounts.js';
+    import {AccountsRepo} from '@lib/db/accounts.js';
     import { confirm } from "@global/dialogs/Confirm.js";
 
     function deleteAccount() {

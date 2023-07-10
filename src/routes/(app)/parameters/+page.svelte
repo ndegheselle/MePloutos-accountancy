@@ -2,21 +2,13 @@
     import { isDesktop } from "@lib/helpers";
     import { confirm } from "@global/dialogs/Confirm";
     import { categories } from "@lib/store";
-    import { Category } from "@lib/models";
-    import { colors } from "@lib/base/colors.js";
-    import CategoriesRepo from "@lib/repos/categories";
-    import paramsService from "@lib/services/parameters";
+    import {CategoriesRepo} from "@lib/db/categories";
+    import ParamsService from "@lib/services/parameters";
 
     import CategoryIcon from "@app/categories/CategoryIcon.svelte";
-    import ColorInput from "@components/ColorInput.svelte";
+    import CategoryCreateUpdateModal from "@app/categories/CategoryCreateUpdateModal.svelte";
 
     import { params } from "@lib/store";
-
-    function handleModalFinish() {
-        if (modalCategory.id) CategoriesRepo.update(modalCategory);
-        else CategoriesRepo.create(modalCategory);
-        modalCategory = null;
-    }
 
     function handleRemove(_category) {
         confirm
@@ -38,7 +30,7 @@
                 "is-warning"
             )
             .then((result) => {
-                if (result) paramsService.importDB(e.target.files[0]);
+                if (result) ParamsService.importDB(e.target.files[0]);
             });
     }
 
@@ -91,7 +83,7 @@
             <span class="has-text-grey-lighter">Export</span>
             <button
                 class="button is-fullwidth"
-                on:click={paramsService.exportDB}
+                on:click={ParamsService.exportDB}
             >
                 <span class="icon">
                     <i class="fa-solid fa-file-export" />
@@ -107,7 +99,7 @@
         <span class="has-text-grey-lighter">Categories</span>
         <button
             class="button is-small is-light"
-            on:click={() => (modalCategory = new Category())}
+            on:click={() => modalCategory.show()}
         >
             <span class="icon is-small">
                 <i class="fa-solid fa-plus" />
@@ -125,7 +117,7 @@
                 <div class="ml-auto">
                     <button
                         class="button is-outlined is-small"
-                        on:click={() => (modalCategory = category)}
+                        on:click={() => modalCategory.show(category)}
                     >
                         <span class="icon is-small">
                             <i class="fa-solid fa-pen" />
@@ -145,41 +137,4 @@
     {/each}
 </div>
 
-{#if modalCategory}
-    <div
-        class="modal"
-        class:is-active={modalCategory}
-        on:closing={() => {
-            modalCategory = null;
-        }}
-    >
-        <div class="modal-background" />
-        <div class="modal-card">
-            <header class="modal-card-head">
-                <p class="modal-card-title">
-                    {modalCategory.id ? "Edit" : "Create"} category
-                </p>
-                <button class="delete" aria-label="close" />
-            </header>
-            <section class="modal-card-body is-flex">
-                <ColorInput
-                    bind:color={modalCategory.color}
-                    availableColors={colors}
-                />
-                <input
-                    class="input mx-1"
-                    type="text"
-                    bind:value={modalCategory.name}
-                />
-            </section>
-            <footer class="modal-card-foot is-justify-content-flex-end p-2">
-                <button class="button" aria-label="close">Cancel</button>
-                <button
-                    class="ml-1 button is-success"
-                    on:click={handleModalFinish}
-                    >{modalCategory.id ? "Edit" : "Add"}</button
-                >
-            </footer>
-        </div>
-    </div>
-{/if}
+<CategoryCreateUpdateModal bind:modal={modalCategory} />

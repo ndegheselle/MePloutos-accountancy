@@ -1,5 +1,5 @@
 <script>
-    import { Investment } from "@lib/models";
+    import { Investment } from "@lib/db/investments";
     import { parseDate } from "@lib/helpers";
 
     import investmentsService from "@lib/services/tracking/investments.js";

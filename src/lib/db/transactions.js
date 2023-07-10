@@ -1,6 +1,6 @@
 import { BaseRepo } from '@lib/base/db/BaseRepo';
 
-class TransactionsRepo extends BaseRepo {
+class TransactionsRepository extends BaseRepo {
     constructor() {
         super("transactions");
     }
@@ -42,4 +42,18 @@ class TransactionsRepo extends BaseRepo {
     }
 }
 
-export default new TransactionsRepo();
+export const TransactionsRepo = new TransactionsRepository();
+export class Transaction
+{
+    constructor(_date, _description, _value, _accountId)
+    {
+        this.id = null;
+        this.date = _date || new Date();
+        this.description = _description || "";
+        this.value = _value || 0;
+
+        this.accountId = _accountId || null;
+        this.categoryId = null;
+        this.orderNumber = 0;
+    }
+}
