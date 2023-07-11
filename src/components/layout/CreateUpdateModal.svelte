@@ -24,6 +24,9 @@
     export let repo = null;
     export let form = [];
     export const modal = {
+        isEdit() {
+            return edit;
+        },
         show(_value) {
             value = _value;
             edit = !!(value?.id);
@@ -32,13 +35,15 @@
     };
 </script>
 
-
-<div class="modal" class:is-active={show} on:closing={handleClosing}>
+{#if show }
+<div class="modal is-active" on:closing={handleClosing}>
     <div class="modal-background" />
     <div class="modal-content">
         <div class="box">
-            <span class="has-text-grey-lighter">{(edit)? `Edit ${name}` : `Add ${name}`}</span>
-            <DynamicForm bind:form={form} bind:value={value}/>
+            <div>
+                <span class="has-text-grey-lighter">{(edit)? `Edit ${name}` : `Add ${name}`}</span>
+                <DynamicForm bind:form={form} bind:value={value}/>
+            </div>
 
             <footer class="is-flex is-justify-content-flex-end">
                 <button class="button" aria-label="close">Cancel</button>
@@ -47,7 +52,7 @@
         </div>
     </div>
 </div>
-
+{/if}
 <style scoped>
     .modal-content {
         overflow: initial;

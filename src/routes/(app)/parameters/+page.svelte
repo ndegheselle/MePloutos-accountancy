@@ -2,12 +2,12 @@
     import { isDesktop } from "@lib/helpers";
     import { confirm } from "@global/dialogs/Confirm";
     import { categories } from "@lib/store";
-    import {CategoriesRepo} from "@lib/db/categories";
     import ParamsService from "@lib/services/parameters";
 
-    import CategoryIcon from "@app/categories/CategoryIcon.svelte";
-    import CategoryCreateUpdateModal from "@app/categories/CategoryCreateUpdateModal.svelte";
+    import CreateUpdateModal from "@components/layout/CreateUpdateModal.svelte";
+    import {CategoriesRepo, Category} from "@lib/db/categories";
 
+    import CategoryIcon from "@app/categories/CategoryIcon.svelte";
     import { params } from "@lib/store";
 
     function handleRemove(_category) {
@@ -99,7 +99,7 @@
         <span class="has-text-grey-lighter">Categories</span>
         <button
             class="button is-small is-light"
-            on:click={() => modalCategory.show()}
+            on:click={() => modalCategory.show(new Category())}
         >
             <span class="icon is-small">
                 <i class="fa-solid fa-plus" />
@@ -137,4 +137,20 @@
     {/each}
 </div>
 
-<CategoryCreateUpdateModal bind:modal={modalCategory} />
+<CreateUpdateModal
+    name="Category"
+    repo={CategoriesRepo}
+    form={[
+        [
+            {
+                prop: "color",
+                type: "color",
+                class: "is-one-quarter"
+            },
+            {
+                prop: "name",
+            },
+        ],
+    ]}
+    bind:modal={modalCategory}
+/>

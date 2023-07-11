@@ -3,7 +3,8 @@
     import { investments } from "./_store";
     import investmentsService from "@lib/services/tracking/investments";
 
-    import InvestmentCreateUpdateModal from "./InvestmentCreateUpdateModal.svelte";
+    import CreateUpdateModal from "@components/layout/CreateUpdateModal.svelte";
+    import { InvestmentsRepo, Investment } from "@lib/db/investments.js";
 
     let modal = null;
     $: investmentsRecap = investmentsService.getInvestmentsRecap($investments);
@@ -68,7 +69,7 @@
         </div>
         <div class="dropdown-menu" role="menu">
             <div class="dropdown-content">
-                <a class="dropdown-item" on:click={() => modal.show()}>
+                <a class="dropdown-item" on:click={() => modal.show(new Investment())}>
                     <i class="fa-solid fa-plus" /> Add investment
                 </a>
             </div>
@@ -159,7 +160,30 @@
     {/each}
 </div>
 
-<InvestmentCreateUpdateModal bind:modal />
+<CreateUpdateModal
+    name="Investment"
+    repo={InvestmentsRepo}
+    form={[
+        [{
+            prop: "name",
+        }],
+        [
+            {
+                prop: "investedValue",
+                label: "Initial investment"
+            },
+            {
+                prop: "startDate",
+                label: "Start date",
+            },
+        ],
+        [{
+            prop: "actualValue",
+            isVisible: () => modal.isEdit(),
+        }],
+    ]}
+    bind:modal
+/>
 
 <style>
     .text-header {

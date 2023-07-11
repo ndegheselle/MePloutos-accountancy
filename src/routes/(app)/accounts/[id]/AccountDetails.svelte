@@ -1,19 +1,25 @@
 <script>
-    import { goto } from '$app/navigation';
+    import { goto } from "$app/navigation";
     import { categoriesMap } from "@lib/store";
+    import { AccountsRepo } from "@lib/db/accounts.js";
     import AccountRecap from "../AccountRecap.svelte";
-    import AccountCreateUpdateModal from "../AccountCreateUpdateModal.svelte";
-    import {AccountsRepo} from '@lib/db/accounts.js';
+
+    import CreateUpdateModal from "@components/layout/CreateUpdateModal.svelte";
     import { confirm } from "@global/dialogs/Confirm.js";
 
     function deleteAccount() {
-        confirm.show(`Are you sure you want to delete the account '${account.name}' and all linked transactions ?`, 
-        "Delete account", "is-danger").then((success) => {
-            if (!success) return;
-            
-            AccountsRepo.remove(account.id);
-            goto("/");
-        });
+        confirm
+            .show(
+                `Are you sure you want to delete the account '${account.name}' and all linked transactions ?`,
+                "Delete account",
+                "is-danger"
+            )
+            .then((success) => {
+                if (!success) return;
+
+                AccountsRepo.remove(account.id);
+                goto("/");
+            });
     }
 
     let modal = null;
@@ -75,4 +81,20 @@
     {/if}
 </div>
 
-<AccountCreateUpdateModal bind:modal />
+<CreateUpdateModal
+    name="Account"
+    repo={AccountsRepo}
+    form={[
+        [
+            {
+                prop: "color",
+                type: "color",
+                class: "is-one-quarter",
+            },
+            {
+                prop: "name",
+            },
+        ],
+    ]}
+    bind:modal
+/>
