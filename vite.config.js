@@ -12,9 +12,9 @@ export default defineConfig({
             // these are the aliases and paths to them
             '@styles': path.resolve('./src/scss'),
             '@lib': path.resolve('./src/lib'),
-            '@components': path.resolve('./src/components'),
             '@app': path.resolve('./src/routes/(app)'),
-            '@global': path.resolve('./src/_global'),
+            '@components': path.resolve('./src/_base/components'),
+            '@base': path.resolve('./src/_base'),
         }
     },
     server: {

@@ -1,5 +1,5 @@
-import { uuidv4 } from "@lib/helpers";
-import { db } from "./indexDB.js";
+import { uuidv4 } from "@base/helpers";
+import { db } from "./index.js";
 
 export class BaseRepo
 {

@@ -5,9 +5,7 @@ import {AccountsRepo} from "@lib/db/accounts";
 import {TransactionsRepo} from "@lib/db/transactions";
 
 import transactionsService from "@lib/services/transactions";
-import { firstDayOfMonth } from "@lib/helpers";
-
-import { useLiveQuery } from "@lib/base/db/dexieLiveQuery";
+import { useLiveQuery } from "@base/db/dexieLiveQuery";
 
 let currentAccountId = null;
 

@@ -5,7 +5,7 @@ import {ParamsRepo} from "@lib/db/params";
 import {CategoriesRepo} from "@lib/db/categories";
 
 import { Category, Params } from "@lib/db";
-import { isDesktop } from './helpers';
+import { isDesktop } from '@lib/desktop/helpers';
 
 // Fixed
 export const params = derived(

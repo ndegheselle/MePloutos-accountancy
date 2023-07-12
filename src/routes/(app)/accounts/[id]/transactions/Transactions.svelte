@@ -1,17 +1,17 @@
 <script>
     import TransactionsService from "@lib/services/transactions";
     import {TransactionsRepo} from "@lib/db/transactions";
-    import { context } from "@global/dialogs/contextMenu.js";
-    import { confirm } from "@global/dialogs/Confirm.js";
+    import { context } from "@components/dialogs/contextMenu.js";
+    import { confirm } from "@components/dialogs/Confirm.js";
 
-    import Money from "@components/Money.svelte";
+    import Money from "@components/miscs/Money.svelte";
     import CategoryIcon from "@app/categories/CategoryIcon.svelte";
 
     import CategorySelectionModal from "@app/categories/CategorySelectionModal.svelte";
     import ModalImport from "./ModalImport.svelte";
 
     import { transactionsFilters } from "../_store";
-    import { firstDayOfMonth } from "@lib/helpers";
+    import { firstDayOfMonth } from "@base/helpers";
 
     let groupedTransactions = [];
     let categoryModal = null;

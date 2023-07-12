@@ -1,5 +1,5 @@
 <script>
-    import { alert } from "@global/dialogs/Alert.js";
+    import { alert } from "@components/dialogs/Alert.js";
     import importService from "@lib/services/transactions/import";
     import desktopSave from "@lib/desktop/save.js";
     import { params } from "@lib/store";

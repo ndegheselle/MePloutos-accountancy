@@ -1,5 +1,5 @@
 <script>
-    import DynamicForm from "./DynamicForm.svelte";
+    import Form from "./Form.svelte";
 
     function handleClosing() {
         show = false;
@@ -42,7 +42,7 @@
         <div class="box">
             <div>
                 <span class="has-text-grey-lighter">{(edit)? `Edit ${name}` : `Add ${name}`}</span>
-                <DynamicForm bind:form={form} bind:value={value}/>
+                <Form bind:form={form} bind:value={value}/>
             </div>
 
             <footer class="is-flex is-justify-content-flex-end">

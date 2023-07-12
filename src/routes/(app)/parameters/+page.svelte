@@ -1,11 +1,11 @@
 <script>
-    import { isDesktop } from "@lib/helpers";
-    import { confirm } from "@global/dialogs/Confirm";
+    import { isDesktop } from "@lib/desktop/helpers";
     import { categories } from "@lib/store";
     import ParamsService from "@lib/services/parameters";
-
-    import CreateUpdateModal from "@components/layout/CreateUpdateModal.svelte";
     import {CategoriesRepo, Category} from "@lib/db/categories";
+
+    import { confirm } from "@components/dialogs/Confirm";
+    import CreateUpdateModal from "@components/dynamic/CreateUpdateModal.svelte";
 
     import CategoryIcon from "@app/categories/CategoryIcon.svelte";
     import { params } from "@lib/store";

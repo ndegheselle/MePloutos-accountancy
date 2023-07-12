@@ -1,4 +1,4 @@
-import { db } from '@lib/base/db/indexDB';
+import { db } from '@base/db';
 
 class ParamsRepository
 {

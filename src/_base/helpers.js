@@ -25,8 +25,3 @@ export function parseDate(date)
         return new Date(timestamp);
     return new Date();
 }
-
-export function isDesktop()
-{
-    return !!window.__TAURI__;
-}

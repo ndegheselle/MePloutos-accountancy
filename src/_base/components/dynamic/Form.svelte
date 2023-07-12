@@ -1,14 +1,14 @@
 <script>
-    import { parseDate } from "@lib/helpers";
-    import { colors } from "@lib/base/colors.js";
-    import ColorInput from "@components/ColorInput.svelte";
+    import { parseDate } from "@base/helpers";
+    import ColorInput from "@components/inputs/ColorInput.svelte";
 
     export let value = {};
 
     /* Exemple
     [
         [{prop: "name", class: "is-one-third"}, {prop: "description"}],
-        [{prop: "color", label: "Color of the thing", type: "color", isVisible: () => !isEdit()}
+        [{prop: "color", label: "Color of the thing", type: "color", isVisible: () => !isEdit()}]
+        [{prop: "dueEvery", label: "Due every", type: [{value: 1, label: "Day"}]}]
     ]
     */
     export let form = [];
@@ -24,7 +24,15 @@
                             <span class="field-name"
                                 >{col.label || col.prop}</span
                             >
-                            {#if typeof value[col.prop] == "object" && value[col.prop] instanceof Date}
+                            {#if Array.isArray(col.type)}
+                            <div class="select is-fullwidth">
+                                <select bind:value={value[col.prop]} class="is-fullwidth">
+                                    {#each col.type as option}
+                                        <option value={option.value}>{option.label}</option>
+                                    {/each}
+                                </select>
+                            </div>
+                            {:else if typeof value[col.prop] == "object" && value[col.prop] instanceof Date}
                                 <input
                                     class="input"
                                     type="date"
@@ -46,7 +54,6 @@
                                 {#if col.type == "color"}
                                     <ColorInput
                                         bind:color={value[col.prop]}
-                                        availableColors={colors}
                                     />
                                 {:else}
                                     <input

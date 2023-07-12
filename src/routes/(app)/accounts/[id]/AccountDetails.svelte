@@ -4,8 +4,9 @@
     import { AccountsRepo } from "@lib/db/accounts.js";
     import AccountRecap from "../AccountRecap.svelte";
 
-    import CreateUpdateModal from "@components/layout/CreateUpdateModal.svelte";
-    import { confirm } from "@global/dialogs/Confirm.js";
+    import CreateUpdateModal from "@components/dynamic/CreateUpdateModal.svelte";
+    import { confirm } from "@components/dialogs/Confirm.js";
+    import Money from "@components/miscs/Money.svelte";
 
     function deleteAccount() {
         confirm
@@ -31,12 +32,7 @@
 <div class="box mb-0">
     {#if account && transactionsRecap}
         <h2 class="title flex-container">
-            <span
-                >{account.balance.toLocaleString(undefined, {
-                    currency: "EUR",
-                    style: "currency",
-                })}</span
-            >
+            <Money value = {account.balance} />
             <div class="dropdown is-right">
                 <div class="dropdown-trigger">
                     <button

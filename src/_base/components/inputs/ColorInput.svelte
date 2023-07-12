@@ -1,5 +1,12 @@
 <script>
-    export let availableColors = [];
+    export let availableColors = [
+        "#e63946",
+        "#f1faee",
+        "#a8dadc",
+        "#457b9d",
+        "#1d3557",
+        "#dda15e",
+    ];
     export let color = "#c8b6ff";
     let clazz = "";
     export { clazz as class };
@@ -20,7 +27,7 @@
             <div class="dropdown-item">
                 <div class="colors-container">
                     {#each availableColors as _color}
-                        <a on:click={() => color = _color}>
+                        <a on:click={() => (color = _color)}>
                             <span
                                 class="color-preview"
                                 style="background-color: {_color};"
@@ -29,7 +36,10 @@
                     {/each}
                 </div>
                 <label class="custom-color-input">
-                    <input type="color" on:change={(event) => color = event.target.value}/>
+                    <input
+                        type="color"
+                        on:change={(event) => (color = event.target.value)}
+                    />
                     Custom
                 </label>
             </div>

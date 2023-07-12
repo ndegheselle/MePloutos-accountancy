@@ -2,9 +2,9 @@
     import { params } from "@lib/store";
     import { accounts } from "./_store";
 
-    import { context } from "@global/dialogs/contextMenu.js";
-    import Money from "@components/Money.svelte";
-    import CreateUpdateModal from "@components/layout/CreateUpdateModal.svelte";
+    import { context } from "@components/dialogs/contextMenu.js";
+    import Money from "@components/miscs/Money.svelte";
+    import CreateUpdateModal from "@components/dynamic/CreateUpdateModal.svelte";
 
     import { AccountsRepo, Account } from "@lib/db/accounts.js";
 

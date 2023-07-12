@@ -1,10 +1,10 @@
 <script>
   import "../scss/app.scss";
 
-  import Alert from "@global/dialogs/Alert.svelte";
-  import Confirm from "@global/dialogs/Confirm.svelte";
-  import ContextMenu from "@global/dialogs/ContextMenu.svelte";
-  import Loading from "@global/page/Loading.svelte";
+  import Alert from "@components/dialogs/Alert.svelte";
+  import Confirm from "@components/dialogs/Confirm.svelte";
+  import ContextMenu from "@components/dialogs/ContextMenu.svelte";
+  import Loading from "@components/page/Loading.svelte";
 
   import { categories } from "@lib/store";
 

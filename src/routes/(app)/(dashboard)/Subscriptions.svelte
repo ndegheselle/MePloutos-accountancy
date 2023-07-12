@@ -1,5 +1,6 @@
 <script>
     import { subscriptions } from "./_store";
+    import Money from "@components/miscs/Money.svelte";
     import subscriptionsService from "@lib/services/tracking/subscriptions";
 
     $: subscriptionsRecap = subscriptionsService.getSubscriptionsRecap($subscriptions);
@@ -17,10 +18,7 @@
         </div>
         <div class="column flex-container">
             <span>
-                <span class="title mb-0 has-text-danger">{subscriptionsRecap.perMonth.toLocaleString(undefined, {
-                    currency: "EUR",
-                    style: "currency",
-                })}</span>
+                <Money class="title mb-0 has-text-danger" value={subscriptionsRecap.perMonth} />
                 <span class="title-placement is-size-6 has-text-grey-lighter">per month</span>
             </span>
         </div>

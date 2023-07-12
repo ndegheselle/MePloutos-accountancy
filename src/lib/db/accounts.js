@@ -1,4 +1,4 @@
-import { BaseRepo } from '@lib/base/db/BaseRepo';
+import { BaseRepo } from '@base/db/BaseRepo';
 import {TransactionsRepo} from "./transactions.js"
 
 class AccountsRepository extends BaseRepo

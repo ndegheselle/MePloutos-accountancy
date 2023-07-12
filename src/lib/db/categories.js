@@ -1,4 +1,4 @@
-import { BaseRepo } from '@lib/base/db/BaseRepo';
+import { BaseRepo } from '@base/db/BaseRepo';
 
 export const CategoriesRepo = new BaseRepo("categories");
 export class Category
