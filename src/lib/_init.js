@@ -1,6 +1,12 @@
-import initDatabase from './db/_init.js';
-
-export default function init()
+export function initCustomCSS(categories)
 {
-    initDatabase();
+  if (!categories) return;
+  
+  let styles = "";
+  for(const category of categories)
+  {
+    styles += `.category-${category.id} {stroke: ${category.color};}`;
+  }
+
+  document.getElementById("generatedStyles").innerHTML = styles;
 }

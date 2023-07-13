@@ -1,27 +1,14 @@
 <script>
   import "../scss/app.scss";
-
   import Alert from "@components/dialogs/Alert.svelte";
   import Confirm from "@components/dialogs/Confirm.svelte";
   import ContextMenu from "@components/dialogs/ContextMenu.svelte";
   import Loading from "@components/page/Loading.svelte";
 
+  import { initCustomCSS } from "@lib/_init";
   import { categories } from "@lib/store";
 
-  $: updateCategoriesCSS($categories)
-
-  function updateCategoriesCSS(categories)
-  {
-    if (!categories) return;
-    
-    let styles = "";
-    for(const category of categories)
-    {
-      styles += `.category-${category.id} {stroke: ${category.color};}`;
-    }
-
-    document.getElementById("generatedStyles").innerHTML = styles;
-  }
+  $: initCustomCSS($categories)
 </script>
 
 <svelte:head>

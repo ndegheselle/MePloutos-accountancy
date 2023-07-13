@@ -152,7 +152,7 @@ async function importTransactions(file, options)
 
     // Keep all imported files localy
     if (options.saveImportedFile)
-        desktopSave.saveImportedFile(file, options.bank);
+        desktopSave.saveImportedTransactions(newTransactions);
 
     return {
         count: newTransactions.length,

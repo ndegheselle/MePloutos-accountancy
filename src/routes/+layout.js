@@ -1,11 +1,14 @@
 import initComponents from "@components/_init.js";
-import initLib from "@lib/_init.js";
+import initDb from "@lib/db/_init.js";
 
-// Need to be called ASAP
-initLib();
-
+import { isDesktop } from '@lib/desktop/helpers.js'
+import initDesktop from '@lib/desktop/_init.js';
 // Check for each page is still connected
 export const load = async ({ route }) => {
+  if (isDesktop())
+    initDesktop();
+    
+  initDb();
   initComponents();
 };
 
