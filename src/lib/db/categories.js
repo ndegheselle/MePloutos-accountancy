@@ -1,6 +1,6 @@
-import { BaseRepo } from '@base/db/BaseRepo';
+import { BaseRepoSync } from '@base/db/BaseRepo';
 
-export const CategoriesRepo = new BaseRepo("categories");
+export const CategoriesRepo = new BaseRepoSync("categories");
 export class Category
 {
     constructor(_name, _color)

@@ -9,8 +9,6 @@
     }
 
     async function importFile() {
-        desktopSave.saveImportedFile(files[0]);
-
         let result = await importService.importTransactions(files[0], {
             accountId: accountId,
             bank: bank,

@@ -14,10 +14,13 @@
     "allowlist": {
       "fs": {
         "all": true,
-        "scope": ["$APPDATA/**/*"]
+        "scope": [ "$APPCONFIG/imported/*", "$APPCONFIG/*"]
       },
       "path": {
         "all": true
+      },
+      "dialog": {
+        "open": true
       }
     },
     "bundle": {

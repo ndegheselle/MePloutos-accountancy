@@ -1,6 +1,6 @@
-import { BaseRepo } from '@base/db/BaseRepo';
+import { BaseRepoSync } from '@base/db/BaseRepo';
 
-export const InvestmentsRepo = new BaseRepo("investments");
+export const InvestmentsRepo = new BaseRepoSync("investments");
 export class Investment
 {
     constructor(_name)

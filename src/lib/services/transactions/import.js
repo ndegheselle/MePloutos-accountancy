@@ -4,7 +4,7 @@ import { Transaction } from "@lib/db/transactions";
 import {TransactionsRepo} from "@lib/db/transactions";
 import {AccountsRepo} from "@lib/db/accounts";
 
-import desktopSave from "@lib/desktop/save.js";
+import DesktopSave from "@lib/desktop/save.js";
 
 const importOptions = {
     "labanquepostale": {
@@ -151,8 +151,8 @@ async function importTransactions(file, options)
     AccountsRepo.updateBalance(options.accountId, balance);
 
     // Keep all imported files localy
-    if (options.saveImportedFile)
-        desktopSave.saveImportedTransactions(newTransactions);
+    if (options.saveImportedFiles)
+        DesktopSave.saveImportedTransactions(newTransactions);
 
     return {
         count: newTransactions.length,

@@ -2,6 +2,7 @@
     import { isDesktop } from "@lib/desktop/helpers";
     import { categories } from "@lib/store";
     import ParamsService from "@lib/services/parameters";
+    import SaveService from "@lib/desktop/save"
     import {CategoriesRepo, Category} from "@lib/db/categories";
 
     import { confirm } from "@components/dialogs/Confirm";
@@ -53,6 +54,7 @@
                 Save imported files locally
             </label>
         </div>
+        <button class="button" on:click={SaveService.openAppDataDir}>Open app folder</button>
     </div>
 </div>
 {/if}

@@ -1,7 +1,7 @@
-import { BaseRepo } from '@base/db/BaseRepo';
+import { BaseRepoSync } from '@base/db/BaseRepo';
 import {TransactionsRepo} from "./transactions.js"
 
-class AccountsRepository extends BaseRepo
+class AccountsRepository extends BaseRepoSync
 {
     constructor()
     {
