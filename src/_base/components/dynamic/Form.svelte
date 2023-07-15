@@ -48,7 +48,9 @@
                                 <input
                                     class="input"
                                     type="number"
-                                    bind:value={value[col.prop]}
+                                    value={value[col.prop]}
+                                    on:change={(e) =>
+                                        (value[col.prop] = Number(e.target.value))}
                                 />
                             {:else if typeof value[col.prop] === "string"}
                                 {#if col.type == "color"}

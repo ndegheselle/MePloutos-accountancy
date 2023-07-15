@@ -8,7 +8,7 @@
     function handleSuccess()
     {
         if (edit)
-            repo.udapte(value);
+            repo.update(value);
         else
             repo.create(value);
         
