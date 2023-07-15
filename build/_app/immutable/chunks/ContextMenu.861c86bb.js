@@ -1,0 +1,1 @@
+import{w as n}from"./index.b5ec8d3d.js";const o=n({show:!1,position:{x:0,y:0},items:[],dataContext:null}),i={show(e,s,a=null){o.update(t=>(t.show=!0,t.position=e,t.items=s,t.dataContext=a,t))},hide(){o.update(e=>(e.show=!1,e))}};export{i as a,o as c};

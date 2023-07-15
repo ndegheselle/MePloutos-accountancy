@@ -1,0 +1,1 @@
+function o(n){const e={number:0,totalAnnual:0,perMonth:0};if((n==null?void 0:n.length)===0)return e;for(const t of n){e.number+=1;let r=t.price/t.dueEvery;e.totalAnnual+=r*12,e.perMonth+=r}return e}const a={getSubscriptionsRecap:o};export{a as s};
