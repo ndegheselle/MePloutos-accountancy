@@ -1,5 +1,10 @@
 import Papa from "papaparse";
-import { Transaction } from "@lib/models";
+import { Transaction } from "@lib/db/transactions";
+
+import {TransactionsRepo} from "@lib/db/transactions";
+import {AccountsRepo} from "@lib/db/accounts";
+
+import DesktopSave from "@lib/desktop/save.js";
 
 const importOptions = {
     "labanquepostale": {
@@ -71,7 +76,7 @@ function convertFromDatable(datatable, options, accountId) {
     }
 }
 
-export async function importFile(file, options) {
+async function importFile(file, options) {
     switch (options.bank) {
         case 'labanquepostale':
             return convertFromDatable(
@@ -81,7 +86,7 @@ export async function importFile(file, options) {
     }
 }
 
-export function filterAlreadyExisting(accountId, lastTransaction, transactionsList) {
+function filterAlreadyExisting(accountId, lastTransaction, transactionsList) {
 
     const transacNumberByDate = {};
     // Reverse loop to keep orderNumber logical (oldest to newest)
@@ -133,3 +138,27 @@ export function filterAlreadyExisting(accountId, lastTransaction, transactionsLi
 
     return transactionsList;
 }
+
+async function importTransactions(file, options)
+{
+    let { balance, dateMin, dateMax, transactions } = await importFile(file, options);
+    const lastTransaction = await TransactionsRepo.getMostRecent();
+    const newTransactions = filterAlreadyExisting(options.accountId, lastTransaction, transactions);
+
+    if (!newTransactions.length) return {count: 0};
+
+    TransactionsRepo.createAll(newTransactions);
+    AccountsRepo.updateBalance(options.accountId, balance);
+
+    // Keep all imported files localy
+    if (options.saveImportedFiles)
+        DesktopSave.saveImportedTransactions(newTransactions);
+
+    return {
+        count: newTransactions.length,
+    };
+}
+
+export default {
+    importTransactions
+};

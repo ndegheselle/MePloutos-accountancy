@@ -1,19 +1,26 @@
 <script>
-    import { goto } from '$app/navigation';
+    import { goto } from "$app/navigation";
     import { categoriesMap } from "@lib/store";
+    import { AccountsRepo } from "@lib/db/accounts.js";
     import AccountRecap from "../AccountRecap.svelte";
-    import AccountCreateUpdateModal from "../AccountCreateUpdateModal.svelte";
-    import AccountsRepo from '@lib/repos/accounts.js';
-    import { confirm } from "@global/dialogs/Confirm.js";
+
+    import CreateUpdateModal from "@components/dynamic/CreateUpdateModal.svelte";
+    import { confirm } from "@components/dialogs/Confirm.js";
+    import Money from "@components/miscs/Money.svelte";
 
     function deleteAccount() {
-        confirm.show(`Are you sure you want to delete the account '${account.name}' and all linked transactions ?`, 
-        "Delete account", "is-danger").then((success) => {
-            if (!success) return;
-            
-            AccountsRepo.remove(account.id);
-            goto("/");
-        });
+        confirm
+            .show(
+                `Are you sure you want to delete the account '${account.name}' and all linked transactions ?`,
+                "Delete account",
+                "is-danger"
+            )
+            .then((success) => {
+                if (!success) return;
+
+                AccountsRepo.remove(account.id);
+                goto("/");
+            });
     }
 
     let modal = null;
@@ -25,12 +32,7 @@
 <div class="box mb-0">
     {#if account && transactionsRecap}
         <h2 class="title flex-container">
-            <span
-                >{account.balance.toLocaleString(undefined, {
-                    currency: "EUR",
-                    style: "currency",
-                })}</span
-            >
+            <Money value = {account.balance} />
             <div class="dropdown is-right">
                 <div class="dropdown-trigger">
                     <button
@@ -75,4 +77,20 @@
     {/if}
 </div>
 
-<AccountCreateUpdateModal bind:modal />
+<CreateUpdateModal
+    name="Account"
+    repo={AccountsRepo}
+    form={[
+        [
+            {
+                prop: "color",
+                type: "color",
+                class: "is-one-quarter",
+            },
+            {
+                prop: "name",
+            },
+        ],
+    ]}
+    bind:modal
+/>

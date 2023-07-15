@@ -3,7 +3,7 @@
   "build": {
     "beforeBuildCommand": "npm run build",
     "beforeDevCommand": "npm run dev",
-    "devPath": "http://0.0.0.0",
+    "devPath": "http://localhost",
     "distDir": "../build"
   },
   "package": {
@@ -14,10 +14,13 @@
     "allowlist": {
       "fs": {
         "all": true,
-        "scope": ["$APPDATA/**/*"]
+        "scope": [ "$APPCONFIG/imported/*", "$APPCONFIG/*"]
       },
       "path": {
         "all": true
+      },
+      "dialog": {
+        "open": true
       }
     },
     "bundle": {

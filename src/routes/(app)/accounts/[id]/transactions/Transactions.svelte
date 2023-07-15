@@ -1,16 +1,17 @@
 <script>
-    import transactionsService from "@lib/services/transactions/transactions.js";
-    import { context } from "@global/dialogs/contextMenu.js";
-    import { confirm } from "@global/dialogs/Confirm.js";
+    import TransactionsService from "@lib/services/transactions";
+    import {TransactionsRepo} from "@lib/db/transactions";
+    import { context } from "@components/dialogs/contextMenu.js";
+    import { confirm } from "@components/dialogs/Confirm.js";
 
-    import Money from "@components/Money.svelte";
+    import Money from "@components/miscs/Money.svelte";
     import CategoryIcon from "@app/categories/CategoryIcon.svelte";
 
     import CategorySelectionModal from "@app/categories/CategorySelectionModal.svelte";
     import ModalImport from "./ModalImport.svelte";
 
     import { transactionsFilters } from "../_store";
-    import { firstDayOfMonth } from "@lib/helpers";
+    import { firstDayOfMonth } from "@base/helpers";
 
     let groupedTransactions = [];
     let categoryModal = null;
@@ -18,7 +19,7 @@
     let currentFilter = 0;
 
     $: groupedTransactions =
-        transactionsService.groupTransactionsByDate(transactions);
+        TransactionsService.groupTransactionsByDate(transactions);
 
     function showTransactionContext(event, _transaction) {
         context.show({ x: event.pageX, y: event.pageY }, [
@@ -42,7 +43,7 @@
 
     function setSelectedTransactionCategory() {
         categoryModal.show().then((selectedCategory) => {
-            transactionsService.updateCategory(
+            TransactionsRepo.update(
                 transactions.filter((t) => t.selected),
                 selectedCategory
             );
@@ -58,7 +59,7 @@
                 "is-danger"
             )
             .then((success) => {
-                if (success) transactionsService.remove(selectedTransactions);
+                if (success) TransactionsRepo.remove(selectedTransactions);
             });
     }
 
@@ -71,14 +72,10 @@
                 date = firstDayOfMonth();
                 break;
             case 1:
-                date = new Date(
-                    new Date().setMonth(new Date().getMonth() - 1)
-                );
+                date = new Date(new Date().setMonth(new Date().getMonth() - 1));
                 break;
             case 6:
-                date = new Date(
-                    new Date().setMonth(new Date().getMonth() - 6)
-                );
+                date = new Date(new Date().setMonth(new Date().getMonth() - 6));
                 break;
             case 12:
                 date = new Date(
@@ -92,7 +89,7 @@
 
         $transactionsFilters.date = date;
     }
-    
+
     export let accountId = null;
     export let transactions = null;
 </script>
@@ -116,31 +113,41 @@
                 <div class="dropdown-menu" role="menu">
                     <div class="dropdown-content">
                         <a
-                            class="dropdown-item {currentFilter == 0 ? 'is-active' : ''}"
+                            class="dropdown-item {currentFilter == 0
+                                ? 'is-active'
+                                : ''}"
                             on:click={() => transactionsFilterDate(0)}
                         >
                             Current month
                         </a>
                         <a
-                            class="dropdown-item {currentFilter == 1 ? 'is-active' : ''}"
+                            class="dropdown-item {currentFilter == 1
+                                ? 'is-active'
+                                : ''}"
                             on:click={() => transactionsFilterDate(1)}
                         >
                             1 month
                         </a>
                         <a
-                            class="dropdown-item {currentFilter == 6 ? 'is-active' : ''}"
+                            class="dropdown-item {currentFilter == 6
+                                ? 'is-active'
+                                : ''}"
                             on:click={() => transactionsFilterDate(6)}
                         >
                             6 month
                         </a>
                         <a
-                            class="dropdown-item {currentFilter == 12 ? 'is-active' : ''}"
+                            class="dropdown-item {currentFilter == 12
+                                ? 'is-active'
+                                : ''}"
                             on:click={() => transactionsFilterDate(12)}
                         >
                             1 year
                         </a>
                         <a
-                            class="dropdown-item {currentFilter == -1 ? 'is-active' : ''}"
+                            class="dropdown-item {currentFilter == -1
+                                ? 'is-active'
+                                : ''}"
                             on:click={() => transactionsFilterDate(-1)}
                         >
                             All

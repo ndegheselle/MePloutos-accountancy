@@ -1,5 +1,5 @@
 import { derived } from 'svelte/store';
-import InvestmentsRepo from "@lib/repos/investments";
+import {InvestmentsRepo} from "@lib/db/investments";
 import {liveQuery} from "dexie";
 
 export const investments = derived(

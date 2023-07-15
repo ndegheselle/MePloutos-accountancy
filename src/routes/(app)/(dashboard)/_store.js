@@ -1,16 +1,14 @@
 import { writable, derived } from 'svelte/store';
 
-import AccountsRepo from "@lib/repos/accounts";
-import TransactionsRepo from "@lib/repos/transactions";
-import InvestmentsRepo from "@lib/repos/investments";
-import SubscriptionsRepo from "@lib/repos/subscriptions";
+import {AccountsRepo} from "@lib/db/accounts";
+import {TransactionsRepo} from "@lib/db/transactions";
+import {InvestmentsRepo} from "@lib/db/investments";
+import {SubscriptionsRepo} from "@lib/db/subscriptions";
 
-import transactionsService from "@lib/services/transactions/transactions";
+import transactionsService from "@lib/services/transactions";
 
 import { params } from "@lib/store";
 import {liveQuery} from "dexie";
-
-import { firstDayOfMonth } from "@lib/helpers";
 
 export const accounts = derived(
     liveQuery(() => AccountsRepo.getAll()),
@@ -27,7 +25,7 @@ export const transactionsRecap = derived(
         // Can't use async function in derived
         (async () => {
             // TODO : add global params to select the default date filter
-            let transactions = await TransactionsRepo.getByAccount($params.favoriteAccountId, firstDayOfMonth());
+            let transactions = await TransactionsRepo.getByAccount($params.favoriteAccountId, new Date(new Date().setMonth(new Date().getMonth() - 1)));
     
             let recap = transactionsService.getTransactionsRecap(transactions);
             set(recap);

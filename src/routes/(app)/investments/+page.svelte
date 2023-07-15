@@ -1,9 +1,11 @@
 <script>
-    import { confirm } from "@global/dialogs/Confirm";
+    import { confirm } from "@components/dialogs/Confirm";
     import { investments } from "./_store";
-    import investmentsService from "@lib/services/overview/investments";
+    import investmentsService from "@lib/services/tracking/investments";
 
-    import InvestmentCreateUpdateModal from "./InvestmentCreateUpdateModal.svelte";
+    import Money from "@components/miscs/Money.svelte";
+    import CreateUpdateModal from "@components/dynamic/CreateUpdateModal.svelte";
+    import { InvestmentsRepo, Investment } from "@lib/db/investments.js";
 
     let modal = null;
     $: investmentsRecap = investmentsService.getInvestmentsRecap($investments);
@@ -50,12 +52,7 @@
                         : 'up'}"
                 /></span
             >
-            <span class="title is-spaced"
-                >{investmentsRecap.total.toLocaleString(undefined, {
-                    currency: "EUR",
-                    style: "currency",
-                })}</span
-            >
+            <Money class="title is-spaced" value = {investmentsRecap.total} />
         </span>
     </div>
     <div class="dropdown is-right my-auto ml-4">
@@ -68,7 +65,7 @@
         </div>
         <div class="dropdown-menu" role="menu">
             <div class="dropdown-content">
-                <a class="dropdown-item" on:click={() => modal.show()}>
+                <a class="dropdown-item" on:click={() => modal.show(new Investment())}>
                     <i class="fa-solid fa-plus" /> Add investment
                 </a>
             </div>
@@ -124,12 +121,7 @@
                     </div>
 
                     <div class="flex-container">
-                        <span class="is-size-4 title mb-0"
-                            >{investment.actualValue.toLocaleString(undefined, {
-                                currency: "EUR",
-                                style: "currency",
-                            })}</span
-                        >
+                        <Money class="is-size-4 title mb-0" value = {investment.actualValue} />
                         <span
                             class={getGains(investment) < 0
                                 ? "has-text-danger"
@@ -142,15 +134,8 @@
                                     ? 'down'
                                     : 'up'}"
                             />
-                            {(getGains(investment) * 100) / investment.investedValue}% (<span
-                                >{getGains(investment).toLocaleString(
-                                    undefined,
-                                    {
-                                        currency: "EUR",
-                                        style: "currency",
-                                    }
-                                )}</span
-                            >)
+                            {(getGains(investment) * 100) / investment.investedValue}%
+                            <Money value = {getGains(investment)} />
                         </span>
                     </div>
                 </div>
@@ -159,7 +144,30 @@
     {/each}
 </div>
 
-<InvestmentCreateUpdateModal bind:modal />
+<CreateUpdateModal
+    name="Investment"
+    repo={InvestmentsRepo}
+    form={[
+        [{
+            prop: "name",
+        }],
+        [
+            {
+                prop: "investedValue",
+                label: "Initial investment"
+            },
+            {
+                prop: "startDate",
+                label: "Start date",
+            },
+        ],
+        [{
+            prop: "actualValue",
+            isVisible: () => modal.isEdit(),
+        }],
+    ]}
+    bind:modal
+/>
 
 <style>
     .text-header {

@@ -1,8 +1,7 @@
-.dropdown-menu.in-modal
+.modal-content .dropdown-menu
 {
     position: fixed;
     z-index: 20;
     left: unset !important;
     top: unset !important;
-    margin-top: 40px;
 }

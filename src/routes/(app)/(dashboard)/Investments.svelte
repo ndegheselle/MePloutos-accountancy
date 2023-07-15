@@ -1,6 +1,7 @@
 <script>
     import { investments } from "./_store";
-    import investmentsService from "@lib/services/overview/investments";
+    import Money from "@components/miscs/Money.svelte";
+    import investmentsService from "@lib/services/tracking/investments";
 
     $: investmentsRecap = investmentsService.getInvestmentsRecap($investments);
 </script>
@@ -13,10 +14,7 @@
         </div>
         <div class="column flex-container">
             <span>
-                <span class="title is-spaced">{investmentsRecap.total.toLocaleString(undefined, {
-                    currency: "EUR",
-                    style: "currency",
-                })}</span>
+                <Money class="title is-spaced" value={investmentsRecap.total} />
                 <span class="percent subtitle is-4 { (investmentsRecap.percentage < 0) ? 'has-text-danger' : 'has-text-success' }"
                     >{investmentsRecap.percentage} %<i class="fa-solid fa-arrow-trend-{ (investmentsRecap.percentage < 0) ? 'down' : 'up' }"></i></span
                 >

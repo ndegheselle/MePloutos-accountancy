@@ -1,9 +1,12 @@
 <script>
-    import { accounts } from "./_store";
-    import Money from "@components/Money.svelte";
-    import AccountCreateUpdateModal from "../accounts/AccountCreateUpdateModal.svelte";
     import { params } from "@lib/store";
-    import { context } from "@global/dialogs/contextMenu.js";
+    import { accounts } from "./_store";
+
+    import { context } from "@components/dialogs/contextMenu.js";
+    import Money from "@components/miscs/Money.svelte";
+    import CreateUpdateModal from "@components/dynamic/CreateUpdateModal.svelte";
+
+    import { AccountsRepo, Account } from "@lib/db/accounts.js";
 
     function showAccountContext(event, _account) {
         context.show({ x: event.pageX, y: event.pageY }, [
@@ -23,7 +26,7 @@
 <div class="panel p-4 mb-0 accounts-container">
     <div class="panel-block flex-container p-0">
         <span class="has-text-grey-lighter">Accounts</span>
-        <button class="button is-small is-light" on:click={() => modal.show()}>
+        <button class="button is-small is-light" on:click={() => modal.show(new Account())}>
             <span class="icon is-small">
                 <i class="fa-solid fa-plus" />
             </span>
@@ -58,10 +61,26 @@
     {/each}
 </div>
 
-<AccountCreateUpdateModal bind:modal />
+<CreateUpdateModal
+    name="Account"
+    repo={AccountsRepo}
+    form={[
+        [
+            {
+                prop: "color",
+                type: "color",
+                class: "is-one-quarter",
+            },
+            {
+                prop: "name",
+            },
+        ],
+    ]}
+    bind:modal
+/>
 
 <style>
-.accounts-container {
-    min-height: 15rem;
-}
+    .accounts-container {
+        min-height: 15rem;
+    }
 </style>

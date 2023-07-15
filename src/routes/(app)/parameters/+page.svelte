@@ -1,22 +1,15 @@
 <script>
-    import { isDesktop } from "@lib/helpers";
-    import { confirm } from "@global/dialogs/Confirm";
+    import { isDesktop } from "@lib/desktop/helpers";
     import { categories } from "@lib/store";
-    import { Category } from "@lib/models";
-    import { colors } from "@lib/base/colors.js";
-    import categoriesService from "@lib/services/categories";
-    import paramsService from "@lib/services/parameters";
+    import ParamsService from "@lib/services/parameters";
+    import SaveService from "@lib/desktop/save"
+    import {CategoriesRepo, Category} from "@lib/db/categories";
+
+    import { confirm } from "@components/dialogs/Confirm";
+    import CreateUpdateModal from "@components/dynamic/CreateUpdateModal.svelte";
 
     import CategoryIcon from "@app/categories/CategoryIcon.svelte";
-    import ColorInput from "@components/ColorInput.svelte";
-
     import { params } from "@lib/store";
-
-    function handleModalFinish() {
-        if (modalCategory.id) categoriesService.update(modalCategory);
-        else categoriesService.create(modalCategory);
-        modalCategory = null;
-    }
 
     function handleRemove(_category) {
         confirm
@@ -26,7 +19,7 @@
                 "is-danger"
             )
             .then((result) => {
-                if (result) categoriesService.remove(_category.id);
+                if (result) CategoriesRepo.remove(_category.id);
             });
     }
 
@@ -38,7 +31,7 @@
                 "is-warning"
             )
             .then((result) => {
-                if (result) paramsService.importDB(e.target.files[0]);
+                if (result) ParamsService.importDB(e.target.files[0]);
             });
     }
 
@@ -61,14 +54,15 @@
                 Save imported files locally
             </label>
         </div>
+        <button class="button" on:click={SaveService.openAppDataDir}>Open app folder</button>
     </div>
 </div>
 {/if}
 
 <div class="box">
-    <span class="has-text-grey-lighter">Export / import</span>
     <div class="columns">
         <div class="column">
+            <span class="has-text-grey-lighter">Import</span>
             <div class="file">
                 <label class="file-label is-fullwidth">
                     <input
@@ -88,9 +82,10 @@
             </div>
         </div>
         <div class="column">
+            <span class="has-text-grey-lighter">Export</span>
             <button
                 class="button is-fullwidth"
-                on:click={paramsService.exportDB}
+                on:click={ParamsService.exportDB}
             >
                 <span class="icon">
                     <i class="fa-solid fa-file-export" />
@@ -106,7 +101,7 @@
         <span class="has-text-grey-lighter">Categories</span>
         <button
             class="button is-small is-light"
-            on:click={() => (modalCategory = new Category())}
+            on:click={() => modalCategory.show(new Category())}
         >
             <span class="icon is-small">
                 <i class="fa-solid fa-plus" />
@@ -124,7 +119,7 @@
                 <div class="ml-auto">
                     <button
                         class="button is-outlined is-small"
-                        on:click={() => (modalCategory = category)}
+                        on:click={() => modalCategory.show(category)}
                     >
                         <span class="icon is-small">
                             <i class="fa-solid fa-pen" />
@@ -144,41 +139,20 @@
     {/each}
 </div>
 
-{#if modalCategory}
-    <div
-        class="modal"
-        class:is-active={modalCategory}
-        on:closing={() => {
-            modalCategory = null;
-        }}
-    >
-        <div class="modal-background" />
-        <div class="modal-card">
-            <header class="modal-card-head">
-                <p class="modal-card-title">
-                    {modalCategory.id ? "Edit" : "Create"} category
-                </p>
-                <button class="delete" aria-label="close" />
-            </header>
-            <section class="modal-card-body is-flex">
-                <ColorInput
-                    bind:color={modalCategory.color}
-                    availableColors={colors}
-                />
-                <input
-                    class="input mx-1"
-                    type="text"
-                    bind:value={modalCategory.name}
-                />
-            </section>
-            <footer class="modal-card-foot is-justify-content-flex-end p-2">
-                <button class="button" aria-label="close">Cancel</button>
-                <button
-                    class="ml-1 button is-success"
-                    on:click={handleModalFinish}
-                    >{modalCategory.id ? "Edit" : "Add"}</button
-                >
-            </footer>
-        </div>
-    </div>
-{/if}
+<CreateUpdateModal
+    name="Category"
+    repo={CategoriesRepo}
+    form={[
+        [
+            {
+                prop: "color",
+                type: "color",
+                class: "is-one-quarter"
+            },
+            {
+                prop: "name",
+            },
+        ],
+    ]}
+    bind:modal={modalCategory}
+/>
