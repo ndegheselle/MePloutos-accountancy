@@ -6,6 +6,7 @@ import {TransactionsRepo} from "@lib/db/transactions";
 
 import transactionsService from "@lib/services/transactions";
 import { useLiveQuery } from "@base/db/dexieLiveQuery";
+import { firstDayOfMonth } from "@base/helpers";
 
 let currentAccountId = null;
 
@@ -15,10 +16,11 @@ export function setCurrentAccountId(_accoundId) {
 
 export const transactionsFilters = writable({
     // - 1 month
-    date: new Date(new Date().setMonth(new Date().getMonth() - 1)),
+    date: firstDayOfMonth(),
 });
 
 export const currentAccount = liveQuery(() => AccountsRepo.getById(currentAccountId));
+
 export const currentTransactions = useLiveQuery(
     (_transactionsFilters) => TransactionsRepo.getByAccount(currentAccountId, _transactionsFilters.date),
     transactionsFilters, { initialValue: [] });
@@ -27,3 +29,4 @@ export const transactionsRecap = derived(currentTransactions,
         return transactionsService.getTransactionsRecap($transactions);
     }
 );
+export const selectedTransactions = writable(new Map());

@@ -6,7 +6,7 @@
 
 <span class="category-icon" style="background-color: {$categoriesMap.get(categoryId)?.color};">
     {#if selected}
-        <i class="fa-solid fa-check has-text-link"></i>
+        <i class="fa-solid fa-check has-text-dark"></i>
     {/if}
 </span>
 

@@ -3,16 +3,16 @@
     import { PieChart } from "chartist";
     import { categoriesMap } from "@lib/store";
 
-    $: updateFilters(currentFilter, transactionsRecap)
+    $: updateFilters(currentFilter, transactionsRecap, selectedRecap)
 
     $: {
-        if (chart && categoriesValues.length)
+        if (chart && categoriesValues?.length)
         {
             chart.update(getChartData($categoriesMap, categoriesValues, categoriesTotal));
         }
     }
 
-    function updateFilters(_currentFilter, _transactionsRecap)
+    function updateFilters(_currentFilter, _transactionsRecap, _selectedRecap)
     {
         if (!_transactionsRecap.categoriesTotal) return;
 
@@ -22,12 +22,16 @@
                 categoriesValues = _transactionsRecap.categoriesTotal;
                 break;
             case "onlyNegatives":
-                categoriesTotal = _transactionsRecap.totals.totalNegative;
+                categoriesTotal = _transactionsRecap.totals.negativeTotal;
                 categoriesValues = _transactionsRecap.categoriesNegative;
                 break;
             case "onlyPositives":
-                categoriesTotal = _transactionsRecap.totals.totalPositive;
+                categoriesTotal = _transactionsRecap.totals.positiveTotal;
                 categoriesValues = _transactionsRecap.categoriesPositive;
+                break;
+            case "onlySelected":
+                categoriesTotal = _selectedRecap.totals.total;
+                categoriesValues = _selectedRecap.categoriesTotal;
                 break;
         }
     }
@@ -38,7 +42,7 @@
                 return {
                     value:
                         (Math.abs(cat.value) * 100) /
-                            _total || 1,
+                            Math.abs(_total) || 1,
                     className: `category-${cat.id}`,
                 };
             }),
@@ -70,6 +74,7 @@
     let clazz = "";
     export { clazz as class };
     export let transactionsRecap = {};
+    export let selectedRecap = null;
 </script>
 
 <div class="box flex-auto-height {clazz}">
@@ -106,6 +111,14 @@
                     >
                         Only positives
                     </a>
+                    {#if selectedRecap}
+                    <a
+                        class="dropdown-item {currentFilter == 'onlySelected' ? 'is-active' : ''}"
+                        on:click={() => currentFilter = "onlySelected"}
+                    >
+                        Only selected
+                    </a>
+                    {/if}
                 </div>
             </div>
         </div>
