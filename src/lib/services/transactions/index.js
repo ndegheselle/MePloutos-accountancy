@@ -31,9 +31,6 @@ function getTransactionsRecap(_transactions)
     let catTmpMapTotal = new Map();
     let catTmpMapPositive = new Map();
     let catTmpMapNegative = new Map();
-    catTmpMapTotal.set(null, 0);
-    catTmpMapPositive.set(null, 0);
-    catTmpMapNegative.set(null, 0);
 
     let totals = {
         positiveTotal: 0,
@@ -68,13 +65,25 @@ function getTransactionsRecap(_transactions)
     // Reverse so that None category is always at the end
     let categoriesTotal = Array.from(catTmpMapTotal, function(entry) {
         return {id: entry[0], value: entry[1]};
-    }).reverse();
+    }).sort((a,b) => {
+        if (a.value > b.value) return 1;
+        if (a.value < b.value) return -1;
+        return 0;
+    });
     let categoriesPositive = Array.from(catTmpMapPositive, function(entry) {
         return {id: entry[0], value: entry[1]};
-    }).reverse();
+    }).sort((a,b) => {
+        if (a.value > b.value) return 1;
+        if (a.value < b.value) return -1;
+        return 0;
+    });
     let categoriesNegative = Array.from(catTmpMapNegative, function(entry) {
         return {id: entry[0], value: entry[1]};
-    }).reverse();
+    }).sort((a,b) => {
+        if (a.value > b.value) return 1;
+        if (a.value < b.value) return -1;
+        return 0;
+    });
 
     totals.total = Math.abs(totals.positiveTotal) + Math.abs(totals.negativeTotal);
 

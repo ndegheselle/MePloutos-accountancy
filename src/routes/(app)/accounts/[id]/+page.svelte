@@ -22,9 +22,7 @@
         <AccountDetails account={$currentAccount} transactionsRecap={$transactionsRecap}/>
     </div>
     <div class="column pb-2">
-        <div class="flex-list">
-            <Categories transactionsRecap={$transactionsRecap} selectedRecap={selectedRecap}/>
-        </div>
+        <Categories transactionsRecap={$transactionsRecap} selectedRecap={selectedRecap}/>
     </div>
 </div>
 <div>
