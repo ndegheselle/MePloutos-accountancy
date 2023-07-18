@@ -42,9 +42,15 @@
     }
 
     function setSelectedTransactionCategory() {
+
+        let selectedTransactionsId = [];
+        for (var transaction of $selectedTransactions)
+        {
+            selectedTransactionsId.push(transaction[0]);
+        }
         categoryModal.show().then((selectedCategory) => {
-            TransactionsRepo.updatesAllCategory(
-                selectedTransactions,
+            TransactionsRepo.updateAllCategory(
+                selectedTransactionsId,
                 selectedCategory
             );
         });

@@ -22,7 +22,10 @@ export const transactionsFilters = writable({
 export const currentAccount = liveQuery(() => AccountsRepo.getById(currentAccountId));
 
 export const currentTransactions = useLiveQuery(
-    (_transactionsFilters) => TransactionsRepo.getByAccount(currentAccountId, _transactionsFilters.date),
+    (_transactionsFilters) => {
+        selectedTransactions.set(new Map());
+        return TransactionsRepo.getByAccount(currentAccountId, _transactionsFilters.date);
+    },
     transactionsFilters, { initialValue: [] });
 export const transactionsRecap = derived(currentTransactions,
     $transactions => {

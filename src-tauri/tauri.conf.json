@@ -8,7 +8,7 @@
   },
   "package": {
     "productName": "personnal-accountancy",
-    "version": "0.0.2"
+    "version": "0.0.3"
   },
   "tauri": {
     "allowlist": {
@@ -67,7 +67,7 @@
         "fullscreen": false,
         "height": 650,
         "resizable": true,
-        "title": "Personnal accountancy",
+        "title": "MePlutos - Accountancy",
         "width": 1024
       }
     ]

@@ -133,10 +133,10 @@
     </div>
     {#if transactionsRecap}
         <div class="ct-chart" />
-        <div class="columns is-gapless">
+        <div class="columns is-gapless is-multiline categories-legend">
             {#each categoriesValues as cat}
                 <div class="column is-one-third is-flex is-align-items-center">
-                    <CategoryIcon categoryId={cat.id} />
+                    <CategoryIcon categoryId={cat.id} class="small-icon"/>
                     <span class="ml-2">{$categoriesMap.get(cat.id).name}</span>
                 </div>
             {/each}
@@ -148,3 +148,8 @@
     {/if}
 </div>
 
+<style>
+    .categories-legend span {
+        font-size: 0.8rem;
+    }
+</style>
