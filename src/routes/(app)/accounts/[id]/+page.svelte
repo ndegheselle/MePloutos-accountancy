@@ -2,15 +2,8 @@
     import Categories from "@app/categories/Categories.svelte";
     import AccountDetails from "./AccountDetails.svelte";
 
-    import { currentAccount, transactionsRecap, selectedTransactions} from "./_store";
+    import { currentAccount, transactionsRecap} from "./_store";
     import Transactions from "./transactions/Transactions.svelte";
-    import transactionsService from "@lib/services/transactions";
-    
-    let selectedRecap = null;
-    $: {
-        
-        selectedRecap = transactionsService.getTransactionsRecap(Array.from($selectedTransactions, ([key, value]) => value) || []);
-    }
 </script>
 
 <svelte:head>
@@ -22,7 +15,7 @@
         <AccountDetails account={$currentAccount} transactionsRecap={$transactionsRecap}/>
     </div>
     <div class="column pb-2">
-        <Categories transactionsRecap={$transactionsRecap} selectedRecap={selectedRecap}/>
+        <Categories transactionsRecap={$transactionsRecap} />
     </div>
 </div>
 <div>

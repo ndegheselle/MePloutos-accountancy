@@ -1,5 +1,4 @@
 <script>
-    import { derived } from 'svelte/store';
     import TransactionsService from "@lib/services/transactions";
     import { TransactionsRepo } from "@lib/db/transactions";
     import { context } from "@components/dialogs/contextMenu.js";
@@ -11,11 +10,17 @@
     import CategorySelectionModal from "@app/categories/CategorySelectionModal.svelte";
     import ModalImport from "./ModalImport.svelte";
 
-    import { transactionsFilters, currentTransactions, selectedTransactions } from "../_store";
+    import {
+        filters,
+        currentTransactions,
+        selectedTransactions,
+        hasfilterOnSelection,
+    } from "../_store";
     import { firstDayOfMonth } from "@base/helpers";
 
     let groupedTransactions = [];
-    $: groupedTransactions = TransactionsService.groupTransactionsByDate($currentTransactions);
+    $: groupedTransactions =
+        TransactionsService.groupTransactionsByDate($currentTransactions);
 
     let categoryModal = null;
     let importModal = null;
@@ -42,10 +47,8 @@
     }
 
     function setSelectedTransactionCategory() {
-
         let selectedTransactionsId = [];
-        for (var transaction of $selectedTransactions)
-        {
+        for (var transaction of $selectedTransactions) {
             selectedTransactionsId.push(transaction[0]);
         }
         categoryModal.show().then((selectedCategory) => {
@@ -92,12 +95,11 @@
                 date = null;
         }
 
-        $transactionsFilters.date = date;
+        $filters.date = date;
     }
 
     function selectAll(selected) {
-        for (var transaction of $currentTransactions)
-        {
+        for (var transaction of $currentTransactions) {
             selectTransaction(transaction, selected, false);
         }
         // force refresh
@@ -114,11 +116,10 @@
             }
             return t;
         });
-        
-        if (force)
-            groupedTransactions = groupedTransactions;
+
+        if (force) groupedTransactions = groupedTransactions;
     }
-    
+
     export let accountId = null;
 </script>
 
@@ -126,17 +127,28 @@
     <div class="panel-block flex-container">
         <div>
             <input
-            class="mr-0"
+                class="mr-0"
                 type="checkbox"
                 indeterminate={$selectedTransactions.size > 0 &&
                     $selectedTransactions.size < $currentTransactions.length}
-                checked={$selectedTransactions.size == $currentTransactions.length}
+                checked={$selectedTransactions.size ==
+                    $currentTransactions.length}
                 on:change={(e) => selectAll(e.target.checked)}
             />
             <span class="has-text-grey-lighter">Transactions</span>
         </div>
 
         <div>
+            <button
+                class="button is-white is-small"
+                class:has-text-grey-light={!$hasfilterOnSelection}
+                on:click={() => $hasfilterOnSelection = !$hasfilterOnSelection}
+                title="Filter recap on selected transactions only"
+            >
+                <span class="icon is-small">
+                    <i class="fa-solid fa-eye" />
+                </span>
+            </button>
             <div class="dropdown is-right">
                 <div class="dropdown-trigger">
                     <button

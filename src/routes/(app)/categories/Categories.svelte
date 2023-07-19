@@ -4,7 +4,7 @@
     import { categoriesMap } from "@lib/store";
     import CategoryIcon from "./CategoryIcon.svelte";
 
-    $: updateFilters(currentFilter, transactionsRecap, selectedRecap);
+    $: updateFilters(currentFilter, transactionsRecap);
 
     $: {
         if (chart && categoriesValues?.length) {
@@ -14,7 +14,7 @@
         }
     }
 
-    function updateFilters(_currentFilter, _transactionsRecap, _selectedRecap) {
+    function updateFilters(_currentFilter, _transactionsRecap) {
         if (!_transactionsRecap.categoriesTotal) return;
 
         switch (_currentFilter) {
@@ -29,10 +29,6 @@
             case "onlyPositives":
                 categoriesTotal = _transactionsRecap.totals.positiveTotal;
                 categoriesValues = _transactionsRecap.categoriesPositive;
-                break;
-            case "onlySelected":
-                categoriesTotal = _selectedRecap.totals.total;
-                categoriesValues = _selectedRecap.categoriesTotal;
                 break;
         }
     }
@@ -76,7 +72,6 @@
     let clazz = "";
     export { clazz as class };
     export let transactionsRecap = {};
-    export let selectedRecap = null;
 </script>
 
 <div class="box  {clazz}">
@@ -116,17 +111,6 @@
                     >
                         Only positives
                     </a>
-                    {#if selectedRecap}
-                        <a
-                            class="dropdown-item {currentFilter ==
-                            'onlySelected'
-                                ? 'is-active'
-                                : ''}"
-                            on:click={() => (currentFilter = "onlySelected")}
-                        >
-                            Only selected
-                        </a>
-                    {/if}
                 </div>
             </div>
         </div>

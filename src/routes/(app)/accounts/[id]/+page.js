@@ -1,5 +1,8 @@
-import { setCurrentAccountId } from "./_store";
+import { filters } from "./_store";
 
-export async function load({ params }) {
-    setCurrentAccountId(params.id);
+export function load({ params }) {
+    filters.update(_filters => {
+        _filters.accountId = params.id;
+        return _filters;
+    });
 }
