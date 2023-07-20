@@ -29,7 +29,7 @@
     export let transactionsRecap = null;
 </script>
 
-<div class="box mb-0">
+<div class="box mb-0 is-fullheight">
     {#if account && transactionsRecap}
         <h2 class="title flex-container">
             <Money value = {account.balance} />
