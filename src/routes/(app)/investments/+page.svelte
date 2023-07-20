@@ -45,7 +45,7 @@
                 class="mr-4 subtitle is-4 {investmentsRecap.percentage < 0
                     ? 'has-text-danger'
                     : 'has-text-success'}"
-                >{investmentsRecap.percentage} %<i
+                >{Math.round(investmentsRecap.percentage)} %<i
                     class="fa-solid fa-arrow-trend-{investmentsRecap.percentage <
                     0
                         ? 'down'
