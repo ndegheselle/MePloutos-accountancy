@@ -1,4 +1,4 @@
-import{S as u,i as h,s as p,k as d,q as c,l as f,m as _,r as l,h as a,b as m,E as x,C as r}from"../chunks/index.ecd3f872.js";function g(i){let e,n,t;return{c(){e=d("h1"),n=c("Projects page"),t=c(`\r
+import{S as u,i as h,s as p,k as d,q as c,l as f,m as _,r as l,h as a,b as m,E as x,C as r}from"../chunks/index.7e2123bf.js";function g(i){let e,n,t;return{c(){e=d("h1"),n=c("Projects page"),t=c(`\r
 \r
 Should projects be linked to an account ?\r
 \r
