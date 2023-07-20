@@ -5,10 +5,10 @@ class TransactionsRepository extends BaseRepo {
         super("transactions");
     }
 
-    updatesAllCategory(_transactions, _category) {
+    updateAllCategory(_transactionsIds, _category) {
         return this.table
             .where('id')
-            .anyOf(_transactions.map(x => x.id))
+            .anyOf(_transactionsIds)
             .modify({ categoryId: _category.id });
     }
 

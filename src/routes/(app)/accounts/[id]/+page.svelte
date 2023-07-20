@@ -2,7 +2,7 @@
     import Categories from "@app/categories/Categories.svelte";
     import AccountDetails from "./AccountDetails.svelte";
 
-    import { currentAccount, currentTransactions, transactionsRecap} from "./_store";
+    import { currentAccount, transactionsRecap} from "./_store";
     import Transactions from "./transactions/Transactions.svelte";
 </script>
 
@@ -15,11 +15,9 @@
         <AccountDetails account={$currentAccount} transactionsRecap={$transactionsRecap}/>
     </div>
     <div class="column pb-2">
-        <div class="flex-list">
-            <Categories transactionsRecap={$transactionsRecap}/>
-        </div>
+        <Categories transactionsRecap={$transactionsRecap} />
     </div>
 </div>
 <div>
-    <Transactions transactions={$currentTransactions} accountId={$currentAccount?.id}/>
+    <Transactions accountId={$currentAccount?.id}/>
 </div>

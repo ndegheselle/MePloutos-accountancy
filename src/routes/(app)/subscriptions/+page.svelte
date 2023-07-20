@@ -153,6 +153,7 @@
                 type: [
                     { value: 1, label: "Every month" },
                     { value: 3, label: "Every quarter" },
+                    { value: 4, label: "Every trimester" },
                     { value: 6, label: "Every semester" },
                     { value: 12, label: "Every year" },
                 ],
