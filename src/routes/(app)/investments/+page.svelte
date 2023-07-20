@@ -45,7 +45,7 @@
                 class="mr-4 subtitle is-4 {investmentsRecap.percentage < 0
                     ? 'has-text-danger'
                     : 'has-text-success'}"
-                >{Math.round(investmentsRecap.percentage)} %<i
+                >{(investmentsRecap.percentage).toFixed(2)} %<i
                     class="fa-solid fa-arrow-trend-{investmentsRecap.percentage <
                     0
                         ? 'down'
@@ -134,7 +134,7 @@
                                     ? 'down'
                                     : 'up'}"
                             />
-                            {(getGains(investment) * 100) / investment.investedValue}%
+                            {(getGains(investment) * 100 / investment.investedValue).toFixed(2)}%
                             <Money value = {getGains(investment)} />
                         </span>
                     </div>
