@@ -16,7 +16,7 @@
             <span>
                 <Money class="title is-spaced" value={investmentsRecap.total} />
                 <span class="percent subtitle is-4 { (investmentsRecap.percentage < 0) ? 'has-text-danger' : 'has-text-success' }"
-                    >{investmentsRecap.percentage} %<i class="fa-solid fa-arrow-trend-{ (investmentsRecap.percentage < 0) ? 'down' : 'up' }"></i></span
+                    >{investmentsRecap.percentage.toFixed(2)} %<i class="fa-solid fa-arrow-trend-{ (investmentsRecap.percentage < 0) ? 'down' : 'up' }"></i></span
                 >
             </span>
         </div>
